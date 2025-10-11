@@ -3,185 +3,615 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. Bimal Kumar Chetri — Plant Genomics & Medicinal Plants</title>
+<title>Dr. Bimal Kumar Chetri — Plant Genomics & Medicinal Plant Research</title>
+<meta name="description" content="Profile and research of Dr. Bimal Kumar Chetri — Plant Genomics, Organellar Genome Mining, Ethnobotany.">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<!-- FontAwesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <style>
-:root {
-  --primary:#2b7a4b; --secondary:#f1f8f1; --muted:#6b7280;
-  --bg:#fff; --card:#fbfbfb; --radius:12px; --transition:.3s;
-}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Georgia,'Times New Roman',serif;}
-body{background:var(--bg);color:#111;line-height:1.6;}
-a{color:var(--primary);text-decoration:none;}
-.container{max-width:1100px;margin:0 auto;padding:20px;}
-header{display:flex;align-items:center;gap:18px;margin-bottom:20px;}
-.portrait{width:120px;height:120px;border-radius:12px;object-fit:cover;background:#eee;}
-header h1{font-size:1.8rem;margin-bottom:4px;}
-.subtitle{color:var(--muted);}
-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;position:sticky;top:0;background:#fff;padding:10px 0;z-index:10;}
-nav a{padding:8px 12px;border-radius:8px;transition:var(--transition);}
-nav a:hover{background:var(--secondary);}
-.card{background:var(--card);padding:20px;margin-bottom:20px;border-radius:var(--radius);box-shadow:0 2px 8px rgba(0,0,0,0.05);transition:var(--transition);}
-.card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.1);}
-.two-col{display:grid;grid-template-columns:1fr 300px;gap:20px;}
-.collapsible {cursor:pointer;user-select:none;}
-.collapsible::after {content: '▼';float:right;transition:transform var(--transition);}
-.collapsible.active::after{transform:rotate(-180deg);}
-.content-collapsible{max-height:0;overflow:hidden;transition:max-height 0.3s ease-out;padding-top:0;}
-#pub-search{width:100%;padding:6px;margin-bottom:12px;border-radius:8px;border:1px solid #ccc;}
-footer{color:var(--muted);font-size:0.9rem;text-align:center;padding:15px 0;}
-/* Dynamic gallery */
-.gallery-wrapper{overflow:hidden;position:relative;margin:20px 0;border-radius:12px;}
-.gallery-track{display:flex;gap:10px;animation:scroll 40s linear infinite;}
-.gallery-track img{height:180px;border-radius:8px;object-fit:cover;transition:transform 0.3s;cursor:pointer;}
-.gallery-track img:hover{transform:scale(1.05);}
-@keyframes scroll{
-  0%{transform:translateX(0);}
-  100%{transform:translateX(-50%);}
-}
-@media(max-width:880px){.two-col{grid-template-columns:1fr;}}
+  :root {
+    --primary-green: #388E3C; /* Deeper, richer green */
+    --accent-gold: #FFD700;   /* Subtle gold for highlights */
+    --text-dark: #2C3E50;     /* Darker text for contrast */
+    --text-light: #ECF0F1;    /* Light text for dark backgrounds */
+    --bg-light: #F8F9FA;      /* Lighter background */
+    --card-bg: #FFFFFF;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.4s ease-out;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+    background-color: var(--bg-light);
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+  a {
+    color: var(--primary-green);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+  }
+  a:hover {
+    color: var(--accent-gold);
+  }
+
+  /* Global Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* Header/Hero Section */
+  .hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--text-light);
+    overflow: hidden;
+  }
+
+  .hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    filter: brightness(0.6); /* Darken video for text contrast */
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(56, 142, 60, 0.7) 0%, rgba(26, 76, 30, 0.7) 100%);
+    z-index: -1;
+  }
+
+  .hero-content {
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInSlideUp 1s forwards var(--transition-speed);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    margin-bottom: 10px;
+    letter-spacing: 1.5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero p {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+    letter-spacing: 0.8px;
+  }
+
+  .hero .btn {
+    display: inline-block;
+    background-color: var(--accent-gold);
+    color: var(--text-dark);
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all var(--transition-speed);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero .btn:hover {
+    background-color: var(--primary-green);
+    color: var(--text-light);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Navigation */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--card-bg);
+    box-shadow: 0 2px 8px var(--shadow-light);
+    padding: 15px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+
+  nav a {
+    color: var(--text-dark);
+    font-weight: 500;
+    padding: 8px 15px;
+    position: relative;
+    transition: all var(--transition-speed);
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: var(--primary-green);
+    transition: width var(--transition-speed) ease;
+    -webkit-transition: width var(--transition-speed) ease;
+  }
+
+  nav a:hover::after {
+    width: 100%;
+    left: 0;
+    background: var(--primary-green);
+  }
+
+  /* General Section Styling */
+  section {
+    padding: 60px 0;
+    background-color: var(--card-bg);
+    margin-bottom: 20px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 15px var(--shadow-light);
+    transition: transform 0.6s ease-out; /* For scroll animations */
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  section.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  section h2, section h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-green);
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.8rem;
+  }
+  section h3 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+  }
+
+  /* About Section - Animated Elements */
+  #about .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  #about .about-item {
+    background: var(--bg-light);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    border-top: 5px solid var(--primary-green);
+  }
+
+  #about .about-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  #about .about-item i {
+    font-size: 3rem;
+    color: var(--accent-gold);
+    margin-bottom: 15px;
+  }
+
+  #about .about-item h4 {
+    font-size: 1.4rem;
+    color: var(--primary-green);
+    margin-bottom: 10px;
+  }
+
+  #about .about-item p {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+  }
+
+  .portrait {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--accent-gold);
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  /* Research Section - Interactive Cards */
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .research-card {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--shadow-light);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    min-height: 250px;
+  }
+
+  .research-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+
+  .research-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-out;
+    position: absolute;
+  }
+
+  .research-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .research-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    color: var(--text-light);
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
+
+  .research-card:hover .research-card-overlay {
+    opacity: 1;
+  }
+
+  .research-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .research-card p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+  }
+
+  .research-card:hover p {
+    max-height: 100px; /* Adjust as needed */
+  }
+
+  /* Publications Section */
+  #publications .publication-item {
+    background: var(--bg-light);
+    padding: 20px;
+    border-left: 5px solid var(--primary-green);
+    margin-bottom: 15px;
+    border-radius: var(--radius);
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  }
+
+  #publications .publication-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  }
+
+  #publications .publication-item strong {
+    color: var(--primary-green);
+  }
+
+  #publications .publication-item em {
+    font-style: italic;
+    color: var(--text-dark);
+  }
+
+  #publications .view-all-btn {
+    display: block;
+    width: fit-content;
+    margin: 40px auto 0;
+    background-color: var(--primary-green);
+    color: var(--text-light);
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all var(--transition-speed);
+  }
+
+  #publications .view-all-btn:hover {
+    background-color: var(--accent-gold);
+    color: var(--text-dark);
+    transform: translateY(-2px);
+  }
+
+
+  /* Contact Section */
+  #contact .contact-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  #contact .contact-item {
+    text-align: center;
+    padding: 30px;
+    background: var(--bg-light);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    flex: 1 1 280px;
+    max-width: 320px;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  }
+
+  #contact .contact-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  #contact .contact-item i {
+    font-size: 3.5rem;
+    color: var(--primary-green);
+    margin-bottom: 20px;
+  }
+  #contact .contact-item img {
+    height: 100px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease-out;
+  }
+
+  #contact .contact-item:hover img {
+    transform: scale(1.05);
+  }
+
+  #contact .contact-item p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+    color: #777;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+
+  /* Animations */
+  @keyframes fadeInSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media(max-width: 768px){
+    .hero h1 { font-size: 3rem; }
+    .hero p { font-size: 1.2rem; }
+    nav { gap: 15px; }
+    section h2 { font-size: 2rem; }
+    #about .about-grid, .research-grid, #contact .contact-grid {
+        grid-template-columns: 1fr;
+    }
+  }
+
+  @media(max-width: 480px){
+    .hero h1 { font-size: 2.5rem; }
+    .hero p { font-size: 1rem; }
+    .hero .btn { padding: 12px 25px; font-size: 1rem; }
+  }
+
 </style>
 </head>
+
 <body>
-<div class="container">
+<div class="main-wrapper">
+  <!-- Hero Section -->
+  <header class="hero">
+    <!-- Replace with a subtle looping video or high-res animated GIF -->
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="plant_genomics_loop.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Dr. Bimal Kumar Chetri</h1>
+      <p>Plant Genomics · Organellar Genome Mining · Ethnobotany</p>
+      <a href="#about" class="btn">Explore My Research</a>
+    </div>
+  </header>
 
-<header>
-  <img src="portrait.jpg" alt="Dr. Bimal Kumar Chetri" class="portrait">
-  <div>
-    <h1>Dr. Bimal Kumar Chetri</h1>
-    <div class="subtitle">Faculty of Life Sciences — Sherubtse College, Royal University of Bhutan</div>
-    <div class="subtitle">Plant Genomics · Organellar Genome Mining · Medicinal Plant Biodiversity · Ethnobotany · GHG Inventory</div>
-  </div>
-</header>
+  <!-- Navigation -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#publications">Publications</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-<nav>
-<a href="#home">Home</a>
-<a href="#about">About</a>
-<a href="#research">Research</a>
-<a href="#publications">Publications</a>
-<a href="#projects">Projects</a>
-<a href="#teaching">Teaching</a>
-<a href="#resources">Resources</a>
-<a href="#gallery">Gallery</a>
-<a href="#contact">Contact</a>
-</nav>
+  <main class="container">
+    <!-- About Section -->
+    <section id="about">
+      <h2>About Me</h2>
+      <div style="text-align: center; margin-bottom: 40px;">
+        <img class="portrait" src="portrait.jpg" alt="Dr. Bimal Kumar Chetri">
+        <p style="max-width: 800px; margin: 0 auto; font-size: 1.1rem;">
+          I am an academic and researcher dedicated to unlocking the genetic potential of medicinal plants. My work spans organellar genome mining, plant molecular biology, bioinformatics, and the rich traditions of ethnobotany.
+        </p>
+      </div>
 
-<section id="home" class="card">
-  <h2>Welcome</h2>
-  <p class="muted">I am an academic and researcher specializing in organellar genome mining of herbal and medicinal plants, plant molecular biology, bioinformatics, and ethnobotany. This site presents my research, publications, teaching activities, and resources.</p>
+      <div class="about-grid">
+        <div class="about-item">
+          <i class="fas fa-flask"></i>
+          <h4>Expertise</h4>
+          <p>Plant Genomics, Organellar Genome Mining, Bioinformatics</p>
+        </div>
+        <div class="about-item">
+          <i class="fas fa-graduation-cap"></i>
+          <h4>Education</h4>
+          <p>PhD (IIT Guwahati), MSc Botany (Pune University)</p>
+        </div>
+        <div class="about-item">
+          <i class="fas fa-leaf"></i>
+          <h4>Research Focus</h4>
+          <p>Medicinal Plant Biodiversity, Ethnobotany, GHG Inventory</p>
+        </div>
+        <div class="about-item">
+          <i class="fas fa-dna"></i>
+          <h4>Key Services</h4>
+          <p>NGS Data Annotation, Comparative Genomics, Flow Cytometry</p>
+        </div>
+      </div>
+    </section>
 
-  <h4>Services I provide:</h4>
-  <ul>
-    <li>Organellar genome mining</li>
-    <li>Assembly and annotation of NGS data</li>
-    <li>Downstream analysis</li>
-    <li>Writing academic and scientific papers</li>
-    <li>Genotyping by Sequencing</li>
-    <li>Plant Flow Cytometry</li>
-  </ul>
+    <!-- Research Section -->
+    <section id="research">
+      <h2>My Research</h2>
+      <div class="research-grid">
+        <div class="research-card">
+          <img src="research_genomics.jpg" alt="Genomics Research">
+          <div class="research-card-overlay">
+            <h4>Organellar Genome Mining</h4>
+            <p>Leading the assembly and annotation of chloroplast and mitochondrial genomes from diverse medicinal plants using NGS data.</p>
+          </div>
+        </div>
+        <div class="research-card">
+          <img src="research_ethnobotany.jpg" alt="Ethnobotany Research">
+          <div class="research-card-overlay">
+            <h4>Ethnobotany & Biodiversity</h4>
+            <p>Integrating community knowledge with scientific analysis to identify and conserve valuable medicinal plant species.</p>
+          </div>
+        </div>
+        <div class="research-card">
+          <img src="research_ghg.jpg" alt="GHG Inventory Research">
+          <div class="research-card-overlay">
+            <h4>GHG Inventory & Climate</h4>
+            <p>Developing methodologies for greenhouse gas inventory related to vegetation and land use in ecological systems.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <p>Email: <a href="mailto:bimal_kum.sherubtse@rub.edu.bt">bimal_kum.sherubtse@rub.edu.bt</a></p>
-  <p>ORCID: <a href="https://orcid.org/0000-0002-2154-7676" target="_blank">0000-0002-2154-7676</a></p>
-  <p>ResearchGate: <a href="https://www.researchgate.net/profile/Bimal-Chetri?ev=hdr_xprf" target="_blank">Link</a></p>
-  <img src="qrcode.png" alt="Google Scholar QR Code" style="width:120px;margin-top:10px;">
-</section>
+    <!-- Publications Section -->
+    <section id="publications">
+      <h2>Recent Publications</h2>
+      <div id="publications-list" class="publications-list-container">
+        <!-- Publications will be loaded here by JS -->
+      </div>
+      <a href="full_publications.html" class="view-all-btn">View All Publications</a>
+    </section>
 
-<!-- Dynamic Gallery below Welcome -->
-<section id="gallery" class="card">
-  <h3>Gallery</h3>
-  <div class="gallery-wrapper">
-    <div class="gallery-track" id="gallery-track"></div>
-  </div>
-</section>
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Get in Touch</h2>
+      <div class="contact-grid">
+        <a href="mailto:bimal_kum.sherubtse@rub.edu.bt" class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <h4>Email Me</h4>
+          <p>bimal_kum.sherubtse@rub.edu.bt</p>
+        </a>
+        <a href="https://orcid.org/0000-0002-2154-7676" target="_blank" class="contact-item">
+          <i class="fab fa-orcid"></i>
+          <h4>ORCID</h4>
+          <p>0000-0002-2154-7676</p>
+        </a>
+        <a href="https://www.researchgate.net/profile/Bimal-Chetri?ev=hdr_xprf" target="_blank" class="contact-item">
+          <i class="fab fa-researchgate"></i>
+          <h4>ResearchGate</h4>
+          <p>Profile Link</p>
+        </a>
+        <div class="contact-item">
+          <img src="qrcode.png" alt="Google Scholar QR">
+          <h4>Google Scholar</h4>
+          <p>Scan for Profile</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<div class="two-col">
-<section id="about" class="card">
-  <h3>About</h3>
-  <p><strong>Education:</strong> PhD (IIT Guwahati), MSc Botany (Pune University)</p>
-  <p><strong>Teaching:</strong> Plant Diversity, Ethnobotany, Genetics & Genomics, Plant Physiology, Bioinformatics</p>
-  <p><strong>Postal Address:</strong> Kanglung-42002, Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan, Trashigang, Bhutan</p>
-</section>
-
-<aside class="card">
-  <h4>Contact & CV</h4>
-  <p>Email: <a href="mailto:bimal_kum.sherubtse@rub.edu.bt">bimal_kum.sherubtse@rub.edu.bt</a></p>
-  <p><a href="cv.pdf" download>Download CV</a></p>
-</aside>
+  <footer>
+    <p>© Dr. Bimal Kumar Chetri — Faculty of Life Sciences, Sherubtse College</p>
+  </footer>
 </div>
 
-<section id="research" class="card">
-<h3 class="collapsible">Research</h3>
-<div class="content-collapsible">
-<p>Organellar genome assembly, annotation, downstream NGS analysis, bioinformatics pipelines, and integration of traditional ecological knowledge.</p>
-</div>
-</section>
-
-<section id="publications" class="card">
-<h3>Publications</h3>
-<input type="text" id="pub-search" placeholder="Search publications...">
-<ol id="pub-list"></ol>
-</section>
-
+<!-- Scripts -->
 <script>
-// Smooth scroll
-document.querySelectorAll('nav a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    e.preventDefault();
-    document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
-  });
-});
+  // Publications loader from publications.json
+  // Assuming publications.json structure: [{author, year, title, journal, volume, pages}]
+  fetch('publications.json')
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById('publications-list');
+      // Display only top 5 for brevity on homepage
+      data.slice(0, 5).forEach(pub => {
+        const div = document.createElement('div');
+        div.classList.add('publication-item');
+        div.innerHTML = `<strong>${pub.author}</strong> (${pub.year}). <em>${pub.title}</em>. ${pub.journal || ''} ${pub.volume || ''} ${pub.pages || ''}`;
+        list.appendChild(div);
+      });
+    })
+    .catch(error => console.error('Error loading publications:', error));
 
-// Collapsible
-document.querySelectorAll('.collapsible').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    btn.classList.toggle('active');
-    const content = btn.nextElementSibling;
-    if(content.style.maxHeight) content.style.maxHeight = null;
-    else content.style.maxHeight = content.scrollHeight + "px";
-  });
-});
+  // Intersection Observer for scroll animations
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section');
 
-// Load publications.json dynamically
-fetch('publications.json')
-.then(res=>res.json())
-.then(data=>{
-  const list=document.getElementById('pub-list');
-  data.sort((a,b)=>b.year-a.year);
-  data.forEach(pub=>{
-    const li=document.createElement('li');
-    li.innerHTML=`<strong>${pub.author}</strong> (${pub.year}). <em>${pub.title}</em>. ${pub.journal}. DOI: <a href="https://doi.org/${pub.doi}" target="_blank">${pub.doi}</a>`;
-    list.appendChild(li);
-  });
-});
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          // Optional: remove class when out of view if you want repeat animations
+          // entry.target.classList.remove('is-visible');
+        }
+      });
+    }, {
+      rootMargin: '0px',
+      threshold: 0.1 // Trigger when 10% of the section is visible
+    });
 
-// Publications search
-document.getElementById('pub-search').addEventListener('input',e=>{
-  const q=e.target.value.toLowerCase();
-  Array.from(document.querySelectorAll('#pub-list li')).forEach(li=>{
-    li.style.display=li.textContent.toLowerCase().includes(q)?'':'none';
+    sections.forEach(section => {
+      observer.observe(section);
+    });
   });
-});
-
-// Dynamic gallery loader
-const galleryTrack=document.getElementById('gallery-track');
-const supportedExtensions=['jpg','jpeg','png','tiff'];
-// Auto-detect images in the folder (requires server listing or manual array fallback)
-const images=['field1.jpg','lab1.jpg','specimen1.jpg','team.jpg']; // fallback
-images.forEach(src=>{
-  const img=document.createElement('img');
-  img.src=src;
-  galleryTrack.appendChild(img);
-});
-// Duplicate images for smooth continuous scroll
-images.forEach(src=>{
-  const img=document.createElement('img');
-  img.src=src;
-  galleryTrack.appendChild(img);
-});
 </script>
-
-<footer>
-<p>© Dr. Bimal Kumar Chetri — Faculty of Life Sciences, Sherubtse College</p>
-</footer>
-</div>
 </body>
 </html>
