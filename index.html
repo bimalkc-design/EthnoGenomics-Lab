@@ -3,27 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bimal K. Chetri (PhD) — Plant Genomics & Medicinal Plant Research</title>
-<meta name="description" content="Profile and research of Dr. Bimal Kumar Chetri — Plant Genomics, Organellar Genome Mining, Ethnobotany.">
+<title>Dr. Bimal Kumar Chetri (PhD) — Plant Genomics & Medicinal Plant Research</title>
+<meta name="description" content="Profile and research of Dr. Bimal Kumar Chetri — Plant Genomics, Organellar Genome Mining, Ethnobotany">
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <!-- FontAwesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-<!-- Link to external style.css -->
+<!-- External CSS -->
 <link rel="stylesheet" href="style.css">
 
-</head>
+<style>
+  /* Basic reset */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: #222;
+    background: #f7f7f7;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  .main-wrapper { max-width: 1200px; margin: auto; }
+
+  /* Hero Section */
+  header.hero {
+    position: relative;
+    height: 80vh;
+    background: url('pp.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+  }
+
+  header.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  header.hero .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  header.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  header.hero p {
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+
+  /* Navigation */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    background: #fff;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  nav a:hover { color: #2a9d8f; font-weight: 600; }
+
+  /* Sections */
+  section { padding: 4rem 2rem; }
+  section h2 { text-align: center; margin-bottom: 2rem; font-family: 'Playfair Display', serif; color: #264653; }
+
+  /* About Section */
+  #about .portrait {
+    width: 200px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 3px solid #2a9d8f;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .about-item {
+    background: #fff;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+  }
+
+  .about-item:hover { transform: translateY(-5px); }
+
+  .about-item i { font-size: 2rem; color: #2a9d8f; margin-bottom: 0.5rem; }
+
+  /* Gallery */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .gallery-grid img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .gallery-grid img:hover { transform: scale(1.05); opacity: 0.9; }
+
+  /* Research Section */
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .research-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  }
+
+  .research-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+
+  .research-card:hover img { transform: scale(1.1); }
+
+  .research-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(42,157,143,0.85);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .research-card:hover .research-card-overlay { opacity: 1; }
+
+  /* Publications */
+  #publications .publications-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 900px;
+    margin: auto;
+  }
+
+  .publication-item {
+    background: #fff;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid #2a9d8f;
+    border-radius: 8px;
+  }
+
+  /* Contact Section */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .contact-item {
+    background: #fff;
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+  }
+
+  .contact-item:hover { transform: translateY(-5px); }
+
+  .contact-item i, .contact-item img { font-size: 2rem; margin-bottom: 0.5rem; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background: #264653;
+    color: #fff;
+  }
+</style>
+
+</head>
 <body>
+
 <div class="main-wrapper">
-  <!-- Hero Section -->
+
+  <!-- Hero -->
   <header class="hero">
-    <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1>Dr. Bimal Kumar Chetri</h1>
-      <p>Plant Genomics · Organellar Genome · Ethnobotany</p> <!-- Shorter description -->
+      <p>Plant Genomics · Organellar Genome · Ethnobotany</p>
     </div>
   </header>
 
@@ -36,119 +231,94 @@
     <a href="#contact">Contact</a>
   </nav>
 
-  <main class="container">
-    <!-- About Section -->
+  <main>
+    <!-- About -->
     <section id="about">
       <h2>About Me</h2>
-      <div style="text-align: center;">
+      <div style="text-align:center;">
         <img class="portrait" src="portrait.jpg" alt="Dr. Bimal Kumar Chetri">
-        <p style="max-width: 100%; margin: 0 auto;">
-          Academic & researcher unlocking plant genetic potential. Work spans genomics, bioinformatics, & ethnobotany.
-        </p> <!-- Shorter description -->
+        <p>Academic & researcher unlocking plant genetic potential. Specializing in genomics, bioinformatics, and ethnobotany.</p>
       </div>
-
       <div class="about-grid">
-        <div class="about-item">
-          <i class="fas fa-flask"></i>
-          <h4>Expertise</h4>
-          <p>Genomics, Bioinformatics</p>
-        </div>
-        <div class="about-item">
-          <i class="fas fa-graduation-cap"></i>
-          <h4>Education</h4>
-          <p>PhD (IIT Guwahati)</p>
-        </div>
-        <div class="about-item">
-          <i class="fas fa-leaf"></i>
-          <h4>Research</h4>
-          <p>Med Plants, Ethnobotany</p>
-        </div>
-        <div class="about-item">
-          <i class="fas fa-dna"></i>
-          <h4>Services</h4>
-          <p>NGS Data, Genomics</p>
-        </div>
+        <div class="about-item"><i class="fas fa-flask"></i><h4>Expertise</h4><p>Genomics, Bioinformatics</p></div>
+        <div class="about-item"><i class="fas fa-graduation-cap"></i><h4>Education</h4><p>PhD (IIT Guwahati)</p></div>
+        <div class="about-item"><i class="fas fa-leaf"></i><h4>Research</h4><p>Medicinal Plants & Ethnobotany</p></div>
+        <div class="about-item"><i class="fas fa-dna"></i><h4>Services</h4><p>NGS Data & Genomics</p></div>
       </div>
     </section>
 
-    <!-- Gallery Section - MOVED HERE, AFTER ABOUT -->
+    <!-- Gallery -->
     <section id="gallery">
       <h2>Photo Gallery</h2>
       <div id="gallery-grid" class="gallery-grid">
-        <!-- Images will be loaded here by JS for the fading effect -->
+        <!-- JS will load images here -->
       </div>
     </section>
 
-    <!-- Research Section -->
+    <!-- Research -->
     <section id="research">
-      <h2>My Research</h2>
+      <h2>Research Focus</h2>
       <div class="research-grid">
         <div class="research-card">
-          <img src="research_genomics.jpg" alt="Genomics Research">
+          <img src="research_genomics.jpg" alt="Organellar Genomics">
           <div class="research-card-overlay">
             <h4>Organellar Genomics</h4>
-            <p>Assembly & annotation of chloroplast/mito genomes.</p>
+            <p>Assembly & annotation of chloroplast/mitochondrial genomes.</p>
           </div>
         </div>
         <div class="research-card">
           <img src="research_ethnobotany.jpg" alt="Ethnobotany Research">
           <div class="research-card-overlay">
             <h4>Ethnobotany</h4>
-            <p>Integrating knowledge for plant conservation.</p>
+            <p>Integrating traditional knowledge for plant conservation.</p>
           </div>
         </div>
         <div class="research-card">
           <img src="research_ghg.jpg" alt="GHG Inventory Research">
           <div class="research-card-overlay">
             <h4>GHG Inventory</h4>
-            <p>Methodologies for vegetation & land use.</p>
+            <p>Methodologies for vegetation & land-use assessment.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Publications Section -->
+    <!-- Publications -->
     <section id="publications">
-      <h2>Publications</h2>
+      <h2>Selected Publications</h2>
       <div id="publications-list" class="publications-list-container">
-        <!-- Publications will be loaded here by JS -->
+        <!-- JS will populate -->
       </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section id="contact">
-      <h2>Get in Touch</h2>
+      <h2>Contact</h2>
       <div class="contact-grid">
         <a href="mailto:bimal_kum.sherubtse@rub.edu.bt" class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <h4>Email</h4>
-          <p>bimal_kum...</p> <!-- Very short email display -->
+          <i class="fas fa-envelope"></i><h4>Email</h4><p>bimal_kum.sherubtse@rub.edu.bt</p>
         </a>
         <a href="https://orcid.org/0000-0002-2154-7676" target="_blank" class="contact-item">
-          <i class="fab fa-orcid"></i>
-          <h4>ORCID</h4>
-          <p>Link</p>
+          <i class="fab fa-orcid"></i><h4>ORCID</h4><p>View Profile</p>
         </a>
-        <a href="https://www.researchgate.net/profile/Bimal-Chetri?ev=hdr_xprf" target="_blank" class="contact-item">
-          <i class="fab fa-researchgate"></i>
-          <h4>ResGate</h4>
-          <p>Profile</p>
+        <a href="https://www.researchgate.net/profile/Bimal-Chetri" target="_blank" class="contact-item">
+          <i class="fab fa-researchgate"></i><h4>ResearchGate</h4><p>View Profile</p>
         </a>
         <div class="contact-item">
-          <img src="qrcode.png" alt="Google Scholar QR">
+          <img src="qrcode.png" alt="Google Scholar QR" style="width:80px;">
           <h4>Google Scholar</h4>
-          <p>Scan</p>
+          <p>Scan QR</p>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© B.K. Chetri — Sherubtse College</p> <!-- Shorter footer text -->
+    <p>© Bimal K. Chetri — Sherubtse College, Bhutan</p>
   </footer>
+
 </div>
 
-<!-- Link to external script.js -->
 <script src="script.js"></script>
 </body>
 </html>
