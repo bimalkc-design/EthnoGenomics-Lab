@@ -1,85 +1,121 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Publications loader from publications.json
-  fetch('publications.json')
-    .then(res => {
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      return res.json();
-    })
-    .then(data => {
-      const list = document.getElementById('publications-list');
-      data.forEach(pub => {
-        const div = document.createElement('div');
-        div.classList.add('publication-item');
-        let pubContent = `<strong>${pub.author}</strong> (${pub.year}). <em>${pub.title}</em>. `;
-        if (pub.journal) pubContent += `${pub.journal}. `;
-        if (pub.volume) pubContent += `Vol ${pub.volume}. `;
-        if (pub.pages) pubContent += `pp. ${pub.pages}.`;
-        if (pub.doi) pubContent += `<br><a href="https://doi.org/${pub.doi}" target="_blank">DOI: ${pub.doi}</a>`;
-
-        div.innerHTML = pubContent;
-        list.appendChild(div);
-      });
-    })
-    .catch(error => {
-      console.error('Error loading publications:', error);
-      document.getElementById('publications-list').innerHTML = '<p>Error loading publications. Please try again later.</p>';
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            document.querySelector(targetId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
     });
 
-  // Gallery Image Loader
-  // IMPORTANT: List your actual image filenames here as they are in your root directory.
-  const imageFilenames = [
-    '2.10.jpg',
-    '3.5a.jpg',
-    '3.5b.jpg',
-    '3.6.jpg',
-    '4.2.jpg',
-    '4.4.jpg',
-    '5.0.jpg',
-    '5.2.jpg',
-    'pp.jpg' // You also have pp.jpg, assuming it's part of the gallery
-    // Add any other gallery-intended images here
-  ];
+    // Dummy data for publications (replace with your actual data)
+    const publications = [
+        {
+            title: "Genome-wide insights into the medicinal plant 'Example Species A'",
+            authors: "Chetri BK, Sharma P, Devi R",
+            journal: "Journal of Plant Genomics",
+            year: 2023,
+            link: "https://example.com/pub1"
+        },
+        {
+            title: "Ethnobotanical survey of traditional medicinal plants in the Eastern Himalayas",
+            authors: "Devi R, Chetri BK",
+            journal: "Economic Botany",
+            year: 2022,
+            link: "https://example.com/pub2"
+        },
+        {
+            title: "Chloroplast genome of *Swertia chirayita*: a valuable resource for species identification and conservation",
+            authors: "Chetri BK, Singh A, Kumar S",
+            journal: "Mitochondrial DNA Part B",
+            year: 2021,
+            link: "https://example.com/pub3"
+        },
+        {
+            title: "Impact of climate change on indigenous medicinal plant distribution",
+            authors: "Kumar S, Chetri BK, Singh A",
+            journal: "Environmental Science and Technology",
+            year: 2020,
+            link: "https://example.com/pub4"
+        }
+        // Add more publications as needed
+    ];
 
-  // Since your images are in the root, the galleryPath is just an empty string
-  const galleryPath = ''; // Images are in the root directory
-
-  const galleryGrid = document.getElementById('gallery-grid');
-  if (galleryGrid) {
-    if (imageFilenames.length > 0) {
-      imageFilenames.forEach(filename => {
-        const imgPath = galleryPath + filename; // This will just be the filename
-        const div = document.createElement('div');
-        div.classList.add('gallery-item');
-        const img = document.createElement('img');
-        img.src = imgPath;
-        img.alt = filename.split('.')[0].replace(/_/g, ' '); // Basic alt text
-        img.loading = 'lazy'; // Improve performance
-
-        div.appendChild(img);
-        galleryGrid.appendChild(div);
-      });
-    } else {
-      galleryGrid.innerHTML = '<p>No images found in the gallery. Please add image filenames to `imageFilenames` array in `script.js`.</p>';
+    const publicationsList = document.getElementById('publications-list');
+    if (publicationsList) {
+        publications.forEach(pub => {
+            const pubDiv = document.createElement('div');
+            pubDiv.classList.add('publication-item');
+            pubDiv.innerHTML = `
+                <h3><a href="${pub.link}" target="_blank">${pub.title}</a></h3>
+                <p>${pub.authors} &bull; ${pub.journal} (${pub.year})</p>
+            `;
+            publicationsList.appendChild(pubDiv);
+        });
     }
-  }
 
+    // Gallery Flashing/Transition
+    const galleryImages = [
+        'gallery1.jpg', // Replace with your image paths
+        'gallery2.jpg',
+        'gallery3.jpg',
+        'gallery4.jpg'
+        // Add more images here
+    ];
 
-  // Intersection Observer for scroll animations
-  const sections = document.querySelectorAll('section');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-      }
-    });
-  }, {
-    rootMargin: '0px',
-    threshold: 0.1 // Trigger when 10% of the section is visible
-  });
+    const galleryGrid = document.getElementById('gallery-grid');
+    if (galleryGrid && galleryImages.length > 0) {
+        let currentIndex = 0;
 
-  sections.forEach(section => {
-    observer.observe(section);
-  });
+        // Preload images to prevent flickering
+        galleryImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
+        function createAndAppendImage(src, isActive) {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `Gallery Image ${currentIndex + 1}`;
+            img.classList.add('gallery-image');
+            if (isActive) {
+                img.classList.add('active');
+            }
+            galleryGrid.appendChild(img);
+            return img;
+        }
+
+        // Initialize with the first image
+        let currentImageElement = createAndAppendImage(galleryImages[0], true);
+
+        function changeImage() {
+            // Fade out current image
+            currentImageElement.classList.remove('active');
+
+            // Move to the next index
+            currentIndex = (currentIndex + 1) % galleryImages.length;
+
+            // Create new image and fade it in
+            const nextImageElement = createAndAppendImage(galleryImages[currentIndex], false);
+            // Give a small delay for DOM repaint before adding 'active' class for transition
+            setTimeout(() => {
+                nextImageElement.classList.add('active');
+            }, 50);
+
+            // Remove the old image after its transition is complete
+            currentImageElement.addEventListener('transitionend', function handler() {
+                if (this.parentNode === galleryGrid) { // Check if it's still in the DOM
+                    galleryGrid.removeChild(this);
+                }
+                this.removeEventListener('transitionend', handler);
+            });
+
+            currentImageElement = nextImageElement;
+        }
+
+        // Change image every 5 seconds (adjust as needed)
+        setInterval(changeImage, 5000); // 5000ms = 5 seconds
+    }
 });
