@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Publications loader from publications.json
-  // Assuming publications.json structure: [{author, year, title, journal, volume, pages}]
+  // Publications loader from publications.json
   fetch('publications.json')
     .then(res => {
       if (!res.ok) {
@@ -10,64 +9,69 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(data => {
       const list = document.getElementById('publications-list');
-      if (list) {
-        // Limiting to top 5 for brevity on homepage, adjust as needed
-        data.slice(0, 5).forEach(pub => {
-          const div = document.createElement('div');
-          div.classList.add('publication-item');
-          div.innerHTML = `<strong>${pub.author}</strong> (${pub.year}). <em>${pub.title}</em>. ${pub.journal || ''} ${pub.volume || ''} ${pub.pages || ''}`;
-          list.appendChild(div);
-        });
-      }
-    })
-    .catch(error => console.error('Error loading publications:', error));
+      data.forEach(pub => {
+        const div = document.createElement('div');
+        div.classList.add('publication-item');
+        let pubContent = `<strong>${pub.author}</strong> (${pub.year}). <em>${pub.title}</em>. `;
+        if (pub.journal) pubContent += `${pub.journal}. `;
+        if (pub.volume) pubContent += `Vol ${pub.volume}. `;
+        if (pub.pages) pubContent += `pp. ${pub.pages}.`;
+        if (pub.doi) pubContent += `<br><a href="https://doi.org/${pub.doi}" target="_blank">DOI: ${pub.doi}</a>`;
 
-  // 2. Dynamic gallery loader
-  const galleryTrack = document.getElementById('gallery-track');
-  // *** IMPORTANT: Replace these with your actual high-quality images ***
-  // These are placeholder names. You NEED to have these files in your repo
-  // and they should be distinct, visually appealing images from your work.
-  const galleryImages = [
-    'gallery_fieldwork1.jpg',
-    'gallery_labwork1.jpg',
-    'gallery_plant_specimen1.jpg',
-    'gallery_microscope1.jpg',
-    'gallery_team.jpg',
-    'gallery_fieldwork2.jpg',
-    'gallery_plant_specimen2.jpg',
-    // Add more images here for a richer gallery experience
+        div.innerHTML = pubContent;
+        list.appendChild(div);
+      });
+    })
+    .catch(error => {
+      console.error('Error loading publications:', error);
+      document.getElementById('publications-list').innerHTML = '<p>Error loading publications. Please try again later.</p>';
+    });
+
+  // Gallery Image Loader
+  // IMPORTANT: List your actual image filenames here as they are in your root directory.
+  const imageFilenames = [
+    '2.10.jpg',
+    '3.5a.jpg',
+    '3.5b.jpg',
+    '3.6.jpg',
+    '4.2.jpg',
+    '4.4.jpg',
+    '5.0.jpg',
+    '5.2.jpg',
+    'pp.jpg' // You also have pp.jpg, assuming it's part of the gallery
+    // Add any other gallery-intended images here
   ];
 
-  function loadGallery(imgArray) {
-    if (!galleryTrack || imgArray.length === 0) return;
+  // Since your images are in the root, the galleryPath is just an empty string
+  const galleryPath = ''; // Images are in the root directory
 
-    // Duplicate images multiple times for a truly seamless loop effect
-    // We duplicate it once, effectively having "original, original"
-    // The CSS animation scrolls exactly 50% of this combined length.
-    const totalImgs = [...imgArray, ...imgArray];
+  const galleryGrid = document.getElementById('gallery-grid');
+  if (galleryGrid) {
+    if (imageFilenames.length > 0) {
+      imageFilenames.forEach(filename => {
+        const imgPath = galleryPath + filename; // This will just be the filename
+        const div = document.createElement('div');
+        div.classList.add('gallery-item');
+        const img = document.createElement('img');
+        img.src = imgPath;
+        img.alt = filename.split('.')[0].replace(/_/g, ' '); // Basic alt text
+        img.loading = 'lazy'; // Improve performance
 
-    totalImgs.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = "Research related image"; // Good for accessibility
-      galleryTrack.appendChild(img);
-    });
+        div.appendChild(img);
+        galleryGrid.appendChild(div);
+      });
+    } else {
+      galleryGrid.innerHTML = '<p>No images found in the gallery. Please add image filenames to `imageFilenames` array in `script.js`.</p>';
+    }
   }
 
-  // Load the gallery images
-  loadGallery(galleryImages);
 
-
-  // 3. Intersection Observer for scroll animations (section reveal)
+  // Intersection Observer for scroll animations
   const sections = document.querySelectorAll('section');
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
-      } else {
-        // Optional: remove class when out of view if you want repeat animations
-        // entry.target.classList.remove('is-visible');
       }
     });
   }, {
