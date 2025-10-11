@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling for navigation links
+    // Smooth scrolling for navigation links (won't be used if overflow:hidden on body)
+    // Keeping it in case you change your mind for very slight scroll on certain views
     document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -13,32 +14,46 @@ document.addEventListener('DOMContentLoaded', function() {
     // Dummy data for publications (replace with your actual data)
     const publications = [
         {
-            title: "Genome-wide insights into the medicinal plant 'Example Species A'",
-            authors: "Chetri BK, Sharma P, Devi R",
-            journal: "Journal of Plant Genomics",
+            title: "Genome-wide insights into 'Example Species A'", // Shorter title
+            authors: "Chetri BK, Sharma P", // Shorter authors list
+            journal: "J. Plant Genomics", // Abbreviated journal
             year: 2023,
             link: "https://example.com/pub1"
         },
         {
-            title: "Ethnobotanical survey of traditional medicinal plants in the Eastern Himalayas",
+            title: "Ethnobotany of medicinal plants in Himalayas",
             authors: "Devi R, Chetri BK",
             journal: "Economic Botany",
             year: 2022,
             link: "https://example.com/pub2"
         },
         {
-            title: "Chloroplast genome of *Swertia chirayita*: a valuable resource for species identification and conservation",
-            authors: "Chetri BK, Singh A, Kumar S",
-            journal: "Mitochondrial DNA Part B",
+            title: "Chloroplast genome of *Swertia chirayita*",
+            authors: "Chetri BK, Singh A",
+            journal: "Mitochondrial DNA",
             year: 2021,
             link: "https://example.com/pub3"
         },
         {
-            title: "Impact of climate change on indigenous medicinal plant distribution",
-            authors: "Kumar S, Chetri BK, Singh A",
-            journal: "Environmental Science and Technology",
+            title: "Climate change impact on plant distribution",
+            authors: "Kumar S, Chetri BK",
+            journal: "Env. Sci. Tech.",
             year: 2020,
             link: "https://example.com/pub4"
+        },
+        { // Added a few more to test the overflow-auto for publications
+            title: "New insights into plant metabolomics",
+            authors: "Chetri BK, Li X",
+            journal: "Phytochemistry",
+            year: 2019,
+            link: "https://example.com/pub5"
+        },
+        {
+            title: "Bioinformatics tools for plant genome analysis",
+            authors: "Sharma P, Chetri BK",
+            journal: "Bioinformatics Today",
+            year: 2018,
+            link: "https://example.com/pub6"
         }
         // Add more publications as needed
     ];
