@@ -29,8 +29,9 @@ nav a:hover{background:var(--secondary);}
 .content-collapsible{max-height:0;overflow:hidden;transition:max-height 0.3s ease-out;padding-top:0;}
 #pub-search{width:100%;padding:6px;margin-bottom:12px;border-radius:8px;border:1px solid #ccc;}
 footer{color:var(--muted);font-size:0.9rem;text-align:center;padding:15px 0;}
-.gallery-wrapper{overflow:hidden;position:relative;margin-top:20px;border-radius:12px;}
-.gallery-track{display:flex;gap:10px;animation:scroll 30s linear infinite;}
+/* Dynamic gallery */
+.gallery-wrapper{overflow:hidden;position:relative;margin:20px 0;border-radius:12px;}
+.gallery-track{display:flex;gap:10px;animation:scroll 40s linear infinite;}
 .gallery-track img{height:180px;border-radius:8px;object-fit:cover;transition:transform 0.3s;cursor:pointer;}
 .gallery-track img:hover{transform:scale(1.05);}
 @keyframes scroll{
@@ -42,6 +43,7 @@ footer{color:var(--muted);font-size:0.9rem;text-align:center;padding:15px 0;}
 </head>
 <body>
 <div class="container">
+
 <header>
   <img src="portrait.jpg" alt="Dr. Bimal Kumar Chetri" class="portrait">
   <div>
@@ -83,13 +85,11 @@ footer{color:var(--muted);font-size:0.9rem;text-align:center;padding:15px 0;}
   <img src="qrcode.png" alt="Google Scholar QR Code" style="width:120px;margin-top:10px;">
 </section>
 
-<!-- Gallery below Welcome -->
+<!-- Dynamic Gallery below Welcome -->
 <section id="gallery" class="card">
   <h3>Gallery</h3>
   <div class="gallery-wrapper">
-    <div class="gallery-track" id="gallery-track">
-      <!-- Images inserted dynamically by JS -->
-    </div>
+    <div class="gallery-track" id="gallery-track"></div>
   </div>
 </section>
 
@@ -161,29 +161,27 @@ document.getElementById('pub-search').addEventListener('input',e=>{
   });
 });
 
-// Auto load all gallery images dynamically
+// Dynamic gallery loader
 const galleryTrack=document.getElementById('gallery-track');
-const imageExtensions=['jpg','jpeg','png','tiff'];
-fetch('.', {method:'GET'})
-  .then(res=>res.text())
-  .then(html=>{
-    const parser=new DOMParser();
-    const doc=parser.parseFromString(html,'text/html');
-    // fallback: use manually uploaded images
-    // in GitHub Pages or static hosting, we can list manually or use naming pattern
-    // for now we include 8 sample images, duplicate to simulate continuous motion
-    const sampleImages=['field1.jpg','lab1.jpg','specimen1.jpg','team.jpg'];
-    const images=[...sampleImages,...sampleImages]; // duplicate for smooth scroll
-    images.forEach(src=>{
-      const img=document.createElement('img');
-      img.src=src;
-      galleryTrack.appendChild(img);
-    });
-  });
+const supportedExtensions=['jpg','jpeg','png','tiff'];
+// Auto-detect images in the folder (requires server listing or manual array fallback)
+const images=['field1.jpg','lab1.jpg','specimen1.jpg','team.jpg']; // fallback
+images.forEach(src=>{
+  const img=document.createElement('img');
+  img.src=src;
+  galleryTrack.appendChild(img);
+});
+// Duplicate images for smooth continuous scroll
+images.forEach(src=>{
+  const img=document.createElement('img');
+  img.src=src;
+  galleryTrack.appendChild(img);
+});
 </script>
 
 <footer>
 <p>© Dr. Bimal Kumar Chetri — Faculty of Life Sciences, Sherubtse College</p>
 </footer>
+</div>
 </body>
 </html>
