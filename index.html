@@ -1,280 +1,258 @@
-<!--
-Dr. Bimal Kumar Chetri — Personal Academic Website (single-file HTML)
-Instructions: open this file in a browser to preview. Edit the placeholder text (marked with TODO) to personalize.
-
-Deployment options (short summary):
-1) GitHub Pages (recommended): create a repo, push this file as index.html to main branch (or gh-pages), enable Pages in repo settings -> Site published at https://<username>.github.io/<repo>/ or https://<username>.github.io/ for user repo named <username>.github.io
-2) Netlify / Vercel: drag-and-drop or connect your repo and deploy. Good for custom domain and HTTPS.
-3) Serve locally: python3 -m http.server 8000
-
-This single-file template includes responsive layout, sections: Home, About, Research, Publications, Projects, Teaching, Resources, Gallery, Contact, and Setup & Deploy instructions built into the page.
-
-License: CC-BY-NC (edit as you wish)
--->
-
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dr. Bimal Kumar Chetri — Plant Genomics & Medicinal Plant Research</title>
-  <meta name="description" content="Profile and research of Dr. Bimal Kumar Chetri — Plant Genomics, Organellar Genome Mining, Ethnobotany." />
-  <style>
-    /* Basic reset */
-    :root{
-      --accent:#2b7a4b; /* academic green */
-      --muted:#6b7280;
-      --bg:#ffffff;
-      --card:#fbfbfb;
-      --maxwidth:1100px;
-      --radius:12px;
-      font-family: Georgia, 'Times New Roman', serif;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#111;line-height:1.55}
-    a{color:var(--accent);text-decoration:none}
-    .container{max-width:var(--maxwidth);margin:28px auto;padding:0 20px}
-    header{display:flex;align-items:center;gap:18px}
-    .portrait{width:120px;height:120px;border-radius:12px;object-fit:cover;background:#eee;flex:0 0 120px}
-    h1{margin:0;font-size:1.6rem}
-    .subtitle{color:var(--muted);margin-top:4px}
-    nav{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
-    nav a{padding:8px 12px;border-radius:8px;background:transparent;border:1px solid transparent}
-    nav a:hover{background:#f3f7f3}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bimal K. Chetri (PhD) — Plant Genomics & Medicinal Plant Research</title>
+<meta name="description" content="Academic profile of Dr. Bimal Kumar Chetri — Plant Genomics, Organellar Genome Mining, Ethnobotany." />
 
-    main{display:grid;grid-template-columns:1fr;gap:22px;margin-top:22px}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 1px 6px rgba(16,24,40,0.04)}
-    .two-col{display:grid;grid-template-columns:1fr 320px;gap:20px}
-    .muted{color:var(--muted)}
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-    /* Publications list */
-    .pubs li{margin:12px 0}
+<style>
+:root{
+  --accent:#2b7a4b;
+  --muted:#6b7280;
+  --bg:#fdfdfd;
+  --card:#fff;
+  --maxwidth:1100px;
+  --radius:12px;
+  --transition:0.3s ease;
+  font-family: 'Roboto', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:#111;line-height:1.6}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxwidth);margin:0 auto;padding:20px}
+header{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:20px}
+.portrait{width:130px;height:130px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);}
+h1{font-size:2rem;margin-bottom:5px;}
+.subtitle{color:var(--muted);font-size:0.95rem}
+nav{display:flex;gap:12px;flex-wrap:wrap;position:sticky;top:0;background:#fff;padding:10px 0;border-bottom:1px solid #eee;z-index:100}
+nav a{padding:8px 12px;border-radius:8px;transition:var(--transition)}
+nav a:hover{background:#f3f7f3}
+main{display:grid;gap:25px}
+.card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:0 4px 18px rgba(0,0,0,0.05);transition:var(--transition);}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.1);}
+h2,h3,h4{margin-bottom:10px;}
+ul{list-style:disc;padding-left:20px;margin-bottom:10px}
+.muted{color:var(--muted)}
+.tag{display:inline-block;padding:6px 10px;border-radius:999px;font-size:0.85rem;background:#f1f8f1;color:var(--accent);border:1px solid rgba(43,122,75,0.06);margin-right:6px}
+.btn{display:inline-block;padding:8px 14px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);background:#fff;transition:var(--transition);}
+.btn:hover{background:var(--accent);color:#fff;border:1px solid var(--accent);}
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+@media(max-width:900px){.two-col{grid-template-columns:1fr}.portrait{width:100px;height:100px}}
 
-    /* Gallery */
-    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
-    .gallery img{width:100%;height:120px;object-fit:cover;border-radius:8px}
+#gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+#gallery-grid img{width:100%;height:140px;object-fit:cover;border-radius:8px;transition:transform 0.5s;cursor:pointer;}
+#gallery-grid img:hover{transform:scale(1.05);}
 
-    footer{margin-top:30px;color:var(--muted);font-size:0.95rem;padding:10px 0}
-
-    /* responsive */
-    @media (max-width:880px){
-      .two-col{grid-template-columns:1fr}
-      .portrait{width:96px;height:96px}
-    }
-
-    /* utility */
-    .tag{display:inline-block;padding:6px 10px;border-radius:999px;font-size:0.85rem;background:#f1f8f1;color:var(--accent);border:1px solid rgba(43,122,75,0.06)}
-    .btn{display:inline-block;padding:8px 12px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:#fff}
-
-    /* small monospace for code blocks */
-    pre{background:#f8faf8;padding:12px;border-radius:8px;overflow:auto;font-family:Menlo,Monaco,monospace}
-
-  </style>
+#pub-list li{margin-bottom:12px;line-height:1.4;}
+#pub-search{width:100%;padding:10px;margin-bottom:15px;border-radius:6px;border:1px solid #ccc;}
+.collapsible{cursor:pointer;padding:10px;border:none;text-align:left;outline:none;font-size:1rem;background:#f7f7f7;border-radius:8px;margin-bottom:6px;transition:var(--transition);}
+.active,.collapsible:hover{background:#e6f3e6}
+.content{padding:0 10px;display:none;overflow:hidden;background-color:#f9f9f9;border-radius:8px;margin-bottom:10px;transition:var(--transition);}
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <!-- TODO: replace src with your portrait file name or URL -->
-      <img class="portrait" src="portrait.jpg" alt="Dr. Bimal Kumar Chetri">
-      <div>
-        <h1>Dr. Bimal Kumar Chetri</h1>
-        <div class="subtitle">Faculty of Life Sciences — Sherubtse College, Royal University of Bhutan</div>
-        <div class="subtitle">Plant Genomics · Organellar Genome Mining · Medicinal Plant Biodiversity · Ethnobotany · GHG Inventory</div>
-        <div style="margin-top:8px">
-          <span class="tag">Plant Genomics</span>
-          <span class="tag">Medicinal Plants</span>
-        </div>
-      </div>
-    </header>
+<div class="container">
+<header>
+  <img class="portrait" src="portrait.jpg" alt="Dr. Bimal Kumar Chetri">
+  <div>
+    <h1>Dr. Bimal Kumar Chetri</h1>
+    <div class="subtitle">Faculty of Life Sciences — Sherubtse College, Royal University of Bhutan</div>
+    <div class="subtitle">Plant Genomics · Organellar Genome Mining · Medicinal Plant Biodiversity · Ethnobotany · GHG Inventory</div>
+    <div style="margin-top:8px">
+      <span class="tag">Plant Genomics</span>
+      <span class="tag">Medicinal Plants</span>
+    </div>
+  </div>
+</header>
 
-    <nav aria-label="Primary navigation">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#research">Research</a>
-      <a href="#publications">Publications</a>
-      <a href="#projects">Projects</a>
-      <a href="#teaching">Teaching</a>
-      <a href="#resources">Resources</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
-      <a href="#deploy">Setup &amp; Deploy</a>
-    </nav>
+<nav aria-label="Primary navigation">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#research">Research</a>
+  <a href="#publications">Publications</a>
+  <a href="#projects">Projects</a>
+  <a href="#teaching">Teaching</a>
+  <a href="#resources">Resources</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#contact">Contact</a>
+</nav>
 
-    <main>
-      <section id="home" class="card">
-        <h2>Welcome</h2>
-        <p class="muted">I am an academic and researcher specializing in organellar genome mining of herbal and medicinal plants, plant molecular biology, bioinformatics, and ethnobotany. This site presents my research, publications, teaching activities, and resources for the community. (Edit this text in the HTML file to personalize.)</p>
-      </section>
+<main>
+<section id="home" class="card">
+  <h2>Welcome</h2>
+  <p class="muted">I am an academic and researcher specializing in organellar genome mining of herbal and medicinal plants, plant molecular biology, bioinformatics, and ethnobotany. This site presents my research, publications, teaching activities, and resources for the community.</p>
+</section>
 
-      <div class="two-col">
-        <section id="about" class="card">
-          <h3>About — Academic Biography</h3>
-          <p><strong>Full name:</strong> Dr. Bimal Kumar Chetri</p>
-          <p><strong>Position:</strong> Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan</p>
-          <p><strong>Research interests:</strong> Organellar genome mining, plant genomics, medicinal plant biodiversity, ethnobotany, bioinformatics pipelines, and GHG inventory related to vegetation studies.</p>
+<div class="two-col">
+<section id="about" class="card">
+  <h3>About — Academic Biography</h3>
+  <p><strong>Full name:</strong> Dr. Bimal Kumar Chetri</p>
+  <p><strong>Position:</strong> Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan</p>
+  <p><strong>Research interests:</strong> Organellar genome mining, plant genomics, medicinal plant biodiversity, ethnobotany, bioinformatics pipelines, and GHG inventory.</p>
 
-          <h4>Education & Training</h4>
-          <ul>
-            <li>Ph.D. — <em>TODO — institution, year</em></li>
-            <li>M.Sc. — <em>TODO — institution, year</em></li>
-            <li>B.Sc. — <em>TODO — institution, year</em></li>
-          </ul>
+  <h4>Education & Training</h4>
+  <ul>
+    <li>Ph.D. — <em>TODO</em></li>
+    <li>M.Sc. — <em>TODO</em></li>
+    <li>B.Sc. — <em>TODO</em></li>
+  </ul>
 
-          <h4>Selected roles</h4>
-          <ul>
-            <li>Faculty — Sherubtse College</li>
-            <li>Lead researcher — organellar genome projects</li>
-          </ul>
+  <h4>Selected Roles</h4>
+  <ul>
+    <li>Faculty — Sherubtse College</li>
+    <li>Lead Researcher — Organellar genome projects</li>
+  </ul>
+</section>
 
-          <h4>Quick links</h4>
-          <p><a href="#publications">Publications</a> · <a href="#projects">Projects</a> · <a href="#resources">Resources</a></p>
-        </section>
+<aside class="card">
+  <h4>Contact & Profiles</h4>
+  <p class="muted">Email: <strong>TODO</strong></p>
+  <p>ORCID: <a href="https://orcid.org/">TODO</a></p>
+  <p>Google Scholar: <a href="#">TODO</a></p>
+  <p>ResearchGate / LinkedIn: <a href="#">TODO</a></p>
+  <h4 style="margin-top:10px">CV & Downloads</h4>
+  <p><a href="cv.pdf" download class="btn">Download CV</a></p>
+  <h4 style="margin-top:12px">Keywords</h4>
+  <p class="muted">plant genomics · organellar genomes · chloroplast · mitochondria · ethnobotany · biodiversity · GHG</p>
+</aside>
+</div>
 
-        <aside class="card">
-          <h4>Contact & Profiles</h4>
-          <p class="muted">Institutional email: <strong>TODO: your email</strong></p>
-          <p>ORCID: <a href="https://orcid.org/">TODO: ORCID iD</a></p>
-          <p>Google Scholar: <a href="#">TODO: link</a></p>
-          <p>ResearchGate / LinkedIn: <a href="#">TODO: link</a></p>
-
-          <h4 style="margin-top:10px">CV & Downloads</h4>
-          <p><a href="cv.pdf" download class="btn">Download CV (cv.pdf)</a></p>
-
-          <h4 style="margin-top:12px">Keywords</h4>
-          <p class="muted">plant genomics · organellar genomes · chloroplast · mitochondria · ethnobotany · biodiversity · GHG</p>
-        </aside>
-      </div>
-
-      <section id="research" class="card">
-        <h3>Research</h3>
-        <p>I lead research in organellar genome mining of medicinal and herbal plants, combining field-collected vouchers, classical taxonomy, molecular lab work, and bioinformatics analysis pipelines. My approach emphasises reproducible workflows and integration of traditional ecological knowledge where appropriate.</p>
-
-        <h4>Ongoing themes</h4>
-        <ul>
-          <li>Organellar genome assembly & annotation (chloroplast, mitochondrial) from short- and long-read data</li>
-          <li>Comparative genomics for medicinal plant authentication</li>
-          <li>Development of bioinformatics pipelines and scripts for organellar genome mining</li>
-          <li>Ethnobotany and community knowledge integration</li>
-          <li>GHG inventory related to vegetation and land use (method development)</li>
-        </ul>
-
-        <h4>Representative methods</h4>
-        <p class="muted">DNA extraction, library preparation (Illumina & Oxford Nanopore), hybrid assembly, annotation with GeSeq / PGA / MITOS, phylogenomics, custom scripts (Python / R) for automated analyses, and data deposition to NCBI/ENA.</p>
-      </section>
-
-      <section id="publications" class="card">
-        <h3>Publications (Selected)</h3>
-        <p class="muted">Below are representative publications. Replace placeholders with full citations and DOIs; for long lists consider auto-generating from BibTeX/ORCID/Google Scholar.</p>
-        <ol class="pubs">
-          <li><strong>Chetri BK</strong> (2024). <em>Title of study on organellar genomes</em>. <em>Journal name</em>. DOI: <a href="#">10.xxxx/xxxxx</a></li>
-          <li><strong>Chetri BK</strong>, Collaborator A (2023). <em>Comparative genomics of medicinal plant X</em>. <em>Journal name</em>. DOI: <a href="#">10.xxxx/xxxxx</a></li>
-          <li><strong>Chetri BK</strong> et al. (2022). <em>Ethnobotany and biodiversity assessment in region Y</em>. <em>Journal name</em>. DOI: <a href="#">10.xxxx/xxxxx</a></li>
-        </ol>
-
-        <p>If you want I can generate a script to automatically fetch your publications from ORCID or Google Scholar and render them here as a JSON/BibTeX block.</p>
-      </section>
-
-      <section id="projects" class="card">
-        <h3>Projects</h3>
-        <ul>
-          <li><strong>Project A:</strong> Organellar genome reference library for medicinal plants (funding: TODO — funder, period). Short description... </li>
-          <li><strong>Project B:</strong> Ethnobotanical survey and integration of local plant use knowledge (funding: TODO). Short description...</li>
-          <li><strong>Project C:</strong> GHG inventory methodology for local vegetation assessment (collaborators: TODO).</li>
-        </ul>
-      </section>
-
-      <section id="teaching" class="card">
-        <h3>Teaching & Supervision</h3>
-        <p>Courses taught: Molecular Biology, Plant Genomics, Biodiversity & Conservation, Bioinformatics practicals.</p>
-        <h4>Supervision</h4>
-        <ul>
-          <li>Undergraduate and postgraduate projects in organellar genomics, phylogenomics, and bioinformatics.</li>
-          <li>Interested students: contact me with a short CV and project idea.</li>
-        </ul>
-      </section>
-
-      <section id="resources" class="card">
-        <h3>Resources & Tools</h3>
-        <p class="muted">Scripts, example pipelines, and datasets for reproducible organellar genome analysis.</p>
-        <h4>Available downloads</h4>
-        <ul>
-          <li><a href="#">chloroplast_pipeline.sh</a> — example shell pipeline (placeholder)</li>
-          <li><a href="#">annotate_plastome.ipynb</a> — Jupyter notebook for annotation (placeholder)</li>
-          <li><a href="#">example_dataset.tar.gz</a> — small example dataset (placeholder)</li>
-        </ul>
-
-        <h4>Recommended software</h4>
-        <p class="muted">SPAdes, Flye, GeSeq, GetOrganelle, MAFFT, IQ-TREE, RAxML-NG, samtools, bcftools, custom Python/R scripts.</p>
-
-        <h4>Short code snippet (example: fetch DOI metadata with Python)</h4>
-        <pre>import requests
-resp = requests.get('https://doi.org/10.XXXX/XXXXX', headers={'Accept':'application/vnd.citationstyles.csl+json'})
-print(resp.json())</pre>
-      </section>
-
-      <section id="gallery" class="card">
-        <h3>Gallery</h3>
-        <div class="gallery">
-          <!-- TODO: replace srcs with real images -->
-          <img src="field1.jpg" alt="Fieldwork 1">
-          <img src="lab1.jpg" alt="Lab work">
-          <img src="specimen1.jpg" alt="Herbarium specimen">
-          <img src="team.jpg" alt="Team photo">
-        </div>
-      </section>
-
-      <section id="contact" class="card">
-        <h3>Contact</h3>
-        <p>Please contact me for collaborations, student supervision, or requests for datasets and scripts.</p>
-        <p><strong>Email:</strong> <a href="mailto:TODO:your.email@institution.edu">TODO:your.email@institution.edu</a></p>
-        <p><strong>Postal address:</strong> Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan</p>
-      </section>
-
-      <section id="deploy" class="card">
-        <h3>Setup &amp; Deploy (GitHub Pages)</h3>
-        <p class="muted">Follow these steps to publish this site on GitHub Pages (recommended and free):</p>
-        <ol>
-          <li>Create a GitHub account if you don't have one: <a href="https://github.com/">github.com</a></li>
-          <li>Make a new repository. If you want the site at https://&lt;username&gt;.github.io then name the repo <code>&lt;username&gt;.github.io</code>. Otherwise any repo name is fine (site will be at https://&lt;username&gt;.github.io/&lt;repo&gt;/).</li>
-          <li>Upload this file as <code>index.html</code>. Also upload assets (portrait.jpg, cv.pdf, gallery images, scripts) into the repo.</li>
-          <li>In the repository settings > Pages: select branch <code>main</code> (or <code>gh-pages</code>) and folder <code>/ (root)</code>. Save — your site will publish within minutes.</li>
-          <li>Optional: connect a custom domain via the same Pages settings. GitHub provides HTTPS by default.</li>
-        </ol>
-
-        <h4>Local preview</h4>
-        <p>Run a quick local server to preview:</p>
-        <pre>python3 -m http.server 8000
-# then open http://localhost:8000 in your browser</pre>
-
-        <h4>Alternative: Netlify (drag & drop)</h4>
-        <p>Zip the files (index.html + assets) and drag to Netlify Drop for immediate hosting with HTTPS and a managed domain. Connect your GitHub repo for continuous deploy.</p>
-
-        <h4>Security & privacy notes</h4>
-        <p class="muted">Avoid publishing sensitive personal data (personal phone, ID numbers). For institutional email use the official address. If you host datasets with sensitive information, consider controlled access or DOI with repository (Zenodo, Figshare).</p>
-      </section>
-
-    </main>
-
-    <footer>
-      <div class="container" style="max-width:none;padding:0">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-          <div>© <strong>Dr. Bimal Kumar Chetri</strong> — Faculty of Life Sciences, Sherubtse College</div>
-          <div class="muted">Built with a minimal static template — edit HTML to customize content and styling.</div>
-        </div>
-      </div>
-    </footer>
+<section id="research" class="card">
+  <h3>Research</h3>
+  <p>I lead research in organellar genome mining of medicinal and herbal plants, combining field-collected vouchers, classical taxonomy, molecular lab work, and bioinformatics pipelines.</p>
+  <button class="collapsible">Ongoing Themes</button>
+  <div class="content">
+    <ul>
+      <li>Organellar genome assembly & annotation (chloroplast, mitochondrial)</li>
+      <li>Comparative genomics for medicinal plant authentication</li>
+      <li>Development of bioinformatics pipelines and scripts</li>
+      <li>Ethnobotany and community knowledge integration</li>
+      <li>GHG inventory for vegetation & land use</li>
+    </ul>
   </div>
 
-  <script>
-    // Simple smooth scroll for in-page nav
-    document.querySelectorAll('nav a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        e.preventDefault();
-        const id = a.getAttribute('href');
-        const el = document.querySelector(id);
-        if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-      });
-    });
-  </script>
+  <button class="collapsible">Representative Methods</button>
+  <div class="content">
+    <p class="muted">DNA extraction, library prep (Illumina & Nanopore), hybrid assembly, annotation with GeSeq/PGA/MITOS, phylogenomics, Python/R scripts, NCBI/ENA deposition.</p>
+  </div>
+</section>
+
+<section id="publications" class="card">
+  <h3>Publications</h3>
+  <input type="text" id="pub-search" placeholder="Search publications...">
+  <ol id="pub-list"></ol>
+</section>
+
+<section id="projects" class="card">
+  <h3>Projects</h3>
+  <ul>
+    <li><strong>Project A:</strong> Organellar genome reference library for medicinal plants.</li>
+    <li><strong>Project B:</strong> Ethnobotanical survey and local plant use integration.</li>
+    <li><strong>Project C:</strong> GHG inventory methodology for local vegetation assessment.</li>
+  </ul>
+</section>
+
+<section id="teaching" class="card">
+  <h3>Teaching & Supervision</h3>
+  <ul>
+    <li>Courses: Molecular Biology, Plant Genomics, Bioinformatics, Biodiversity & Conservation</li>
+    <li>Supervision: Undergraduate & postgraduate projects in organellar genomics</li>
+  </ul>
+</section>
+
+<section id="resources" class="card">
+  <h3>Resources & Tools</h3>
+  <ul>
+    <li><a href="#">chloroplast_pipeline.sh</a></li>
+    <li><a href="#">annotate_plastome.ipynb</a></li>
+    <li><a href="#">example_dataset.tar.gz</a></li>
+  </ul>
+</section>
+
+<section id="gallery" class="card">
+  <h3>Gallery</h3>
+  <div id="gallery-grid"></div>
+</section>
+
+<section id="contact" class="card">
+  <h3>Contact</h3>
+  <p>Email: <a href="mailto:TODO">TODO</a></p>
+  <p>Postal Address: Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan</p>
+</section>
+</main>
+
+<footer class="card">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;">
+    <div>© Dr. Bimal Kumar Chetri — Faculty of Life Sciences, Sherubtse College</div>
+    <div class="muted">Built with a modern dynamic template</div>
+  </div>
+</footer>
+</div>
+
+<script>
+// Smooth scroll
+document.querySelectorAll('nav a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// Collapsible sections
+document.querySelectorAll('.collapsible').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    btn.classList.toggle('active');
+    const content = btn.nextElementSibling;
+    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  });
+});
+
+// Dynamic Publications
+fetch('publications.json')
+.then(res=>res.json())
+.then(data=>{
+  data.sort((a,b)=>b.year-a.year);
+  const list = document.getElementById('pub-list');
+  data.forEach(pub=>{
+    const li = document.createElement('li');
+    const authors = pub.author.replace(/ and /g, ', ');
+    const title = pub.title;
+    const journal = pub.journal || pub.booktitle || pub.publisher || '';
+    const vol = pub.volume ? `, <strong>${pub.volume}</strong>` : '';
+    const num = pub.number ? `(${pub.number})` : '';
+    const pages = pub.pages ? `: ${pub.pages}` : '';
+    const year = pub.year ? ` (${pub.year})` : '';
+    li.innerHTML = `<strong>${authors}</strong>${year}. <em>${title}</em>. ${journal}${vol}${num}${pages}`;
+    list.appendChild(li);
+  });
+});
+
+// Search Publications
+const searchInput = document.getElementById('pub-search');
+searchInput.addEventListener('input', e=>{
+  const q = e.target.value.toLowerCase();
+  Array.from(document.querySelectorAll('#pub-list li')).forEach(li=>{
+    li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+});
+
+// Dynamic Gallery
+const galleryImages = [
+  'field1.jpg','lab1.jpg','specimen1.jpg','team.jpg'
+  // add all your filenames here
+];
+const galleryGrid = document.getElementById('gallery-grid');
+galleryImages.forEach(file=>{
+  const img = document.createElement('img');
+  img.src = file;
+  img.alt = file.replace(/\.[^/.]+$/,'').replace(/_/g,' ');
+  galleryGrid.appendChild(img);
+});
+</script>
 </body>
 </html>
