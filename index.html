@@ -1,88 +1,64 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bimal K. Chetri (PhD) — Plant Genomics & Medicinal Plant Research</title>
-<meta name="description" content="Academic profile of Dr. Chetri — Plant Genomics, Organellar Genome Mining, Ethnobotany." />
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bimal Kumar Chetri (PhD) — Plant Genomics & Medicinal Plants</title>
 <style>
-:root{
-  --accent:#2b7a4b;
-  --muted:#6b7280;
-  --bg:#fdfdfd;
-  --card:#fff;
-  --maxwidth:1100px;
-  --radius:12px;
-  --transition:0.3s ease;
-  font-family: 'Roboto', sans-serif;
+:root {
+  --primary:#2b7a4b; --secondary:#f1f8f1; --muted:#6b7280;
+  --bg:#fff; --card:#fbfbfb; --radius:12px; --maxwidth:1100px;
+  --transition:.3s;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:#111;line-height:1.6}
-a{color:var(--accent);text-decoration:none}
-.container{max-width:var(--maxwidth);margin:0 auto;padding:20px}
-header{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:20px}
-.portrait{width:130px;height:130px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);}
-h1{font-size:2rem;margin-bottom:5px;}
-.subtitle{color:var(--muted);font-size:0.95rem}
-nav{display:flex;gap:12px;flex-wrap:wrap;position:sticky;top:0;background:#fff;padding:10px 0;border-bottom:1px solid #eee;z-index:100}
-nav a{padding:8px 12px;border-radius:8px;transition:var(--transition)}
-nav a:hover{background:#f3f7f3}
-main{display:grid;gap:25px}
-.card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:0 4px 18px rgba(0,0,0,0.05);transition:var(--transition);}
-.card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.1);}
-h2,h3,h4{margin-bottom:10px;}
-ul{list-style:disc;padding-left:20px;margin-bottom:10px}
-.muted{color:var(--muted)}
-.tag{display:inline-block;padding:6px 10px;border-radius:999px;font-size:0.85rem;background:#f1f8f1;color:var(--accent);border:1px solid rgba(43,122,75,0.06);margin-right:6px}
-.btn{display:inline-block;padding:8px 14px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);background:#fff;transition:var(--transition);}
-.btn:hover{background:var(--accent);color:#fff;border:1px solid var(--accent);}
-.two-col{display:grid;grid-template-columns:2fr 1fr;gap:20px}
-@media(max-width:900px){.two-col{grid-template-columns:1fr}.portrait{width:100px;height:100px}}
-
-#gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
-#gallery-grid img{width:100%;height:140px;object-fit:cover;border-radius:8px;transition:transform 0.5s;cursor:pointer;}
-#gallery-grid img:hover{transform:scale(1.05);}
-
-#pub-list li{margin-bottom:12px;line-height:1.4;}
-#pub-search{width:100%;padding:10px;margin-bottom:15px;border-radius:6px;border:1px solid #ccc;}
-.collapsible{cursor:pointer;padding:10px;border:none;text-align:left;outline:none;font-size:1rem;background:#f7f7f7;border-radius:8px;margin-bottom:6px;transition:var(--transition);}
-.active,.collapsible:hover{background:#e6f3e6}
-.content{padding:0 10px;display:none;overflow:hidden;background-color:#f9f9f9;border-radius:8px;margin-bottom:10px;transition:var(--transition);}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Georgia,'Times New Roman',serif;}
+body{background:var(--bg);color:#111;line-height:1.6;}
+a{color:var(--primary);text-decoration:none;}
+.container{max-width:var(--maxwidth);margin:0 auto;padding:20px;}
+header{display:flex;align-items:center;gap:18px;margin-bottom:20px;}
+.portrait{width:120px;height:120px;border-radius:12px;object-fit:cover;background:#eee;}
+header h1{font-size:1.8rem;margin-bottom:4px;}
+.subtitle{color:var(--muted);}
+nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;position:sticky;top:0;background:#fff;padding:10px 0;z-index:10;}
+nav a{padding:8px 12px;border-radius:8px;transition:var(--transition);}
+nav a:hover{background:var(--secondary);}
+.card{background:var(--card);padding:20px;margin-bottom:20px;border-radius:var(--radius);box-shadow:0 2px 8px rgba(0,0,0,0.05);transition:var(--transition);}
+.card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.two-col{display:grid;grid-template-columns:1fr 300px;gap:20px;}
+.collapsible {cursor:pointer;user-select:none;}
+.collapsible::after {content: '▼';float:right;transition:transform var(--transition);}
+.collapsible.active::after{transform:rotate(-180deg);}
+.content-collapsible{max-height:0;overflow:hidden;transition:max-height 0.3s ease-out;padding-top:0px;}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;}
+.gallery img{width:100%;border-radius:8px;cursor:pointer;transition:0.3s;}
+.gallery img:hover{transform:scale(1.05);}
+#pub-search{width:100%;padding:6px;margin-bottom:12px;border-radius:8px;border:1px solid #ccc;}
+footer{color:var(--muted);font-size:0.9rem;text-align:center;padding:15px 0;}
+@media(max-width:880px){.two-col{grid-template-columns:1fr;}}
 </style>
 </head>
-
 <body>
 <div class="container">
 <header>
-  <img class="portrait" src="portrait.jpg" alt="Dr. Bimal Kumar Chetri">
+  <img src="portrait.jpg" alt="Dr. Bimal Kumar Chetri" class="portrait">
   <div>
-    <h1>Dr. Bimal Kumar Chetri</h1>
+    <h1>Dr. Chetri</h1>
     <div class="subtitle">Faculty of Life Sciences — Sherubtse College, Royal University of Bhutan</div>
     <div class="subtitle">Plant Genomics · Organellar Genome Mining · Medicinal Plant Biodiversity · Ethnobotany · GHG Inventory</div>
-    <div style="margin-top:8px">
-      <span class="tag">Plant Genomics</span>
-      <span class="tag">Medicinal Plants</span>
-    </div>
   </div>
 </header>
 
-<nav aria-label="Primary navigation">
-  <a href="#home">Home</a>
-  <a href="#about">About</a>
-  <a href="#research">Research</a>
-  <a href="#publications">Publications</a>
-  <a href="#projects">Projects</a>
-  <a href="#teaching">Teaching</a>
-  <a href="#resources">Resources</a>
-  <a href="#gallery">Gallery</a>
-  <a href="#contact">Contact</a>
+<nav>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#research">Research</a>
+<a href="#publications">Publications</a>
+<a href="#projects">Projects</a>
+<a href="#teaching">Teaching</a>
+<a href="#resources">Resources</a>
+<a href="#gallery">Gallery</a>
+<a href="#contact">Contact</a>
 </nav>
 
-<main>
 <section id="home" class="card">
   <h2>Welcome</h2>
   <p class="muted">I am an academic and researcher specializing in organellar genome mining of herbal and medicinal plants, plant molecular biology, bioinformatics, and ethnobotany. This site presents my research, publications, teaching activities, and resources for the community.</p>
@@ -90,168 +66,158 @@ ul{list-style:disc;padding-left:20px;margin-bottom:10px}
 
 <div class="two-col">
 <section id="about" class="card">
-  <h3>About — Academic Biography</h3>
+  <h3>About</h3>
   <p><strong>Full name:</strong> Dr. Bimal Kumar Chetri</p>
-  <p><strong>Position:</strong> Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan</p>
-  <p><strong>Research interests:</strong> Organellar genome mining, plant genomics, medicinal plant biodiversity, ethnobotany, bioinformatics pipelines, and GHG inventory.</p>
+  <p><strong>Position:</strong> Faculty of Life Sciences, Sherubtse College</p>
+  <p><strong>Research interests:</strong> Organellar genome mining, plant genomics, medicinal plant biodiversity, ethnobotany, bioinformatics, GHG inventory</p>
 
   <h4>Education & Training</h4>
   <ul>
-    <li>Ph.D. — <em>TODO</em></li>
-    <li>M.Sc. — <em>TODO</em></li>
-    <li>B.Sc. — <em>TODO</em></li>
+    <li>Ph.D. — TODO</li>
+    <li>M.Sc. — TODO</li>
+    <li>B.Sc. — TODO</li>
   </ul>
 
-  <h4>Selected Roles</h4>
+  <h4>Selected roles</h4>
   <ul>
     <li>Faculty — Sherubtse College</li>
-    <li>Lead Researcher — Organellar genome projects</li>
+    <li>Lead researcher — organellar genome projects</li>
   </ul>
 </section>
 
 <aside class="card">
   <h4>Contact & Profiles</h4>
   <p class="muted">Email: <strong>TODO</strong></p>
-  <p>ORCID: <a href="https://orcid.org/">TODO</a></p>
+  <p>ORCID: <a href="#">TODO</a></p>
   <p>Google Scholar: <a href="#">TODO</a></p>
   <p>ResearchGate / LinkedIn: <a href="#">TODO</a></p>
-  <h4 style="margin-top:10px">CV & Downloads</h4>
+  <h4>CV & Downloads</h4>
   <p><a href="cv.pdf" download class="btn">Download CV</a></p>
-  <h4 style="margin-top:12px">Keywords</h4>
-  <p class="muted">plant genomics · organellar genomes · chloroplast · mitochondria · ethnobotany · biodiversity · GHG</p>
 </aside>
 </div>
 
 <section id="research" class="card">
-  <h3>Research</h3>
-  <p>I lead research in organellar genome mining of medicinal and herbal plants, combining field-collected vouchers, classical taxonomy, molecular lab work, and bioinformatics pipelines.</p>
-  <button class="collapsible">Ongoing Themes</button>
-  <div class="content">
-    <ul>
-      <li>Organellar genome assembly & annotation (chloroplast, mitochondrial)</li>
-      <li>Comparative genomics for medicinal plant authentication</li>
-      <li>Development of bioinformatics pipelines and scripts</li>
-      <li>Ethnobotany and community knowledge integration</li>
-      <li>GHG inventory for vegetation & land use</li>
-    </ul>
-  </div>
-
-  <button class="collapsible">Representative Methods</button>
-  <div class="content">
-    <p class="muted">DNA extraction, library prep (Illumina & Nanopore), hybrid assembly, annotation with GeSeq/PGA/MITOS, phylogenomics, Python/R scripts, NCBI/ENA deposition.</p>
-  </div>
+<h3 class="collapsible">Research</h3>
+<div class="content-collapsible">
+<p>I lead research in organellar genome mining of medicinal and herbal plants, combining field-collected vouchers, molecular lab work, and bioinformatics analysis pipelines. Emphasis on reproducible workflows and traditional ecological knowledge integration.</p>
+<ul>
+<li>Organellar genome assembly & annotation (chloroplast, mitochondrial)</li>
+<li>Comparative genomics for medicinal plant authentication</li>
+<li>Bioinformatics pipeline development</li>
+<li>Ethnobotany and community knowledge integration</li>
+<li>GHG inventory methodology</li>
+</ul>
+</div>
 </section>
 
 <section id="publications" class="card">
-  <h3>Publications</h3>
-  <input type="text" id="pub-search" placeholder="Search publications...">
-  <ol id="pub-list"></ol>
+<h3>Publications</h3>
+<input type="text" id="pub-search" placeholder="Search publications...">
+<ol id="pub-list"></ol>
 </section>
 
 <section id="projects" class="card">
-  <h3>Projects</h3>
-  <ul>
-    <li><strong>Project A:</strong> Organellar genome reference library for medicinal plants.</li>
-    <li><strong>Project B:</strong> Ethnobotanical survey and local plant use integration.</li>
-    <li><strong>Project C:</strong> GHG inventory methodology for local vegetation assessment.</li>
-  </ul>
+<h3 class="collapsible">Projects</h3>
+<div class="content-collapsible">
+<ul>
+<li><strong>Project A:</strong> Organellar genome reference library (TODO)</li>
+<li><strong>Project B:</strong> Ethnobotanical survey (TODO)</li>
+<li><strong>Project C:</strong> GHG inventory methodology (TODO)</li>
+</ul>
+</div>
 </section>
 
 <section id="teaching" class="card">
-  <h3>Teaching & Supervision</h3>
-  <ul>
-    <li>Courses: Molecular Biology, Plant Genomics, Bioinformatics, Biodiversity & Conservation</li>
-    <li>Supervision: Undergraduate & postgraduate projects in organellar genomics</li>
-  </ul>
+<h3 class="collapsible">Teaching & Supervision</h3>
+<div class="content-collapsible">
+<p>Courses: Molecular Biology, Plant Genomics, Biodiversity & Conservation, Bioinformatics practicals.</p>
+<p>Supervision: Undergraduate & postgraduate projects in organellar genomics & phylogenomics.</p>
+</div>
 </section>
 
 <section id="resources" class="card">
-  <h3>Resources & Tools</h3>
-  <ul>
-    <li><a href="#">chloroplast_pipeline.sh</a></li>
-    <li><a href="#">annotate_plastome.ipynb</a></li>
-    <li><a href="#">example_dataset.tar.gz</a></li>
-  </ul>
+<h3>Resources & Tools</h3>
+<ul>
+<li><a href="#">chloroplast_pipeline.sh</a></li>
+<li><a href="#">annotate_plastome.ipynb</a></li>
+<li><a href="#">example_dataset.tar.gz</a></li>
+</ul>
 </section>
 
 <section id="gallery" class="card">
-  <h3>Gallery</h3>
-  <div id="gallery-grid"></div>
+<h3>Gallery</h3>
+<div class="gallery">
+  <img src="field1.jpg" alt="Fieldwork 1">
+  <img src="lab1.jpg" alt="Lab work">
+  <img src="specimen1.jpg" alt="Herbarium specimen">
+  <img src="team.jpg" alt="Team photo">
+</div>
 </section>
 
 <section id="contact" class="card">
-  <h3>Contact</h3>
-  <p>Email: <a href="mailto:TODO">TODO</a></p>
-  <p>Postal Address: Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan</p>
+<h3>Contact</h3>
+<p>Contact for collaborations, supervision, or dataset requests.</p>
+<p>Email: <a href="mailto:TODO">TODO</a></p>
+<p>Postal address: Faculty of Life Sciences, Sherubtse College</p>
 </section>
-</main>
 
-<footer class="card">
-  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;">
-    <div>© Dr. Bimal Kumar Chetri — Faculty of Life Sciences, Sherubtse College</div>
-    <div class="muted">Built with a modern dynamic template</div>
-  </div>
+<footer>
+<p>© Dr. Bimal Kumar Chetri — Faculty of Life Sciences, Sherubtse College</p>
 </footer>
 </div>
 
 <script>
 // Smooth scroll
 document.querySelectorAll('nav a[href^="#"]').forEach(a=>{
-  a.addEventListener('click', e=>{
+  a.addEventListener('click',e=>{
     e.preventDefault();
-    document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth',block:'start'});
+    document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
   });
 });
 
-// Collapsible sections
+// Collapsible
 document.querySelectorAll('.collapsible').forEach(btn=>{
   btn.addEventListener('click',()=>{
     btn.classList.toggle('active');
     const content = btn.nextElementSibling;
-    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    if(content.style.maxHeight) content.style.maxHeight = null;
+    else content.style.maxHeight = content.scrollHeight + "px";
   });
 });
 
-// Dynamic Publications
+// Load publications.json dynamically
 fetch('publications.json')
 .then(res=>res.json())
 .then(data=>{
+  const list=document.getElementById('pub-list');
   data.sort((a,b)=>b.year-a.year);
-  const list = document.getElementById('pub-list');
   data.forEach(pub=>{
-    const li = document.createElement('li');
-    const authors = pub.author.replace(/ and /g, ', ');
-    const title = pub.title;
-    const journal = pub.journal || pub.booktitle || pub.publisher || '';
-    const vol = pub.volume ? `, <strong>${pub.volume}</strong>` : '';
-    const num = pub.number ? `(${pub.number})` : '';
-    const pages = pub.pages ? `: ${pub.pages}` : '';
-    const year = pub.year ? ` (${pub.year})` : '';
-    li.innerHTML = `<strong>${authors}</strong>${year}. <em>${title}</em>. ${journal}${vol}${num}${pages}`;
+    const li=document.createElement('li');
+    li.innerHTML=`<strong>${pub.author}</strong> (${pub.year}). <em>${pub.title}</em>. ${pub.journal}. DOI: <a href="https://doi.org/${pub.doi}" target="_blank">${pub.doi}</a>`;
     list.appendChild(li);
   });
 });
 
-// Search Publications
-const searchInput = document.getElementById('pub-search');
-searchInput.addEventListener('input', e=>{
-  const q = e.target.value.toLowerCase();
+// Publications search
+document.getElementById('pub-search').addEventListener('input',e=>{
+  const q=e.target.value.toLowerCase();
   Array.from(document.querySelectorAll('#pub-list li')).forEach(li=>{
-    li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+    li.style.display=li.textContent.toLowerCase().includes(q)?'':'none';
   });
 });
 
-// Dynamic Gallery
-const galleryImages = [
-  'field1.jpg','lab1.jpg','specimen1.jpg','team.jpg'
-  // add all your filenames here
-];
-const galleryGrid = document.getElementById('gallery-grid');
-galleryImages.forEach(file=>{
-  const img = document.createElement('img');
-  img.src = file;
-  img.alt = file.replace(/\.[^/.]+$/,'').replace(/_/g,' ');
-  galleryGrid.appendChild(img);
+// Gallery lightbox (basic)
+document.querySelectorAll('.gallery img').forEach(img=>{
+  img.addEventListener('click',()=>{
+    const modal=document.createElement('div');
+    modal.style.cssText="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center;z-index:1000;";
+    const modalImg=document.createElement('img');
+    modalImg.src=img.src;
+    modalImg.style.cssText="max-width:90%;max-height:90%;border-radius:12px;";
+    modal.appendChild(modalImg);
+    modal.addEventListener('click',()=>document.body.removeChild(modal));
+    document.body.appendChild(modal);
+  });
 });
 </script>
 </body>
