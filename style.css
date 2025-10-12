@@ -132,8 +132,7 @@ body {
 }
 
 .hero-text-area {
-    /* Adjusted: Decreased width to make space for the gallery */
-    max-width: 50%; /* Was 60% */
+    max-width: 50%;
     padding: var(--spacing-lg);
     animation: fadeInUp 1s ease-out;
 }
@@ -176,11 +175,10 @@ body {
     position: absolute;
     right: 0;
     top: 0;
-    /* Adjusted: Increased width to be larger */
-    width: 50%; /* Was 40% */
+    width: 50%;
     height: 100%;
     overflow: hidden;
-    background: var(--white);
+    background: linear-gradient(135deg, var(--white), var(--bg-light));
     box-shadow: var(--shadow);
     border-left: 2px solid var(--primary-color);
 }
@@ -199,9 +197,9 @@ body {
     position: absolute;
     width: 100%;
     height: calc(100% - 50px); /* Adjust for header height */
-    object-fit: cover;
+    object-fit: contain; /* Changed to contain to show full images */
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 1.5s ease-in-out; /* Smoother transition */
     top: 50px; /* Offset for header */
 }
 
@@ -438,8 +436,8 @@ footer {
 /* Scroll to Top Button */
 #scrollToTopBtn {
     position: fixed;
-    bottom: 22px; /* Slightly adjusted to accommodate potential scrollbar */
-    right: 22px; /* Slightly adjusted to accommodate potential scrollbar */
+    bottom: 20px;
+    right: 20px;
     background-color: var(--primary-color);
     color: var(--white);
     border: none;
@@ -450,7 +448,6 @@ footer {
     cursor: pointer;
     opacity: 0;
     transition: var(--transition);
-    box-shadow: var(--shadow); /* Added shadow for better visibility */
 }
 
 #scrollToTopBtn.visible {
@@ -491,18 +488,17 @@ footer {
     .hero-text-area {
         max-width: 100%;
         text-align: center;
-        padding: var(--spacing-md); /* Adjusted padding for smaller screens */
     }
 
     .dynamic-hero-gallery {
-        display: none; /* Hide on smaller screens if there's not enough space */
+        width: 100%;
+        position: relative;
+        height: 300px; /* Adjusted for mobile */
+        border-left: none;
+        border-top: 2px solid var(--primary-color);
     }
 
-    .about-lab-content {
-        flex-direction: column;
-    }
-
-    .about-lab-contact-mini .contact-grid-mini {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Slightly larger for touch targets */
+    .hero-gallery-image {
+        object-fit: contain; /* Ensure full image visibility on mobile */
     }
 }
