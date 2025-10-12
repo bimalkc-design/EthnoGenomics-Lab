@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
             authors: "Bimal K Chetri, SS Sonu, Nicolas Dierckxsens, Sudip Mitra, Latha Rangan",
             journal: "Journal of Plant Biochemistry and Biotechnology",
             year: "2025",
-            link: "https://link.springer.com/article/10.1007/s40009-025-01633-2"
+            link: "https://link.springer.com/article/10.1007/s13562-025-00992-7"
         },
         {
             title: "In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, Albophoma sp. BAPR5",
