@@ -396,34 +396,66 @@ body {
     transform: translateY(-3px);
 }
 
-/* Contact Footer */
+/* Contact Footer - Modified for Side-by-Side */
 #contact-footer {
-    background: var(--white);
-    padding: var(--spacing-lg);
+    background: none; /* Remove background here as boxes will have their own */
+    padding: var(--spacing-lg) 0; /* Adjust padding */
+    margin: var(--spacing-xl) auto;
+    text-align: left; /* Align text within the grid items */
+    box-shadow: none; /* Remove shadow here */
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns, equal width */
+    gap: var(--spacing-lg); /* Space between the two boxes */
+    max-width: 1000px; /* Constrain max width of the grid */
+    margin: 0 auto; /* Center the grid */
+}
+
+.contact-box {
+    background: var(--white); /* Apply background to individual boxes */
+    padding: var(--spacing-md);
     border-radius: 10px;
     box-shadow: var(--shadow);
-    text-align: center;
-    margin: var(--spacing-xl) auto;
+    text-align: left; /* Keep text left-aligned within each box */
+    display: flex; /* Use flex to control content within the box */
+    flex-direction: column; /* Stack content vertically */
 }
 
-.live-map {
-    margin-top: var(--spacing-lg);
-    text-align: center;
-}
-
-.live-map h3 {
+.contact-box .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Slightly larger title */
     color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.contact-box .section-description {
+    font-size: 0.9rem;
+    color: #666;
     margin-bottom: var(--spacing-md);
 }
 
-.live-map iframe {
-    max-width: 800px;
-    width: 100%;
-    height: 400px;
-    box-shadow: var(--shadow);
+.contact-box p {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-sm);
 }
+
+.live-map {
+    margin-top: 0; /* Remove top margin, handled by flex container */
+    flex-grow: 1; /* Allow map to take available space */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the iframe vertically if space allows */
+}
+
+.live-map iframe {
+    width: 100%; /* Ensure iframe takes full width of its container */
+    height: 250px; /* Reduced height for better fit */
+    box-shadow: var(--shadow);
+    border-radius: 8px; /* Slightly more rounded corners for map */
+}
+
 
 /* Footer */
 footer {
@@ -448,6 +480,7 @@ footer {
     cursor: pointer;
     opacity: 0;
     transition: var(--transition);
+    box-shadow: var(--shadow);
 }
 
 #scrollToTopBtn.visible {
@@ -466,6 +499,17 @@ footer {
 }
 
 /* Responsive Design */
+@media (max-width: 900px) { /* Adjusted breakpoint for contact grid */
+    .contact-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+        gap: var(--spacing-md);
+    }
+
+    .live-map iframe {
+        height: 200px; /* Further reduce map height on small screens */
+    }
+}
+
 @media (max-width: 768px) {
     .nav-menu-compact {
         display: none;
@@ -488,6 +532,15 @@ footer {
     .hero-text-area {
         max-width: 100%;
         text-align: center;
+        padding: var(--spacing-md); /* Adjust padding for smaller screens */
+    }
+
+    .hero-text-area h1 {
+        font-size: 2.5rem; /* Smaller hero title */
+    }
+
+    .hero-tagline {
+        font-size: 1rem;
     }
 
     .dynamic-hero-gallery {
@@ -496,9 +549,56 @@ footer {
         height: 300px; /* Adjusted for mobile */
         border-left: none;
         border-top: 2px solid var(--primary-color);
+        box-shadow: none; /* Remove shadow on gallery for better mobile look */
+    }
+
+    .gallery-header {
+        padding: var(--spacing-sm);
+        font-size: 1.3rem;
     }
 
     .hero-gallery-image {
         object-fit: contain; /* Ensure full image visibility on mobile */
+        height: calc(100% - 40px); /* Adjust for smaller header */
+        top: 40px;
+    }
+
+    .about-lab-content {
+        flex-direction: column; /* Stack about lab content */
+    }
+
+    .about-lab-contact-mini .contact-grid-mini {
+        grid-template-columns: 1fr; /* Stack mini contact items on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .header-brand a {
+        font-size: 1.5rem; /* Smaller header brand */
+    }
+
+    .tiny-profile-wrapper {
+        display: none; /* Hide tiny profile on very small screens */
+    }
+
+    .hero-text-area h1 {
+        font-size: 2rem;
+    }
+
+    .tab-button {
+        font-size: 1rem;
+        padding: var(--spacing-sm);
+    }
+
+    .contact-box .section-title {
+        font-size: 1.5rem; /* Smaller contact titles */
+    }
+
+    .contact-box p {
+        font-size: 0.9rem;
+    }
+
+    .live-map iframe {
+        height: 180px;
     }
 }
