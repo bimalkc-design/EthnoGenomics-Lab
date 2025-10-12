@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dr. Bimal Kumar Chetri (PhD) — Plant Genomics & Medicinal Plant Research</title>
 <meta name="description" content="Profile and research of Dr. Bimal Kumar Chetri — Plant Genomics, Organellar Genome Mining, Ethnobotany">
+<meta name="author" content="Dr. Bimal Kumar Chetri">
+<meta name="keywords" content="Plant Genomics, Organellar Genome Mining, Ethnobotany, Medicinal Plants, Bioinformatics, Bhutan, Research">
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -17,109 +19,147 @@
 
 <div class="main-wrapper">
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <header class="hero">
-    <div class="hero-content">
+    <div class="container hero-content">
+      <img src="portrait.jpg" alt="Dr. Bimal Kumar Chetri" class="portrait-hero">
       <h1>Dr. Bimal Kumar Chetri</h1>
-      <p>Plant Genomics · Organellar Genome · Ethnobotany</p>
+      <p class="hero-subtitle">Plant Genomics · Organellar Genome Mining · Ethnobotany</p>
+      <div class="tag-group">
+        <span class="tag">Plant Genomics</span>
+        <span class="tag">Bioinformatics</span>
+        <span class="tag">Ethnobotany</span>
+        <span class="tag">Medicinal Plants</span>
+      </div>
     </div>
   </header>
 
   <!-- Navigation -->
-  <nav>
-    <a href="#about">About</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#research">Research</a>
-    <a href="#publications">Publications</a>
-    <a href="#contact">Contact</a>
+  <nav class="main-nav">
+    <div class="container nav-container">
+      <button class="nav-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+      <ul class="nav-menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#research">Research Focus</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <main>
-    <!-- About -->
-    <section id="about">
+  <main class="container">
+    <!-- About Section -->
+    <section id="about" class="section-card">
       <h2>About Me</h2>
-      <div class="about-intro">
-        <img src="portrait.jpg" alt="Dr. Bimal Kumar Chetri" class="portrait">
-        <p>Academic & researcher unlocking plant genetic potential. Specializing in genomics, bioinformatics, and ethnobotany.</p>
-      </div>
-      <div class="about-grid">
-        <div class="about-item"><i class="fas fa-flask"></i><h4>Expertise</h4><p>Genomics, Bioinformatics</p></div>
-        <div class="about-item"><i class="fas fa-graduation-cap"></i><h4>Education</h4><p>PhD (IIT Guwahati)</p></div>
-        <div class="about-item"><i class="fas fa-leaf"></i><h4>Research</h4><p>Medicinal Plants & Ethnobotany</p></div>
-        <div class="about-item"><i class="fas fa-dna"></i><h4>Services</h4><p>NGS Data & Genomics</p></div>
+      <div class="about-flex-container">
+        <div class="about-text">
+          <p>As an academic and researcher, my journey is dedicated to **unlocking the genetic potential of plants**. My specialization lies in **organellar genome mining** of herbal and medicinal plants, merging the precision of **plant molecular biology** with advanced **bioinformatics** tools and deep insights from **ethnobotany**.</p>
+          <p>My work contributes to the conservation, authentication, and sustainable utilization of valuable plant genetic resources, particularly focusing on the rich biodiversity of Bhutan and the Eastern Himalayas.</p>
+          <p><strong>Degrees:</strong> PhD (IIT Guwahati), MSc Botany (Pune University)</p>
+          <p><strong>Teaching:</strong> Plant Diversity, Ethnobotany, Genetics & Genomics, Plant Physiology, Bioinformatics</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-item"><i class="fas fa-seedling"></i><h4>Expertise</h4><p>Plant Genomics, Bioinformatics</p></div>
+          <div class="about-item"><i class="fas fa-graduation-cap"></i><h4>Education</h4><p>PhD (IIT Guwahati)</p></div>
+          <div class="about-item"><i class="fas fa-leaf"></i><h4>Research</h4><p>Medicinal Plants & Ethnobotany</p></div>
+          <div class="about-item"><i class="fas fa-dna"></i><h4>Services</h4><p>NGS Data & Genomics, Flow Cytometry</p></div>
+        </div>
       </div>
     </section>
 
-    <!-- Gallery -->
-    <section id="gallery">
+    <!-- Gallery Section -->
+    <section id="gallery" class="section-card">
       <h2>Photo Gallery</h2>
-      <div id="gallery-grid" class="gallery-grid">
-        <!-- JS will populate -->
+      <p class="section-description">A glimpse into my fieldwork, laboratory sessions, and the diverse plant life I study.</p>
+      <div id="gallery-container" class="gallery-motion-container">
+        <div class="gallery-track">
+          <!-- Images will be populated here by script.js -->
+        </div>
       </div>
     </section>
 
-    <!-- Research -->
-    <section id="research">
+    <!-- Research Section -->
+    <section id="research" class="section-card">
       <h2>Research Focus</h2>
+      <p class="section-description">My core research areas aim to bridge traditional knowledge with modern genomic science for sustainable plant resource management.</p>
       <div class="research-grid">
         <div class="research-card">
-          <img src="research_genomics.jpg" alt="Organellar Genomics">
+          <img src="research_genomics.jpg" alt="Organellar Genomics Research">
           <div class="research-card-overlay">
             <h4>Organellar Genomics</h4>
-            <p>Assembly & annotation of chloroplast/mitochondrial genomes.</p>
+            <p>Assembly & annotation of chloroplast and mitochondrial genomes from NGS data.</p>
           </div>
         </div>
         <div class="research-card">
           <img src="research_ethnobotany.jpg" alt="Ethnobotany Research">
           <div class="research-card-overlay">
-            <h4>Ethnobotany</h4>
-            <p>Integrating traditional knowledge for plant conservation.</p>
+            <h4>Ethnobotany & Conservation</h4>
+            <p>Integrating traditional knowledge for sustainable plant utilization and conservation.</p>
           </div>
         </div>
         <div class="research-card">
           <img src="research_ghg.jpg" alt="GHG Inventory Research">
           <div class="research-card-overlay">
             <h4>GHG Inventory</h4>
-            <p>Methodologies for vegetation & land-use assessment.</p>
+            <p>Methodologies for assessing greenhouse gas dynamics in vegetation and land use.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Publications -->
-    <section id="publications">
+    <!-- Publications Section -->
+    <section id="publications" class="section-card">
       <h2>Selected Publications</h2>
+      <p class="section-description">A list of my peer-reviewed publications showcasing my contributions to plant science.</p>
       <div id="publications-list" class="publications-list-container">
-        <!-- JS will populate -->
+        <!-- Publications will be populated here by script.js -->
+      </div>
+      <div class="text-center" style="margin-top: 30px;">
+        <a href="https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <i class="fas fa-graduation-cap"></i> View All on Google Scholar
+        </a>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact">
-      <h2>Contact</h2>
+    <!-- Contact Section -->
+    <section id="contact" class="section-card">
+      <h2>Contact Me</h2>
+      <p class="section-description">Feel free to reach out for collaborations, inquiries, or academic discussions.</p>
       <div class="contact-grid">
         <a href="mailto:bimal_kum.sherubtse@rub.edu.bt" class="contact-item">
-          <i class="fas fa-envelope"></i><h4>Email</h4><p>bimal_kum.sherubtse@rub.edu.bt</p>
+          <i class="fas fa-envelope"></i>
+          <h4>Email</h4>
+          <p>bimal_kum.sherubtse@rub.edu.bt</p>
         </a>
-        <a href="https://orcid.org/0000-0002-2154-7676" target="_blank" class="contact-item">
-          <i class="fab fa-orcid"></i><h4>ORCID</h4><p>View Profile</p>
+        <a href="https://orcid.org/0000-0002-2154-7676" target="_blank" rel="noopener noreferrer" class="contact-item">
+          <i class="fab fa-orcid"></i>
+          <h4>ORCID</h4>
+          <p>orcid.org/0000-0002-2154-7676</p>
         </a>
-        <a href="https://www.researchgate.net/profile/Bimal-Chetri" target="_blank" class="contact-item">
-          <i class="fab fa-researchgate"></i><h4>ResearchGate</h4><p>View Profile</p>
+        <a href="https://www.researchgate.net/profile/Bimal-Chetri" target="_blank" rel="noopener noreferrer" class="contact-item">
+          <i class="fab fa-researchgate"></i>
+          <h4>ResearchGate</h4>
+          <p>View My Profile</p>
         </a>
-        <div class="contact-item">
-          <img src="qrcode.png" alt="Google Scholar QR" class="qrcode">
+        <div class="contact-item qrcode-item">
+          <img src="qrcode.png" alt="Google Scholar QR Code" class="qrcode-image">
           <h4>Google Scholar</h4>
-          <p>Scan QR</p>
+          <p>Scan to view profile</p>
         </div>
       </div>
+      <p class="text-center" style="margin-top: 30px;"><strong>Postal Address:</strong> Kanglung-42002, Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan, Trashigang, Bhutan</p>
     </section>
 
   </main>
 
   <footer>
-    <p>© Bimal K. Chetri — Sherubtse College, Bhutan</p>
+    <div class="container">
+      <p>&copy; <span id="current-year"></span> Dr. Bimal Kumar Chetri — Faculty of Life Sciences, Sherubtse College. All rights reserved.</p>
+    </div>
   </footer>
+
+  <button id="scrollToTopBtn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
 
 </div>
 
