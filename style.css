@@ -550,59 +550,71 @@ p {
 }
 
 /* Contact Section */
+/* Adjusted for smaller, more compact items */
 .contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-xl);
+    display: flex; /* Use flexbox for better control in a vertical/compact layout */
+    flex-direction: column; /* Stack items vertically */
+    gap: var(--spacing-sm); /* Reduced gap */
+    margin-top: var(--spacing-md); /* Reduced top margin */
 }
 
 .contact-item {
     background-color: #f9fcf9;
-    padding: var(--spacing-md);
-    border-radius: 8px;
-    box-shadow: var(--shadow-light);
-    text-align: center;
+    padding: var(--spacing-sm); /* Reduced padding */
+    border-radius: 6px; /* Slightly smaller border-radius */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03); /* Lighter shadow */
+    text-align: left; /* Align text to the left */
     border: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Flex to align icon and text horizontally */
+    align-items: center; /* Vertically align icon and text */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Faster transition */
 }
 
 .contact-item:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-medium);
+    transform: translateX(3px); /* Smaller hover translate */
+    box-shadow: var(--shadow-light); /* Lighter shadow on hover */
 }
 
 .contact-item i {
-    font-size: 2.5em;
+    font-size: 1.5em; /* Smaller icon size */
     color: var(--accent-color);
-    margin-bottom: var(--spacing-sm);
+    margin-right: var(--spacing-sm); /* Space between icon and text */
+    flex-shrink: 0; /* Prevent icon from shrinking */
 }
 
 .contact-item h4 {
-    font-size: 1.2em;
-    margin-bottom: var(--spacing-xs);
+    font-size: 1em; /* Smaller heading size */
+    margin-bottom: 0; /* Remove bottom margin */
     color: var(--secondary-color);
+    line-height: 1.2; /* Better line height for smaller text */
 }
 
 .contact-item p {
-    font-size: 0.9em;
+    font-size: 0.8em; /* Smaller paragraph size */
     color: #666;
-    margin-bottom: 0;
+    margin-bottom: 0; /* Remove bottom margin */
+    display: block; /* Ensure paragraph text goes to new line if too long */
+    overflow: hidden; /* Hide overflow if text is too long */
+    text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+    white-space: nowrap; /* Keep text on single line for ellipsis to work */
+}
+
+.contact-item p:first-of-type { /* For the email, make sure it's visible */
+    white-space: normal; /* Allow email to wrap if needed */
+    word-break: break-all; /* Break long email addresses */
 }
 
 .qrcode-item {
-    position: relative;
-    padding: var(--spacing-md) var(--spacing-xs); /* Adjust padding for QR code */
+    display: flex; /* Keep flex for this item as well */
+    flex-direction: column; /* Stack QR code and text */
+    align-items: center; /* Center QR code and text */
+    padding: var(--spacing-sm); /* Adjust padding for QR code */
 }
 
 .qrcode-item .qrcode-image {
-    width: 120px; /* Adjust QR code size */
-    height: 120px;
-    margin-bottom: var(--spacing-sm);
+    width: 80px; /* Much smaller QR code size */
+    height: 80px;
+    margin-bottom: var(--spacing-xs); /* Reduced margin */
     border: 1px solid var(--border-color);
     border-radius: 4px;
 }
@@ -749,6 +761,27 @@ footer a {
     .section-card {
         padding: var(--spacing-md);
     }
+
+    /* Further compact contact section for very small screens if needed */
+    .contact-grid {
+        gap: var(--spacing-xs); /* Even smaller gap */
+    }
+    .contact-item {
+        padding: var(--spacing-xs); /* Even smaller padding */
+    }
+    .contact-item i {
+        font-size: 1.3em;
+    }
+    .contact-item h4 {
+        font-size: 0.9em;
+    }
+    .contact-item p {
+        font-size: 0.75em;
+    }
+    .qrcode-item .qrcode-image {
+        width: 70px;
+        height: 70px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -764,13 +797,6 @@ footer a {
     .hero-cta .btn {
         font-size: 1em;
         padding: var(--spacing-sm);
-    }
-    .contact-item {
-        padding: var(--spacing-sm);
-    }
-    .qrcode-item .qrcode-image {
-        width: 100px;
-        height: 100px;
     }
     .tab-nav {
         flex-wrap: wrap;
