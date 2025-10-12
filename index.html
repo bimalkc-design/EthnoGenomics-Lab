@@ -1,35 +1,212 @@
-<section id="about" class="section">
-  <h2>About EthnoGenomics Lab</h2>
-  <p>
-    The <strong>EthnoGenomics Laboratory</strong> at the Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan, 
-    is dedicated to advancing research in <em>plant genomics, ethnobotany, and molecular biodiversity studies</em>. 
-    Our work bridges traditional knowledge systems with genomic science to document, conserve, and sustainably utilize 
-    Bhutan’s rich herbal and medicinal plant diversity.
-  </p>
-  
-  <div class="about-grid">
-    <div class="about-text">
-      <h3>Our Research Focus</h3>
-      <ul class="expertise">
-        <li><i class="fas fa-dna"></i> Organellar genome mining and comparative genomics</li>
-        <li><i class="fas fa-leaf"></i> Molecular authentication of medicinal plants</li>
-        <li><i class="fas fa-seedling"></i> Ethnobotanical documentation and conservation biology</li>
-        <li><i class="fas fa-laptop-code"></i> Bioinformatics pipeline development for genomic data analysis</li>
-      </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EthnoGenomics Lab — Dr. Bimal Kumar Chetri (PhD)</title>
+<meta name="description" content="Official website of EthnoGenomics Lab by Dr. Bimal Kumar Chetri. Specializing in Plant Genomics, Organellar Genome Mining, Ethnobotany, Medicinal Plant Research, and Traditional Knowledge integration.">
+<meta name="author" content="Dr. Bimal Kumar Chetri">
+<meta name="keywords" content="EthnoGenomics, Plant Genomics, Molecular Biology, Ethnobotany, Medicinal Plants, Biodiversity, Traditional Knowledge, Bioinformatics, Bhutan, Research, Dr. Bimal Kumar Chetri">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<!-- FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!-- External CSS -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="main-wrapper">
+
+  <!-- Compact Header with Tiny Profile and Nav Toggle -->
+  <header class="main-header-compact">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+      <div class="header-brand"><a href="#home">EthnoGenomics</a></div>
+
+      <div class="tiny-profile-wrapper">
+        <img src="portrait.jpg" alt="Dr. Bimal Kumar Chetri">
+        <div class="tiny-profile-info">
+          <strong>Dr. Bimal K. Chetri</strong>
+          <span>Principal Investigator</span>
+        </div>
+      </div>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><i class="fas fa-bars"></i></button>
+      
+      <nav class="main-nav-compact">
+        <ul class="nav-menu-compact">
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#about-lab">About Lab</a></li>
+          <li><a href="#research">Collaboration</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero/Welcome Section with Dynamic Gallery -->
+  <header class="hero-compact" id="home">
+    <div class="container">
+      <div class="hero-text-area">
+        <h1>Welcome to EthnoGenomics Lab</h1>
+        <p class="hero-tagline">Bridging Traditional Knowledge with Molecular Insights for Plant Conservation & Discovery</p>
+        <p class="hero-mission">At EthnoGenomics, we delve into the genetic architecture of medicinal and herbal plants, integrating advanced genomics with rich ethnobotanical wisdom. Our mission is to unlock the potential of plant biodiversity for sustainable utilization and conservation, with a special focus on the unique flora of the Himalayas.</p>
+        <div class="hero-cta">
+            <a href="#about-lab" class="btn btn-primary">Explore Our Research <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="dynamic-hero-gallery">
+        <!-- Images dynamically loaded here by script.js -->
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content-tabs">
+    <div class="tab-nav">
+      <button class="tab-button active" data-tab="about-lab">About the Lab</button>
+      <button class="tab-button" data-tab="research">Collaboration Areas</button>
+      <button class="tab-button" data-tab="publications">Publications</button>
+      <button class="tab-button" data-tab="contact-tab">Contact</button> <!-- Moved contact here -->
     </div>
 
-    <div class="about-side">
-      <h3>Collaboration Areas</h3>
-      <p>
-        We actively collaborate with researchers and institutions in:
-      </p>
-      <ul>
-        <li>Medicinal plant genomics and phylogenetics</li>
-        <li>Ethnobotany and traditional knowledge integration</li>
-        <li>Bioinformatics and molecular data visualization</li>
-        <li>GHG inventory and ecological modelling</li>
-      </ul>
-      <a href="#contact" class="btn-outline"><i class="fas fa-handshake"></i> Partner with Us</a>
+    <div class="tab-content-wrapper">
+      <!-- About the Lab Tab Content -->
+      <div id="about-lab" class="tab-pane active">
+        <h2 class="section-title">About the EthnoGenomics Lab</h2>
+        <p class="section-description">Our mission and the researcher leading the way in plant genomics and ethnobotany.</p>
+        
+        <div class="about-lab-content">
+          <div class="about-lab-text">
+            <p>The EthnoGenomics Lab is dedicated to advancing our understanding of plant genetics, with a particular emphasis on the medicinal and herbal flora of the Himalayas. We integrate cutting-edge molecular biology and bioinformatics with invaluable traditional knowledge to explore organellar genomes, authenticate species, and support biodiversity conservation efforts. Our work is driven by a commitment to sustainable utilization of plant resources and unlocking their full therapeutic potential.</p>
+            <div class="about-lab-highlights">
+              <h3>Our Focus</h3>
+              <ul>
+                <li><i class="fas fa-leaf"></i> Plant Genomics & Organellar Genome Mining</li>
+                <li><i class="fas fa-seedling"></i> Ethnobotany & Traditional Knowledge Integration</li>
+                <li><i class="fas fa-dna"></i> Molecular Systematics & Species Authentication</li>
+                <li><i class="fas fa-globe-americas"></i> Biodiversity Conservation in the Himalayas</li>
+                <li><i class="fas fa-cloud"></i> Bioinformatics & Data Analysis</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Dr. Chetri's Profile (Integrated, compact) -->
+          <div class="about-profile-card-compact">
+              <img src="portrait.jpg" alt="Dr. Bimal Kumar Chetri" class="portrait-about-compact">
+              <h3>Dr. Bimal Kumar Chetri <span class="degree">(PhD)</span></h3>
+              <p class="profile-title-sm">Principal Investigator</p>
+              <div class="tag-group">
+                  <span class="tag">Plant Genomics</span>
+                  <span class="tag">Ethnobotany</span>
+                  <span class="tag">Bioinformatics</span>
+              </div>
+              <p class="academic-highlight">PhD from IIT Guwahati | MSc from Pune University</p>
+              <p class="academic-detail">Research focuses on **organellar genome mining** of herbal and medicinal plants, blending **plant molecular biology** with **bioinformatics analysis**.</p>
+              <a href="cv.pdf" target="_blank" class="btn btn-outline" style="margin-top: var(--spacing-md);"><i class="fas fa-download"></i> Download CV</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research (Collaboration Areas) Tab Content -->
+      <div id="research" class="tab-pane">
+        <h2 class="section-title">Areas for Collaboration</h2>
+        <p class="section-description">Our core research areas where we actively seek partnerships to bridge traditional knowledge with modern genomic science for sustainable plant resource management and discovery.</p>
+        <div class="collaboration-grid">
+          <div class="collab-item">
+            <i class="fas fa-dna"></i>
+            <h3>Organellar Genomics</h3>
+            <p>Assembly & annotation of chloroplast/mitochondrial genomes from NGS data for phylogenetic insights and marker development.</p>
+          </div>
+          <div class="collab-item">
+            <i class="fas fa-leaf"></i>
+            <h3>Ethnobotany & Conservation</h3>
+            <p>Integrating traditional knowledge with scientific validation for plant conservation and sustainable use.</p>
+          </div>
+          <div class="collab-item">
+            <i class="fas fa-cloud"></i>
+            <h3>Bioinformatics & Data Analysis</h3>
+            <p>Advanced analysis of genomic datasets, phylogenetics, and molecular evolution studies.</p>
+          </div>
+          <div class="collab-item">
+            <i class="fas fa-seedling"></i>
+            <h3>Medicinal Plant Authentication</h3>
+            <p>Developing molecular markers for species authentication and quality control of herbal products.</p>
+          </div>
+          <div class="collab-item">
+            <i class="fas fa-tree"></i>
+            <h3>GHG Inventory & Ecology</h3>
+            <p>Methodologies for assessing greenhouse gas dynamics in diverse vegetation types and land-use patterns.</p>
+          </div>
+          <div class="collab-item">
+            <i class="fas fa-flask"></i>
+            <h3>Plant Molecular Biology</h3>
+            <p>Techniques for DNA/RNA extraction, PCR, qPCR, and gene expression studies.</p>
+          </div>
+        </div>
+        <div class="text-center" style="margin-top: var(--spacing-xl);">
+            <a href="#contact-tab" class="btn btn-primary">Initiate Collaboration <i class="fas fa-handshake"></i></a>
+        </div>
+      </div>
+
+      <!-- Publications Tab Content -->
+      <div id="publications" class="tab-pane">
+        <h2 class="section-title">Selected Publications</h2>
+        <p class="section-description">A selection of my peer-reviewed publications showcasing contributions to plant genomics, ethnobotany, and molecular biology.</p>
+        <div id="publications-list" class="publications-list-compact">
+          <!-- Publications will be populated here by script.js -->
+        </div>
+        <div class="text-center" style="margin-top: 30px;">
+          <a href="https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <i class="fas fa-graduation-cap"></i> View All on Google Scholar
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Tab Content -->
+      <div id="contact-tab" class="tab-pane">
+        <h2 class="section-title">Connect With EthnoGenomics Lab</h2>
+        <p class="section-description">Feel free to reach out for collaborations, research inquiries, or academic discussions.</p>
+        <div class="contact-grid">
+          <a href="mailto:bimal_kum.sherubtse@rub.edu.bt" class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <h4>Email</h4>
+            <p>bimal_kum.sherubtse@rub.edu.bt</p>
+          </a>
+          <a href="https://orcid.org/0000-0002-2154-7676" target="_blank" rel="noopener noreferrer" class="contact-item">
+            <i class="fab fa-orcid"></i>
+            <h4>ORCID</h4>
+            <p>orcid.org/0000-0002-2154-7676</p>
+          </a>
+          <a href="https://www.researchgate.net/profile/Bimal-Chetri" target="_blank" rel="noopener noreferrer" class="contact-item">
+            <i class="fab fa-researchgate"></i>
+            <h4>ResearchGate</h4>
+            <p>View Profile</p>
+          </a>
+          <div class="contact-item qrcode-item">
+            <a href="https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID" target="_blank" rel="noopener noreferrer">
+               <img src="qrcode.png" alt="Google Scholar QR Code" class="qrcode-image">
+            </a>
+            <h4>Google Scholar</h4>
+            <p>Scan to view profile</p>
+          </div>
+        </div>
+        <p class="text-center" style="margin-top: 30px;">**Postal Address:** Kanglung-42002, Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan, Trashigang, Bhutan</p>
+      </div>
     </div>
-  </div>
-</section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="current-year"></span> EthnoGenomics Lab — Dr. Bimal Kumar Chetri, Faculty of Life Sciences, Sherubtse College. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <button id="scrollToTopBtn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
