@@ -34,7 +34,7 @@ body {
     padding: 0 var(--spacing-md);
 }
 
-/* Header Styles */
+/* Header Styles (unchanged) */
 .main-header-compact {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: var(--white);
@@ -117,22 +117,20 @@ body {
     display: inline-block;
 }
 
-/* Hero Section */
+/* Hero Section - Reduced gallery width for better fit, images with contain */
 .hero-compact {
     position: relative;
     min-height: 500px;
     display: flex;
     align-items: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('background-hero.jpg') center/cover; /* Assume a bg if needed */
     color: var(--white);
     padding: var(--spacing-lg) 0;
     overflow: hidden;
 }
 
 .hero-text-area {
-    max-width: 60%;
+    max-width: 65%; /* Increased text area slightly */
     padding: var(--spacing-lg);
     animation: fadeInUp 1s ease-out;
 }
@@ -175,7 +173,7 @@ body {
     position: absolute;
     right: 0;
     top: 0;
-    width: 40%;
+    width: 35%; /* Reduced width for better image fit */
     height: 100%;
     overflow: hidden;
     background: var(--white);
@@ -185,22 +183,24 @@ body {
 
 .gallery-header {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem; /* Slightly smaller */
     color: var(--primary-color);
     text-align: center;
     padding: var(--spacing-sm);
     background: var(--bg-light);
     border-bottom: 1px solid var(--primary-color);
+    margin: 0;
 }
 
 .hero-gallery-image {
     position: absolute;
     width: 100%;
-    height: calc(100% - 50px); /* Adjust for header height */
-    object-fit: cover;
+    height: calc(100% - 50px); /* Adjust for header */
+    object-fit: contain; /* Changed to contain for full image visibility without cropping */
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    top: 50px; /* Offset for header */
+    top: 50px;
+    background: var(--bg-light); /* Fallback bg if image doesn't fill */
 }
 
 .hero-gallery-image.active {
@@ -216,7 +216,7 @@ body {
     margin-bottom: var(--spacing-md);
 }
 
-/* Tab Navigation */
+/* Tab Navigation (unchanged) */
 .tab-nav {
     display: flex;
     justify-content: center;
@@ -259,7 +259,7 @@ body {
     display: block;
 }
 
-/* About Lab Content */
+/* About Lab Content (unchanged except contacts) */
 .about-lab-content {
     display: flex;
     gap: var(--spacing-lg);
@@ -300,24 +300,46 @@ body {
     transform: translateX(10px);
 }
 
+/* Compact Contacts - Smaller sizes, no overlapping, tight spacing */
 .about-lab-contact-mini .contact-grid-mini {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: var(--spacing-sm);
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); /* Tighter min width */
+    gap: 8px; /* Smaller gap */
+    margin-bottom: 10px;
 }
 
 .contact-item-mini {
     display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
+    align-items: flex-start; /* Align top to prevent overlap */
+    gap: 5px; /* Tight gap */
     text-decoration: none;
     color: var(--text-color);
     transition: var(--transition);
-    font-size: 0.9rem;
+    font-size: 0.75rem; /* Smaller overall font */
+    padding: 5px;
 }
 
 .contact-item-mini i {
-    font-size: 1.2rem;
+    font-size: 0.9rem; /* Smaller icons */
+    flex-shrink: 0;
+    width: 16px;
+    margin-top: 2px;
+}
+
+.contact-info-mini {
+    flex: 1;
+}
+
+.contact-info-mini h4 {
+    font-size: 0.8rem;
+    margin: 0 0 2px 0;
+    font-weight: 500;
+}
+
+.contact-info-mini p {
+    font-size: 0.65rem; /* Very small text */
+    margin: 0;
+    line-height: 1.2;
 }
 
 .contact-item-mini:hover {
@@ -325,8 +347,8 @@ body {
 }
 
 .qrcode-image-mini {
-    width: 40px;
-    height: 40px;
+    width: 30px !important; /* Smaller QR */
+    height: 30px !important;
     transition: transform 0.3s ease;
 }
 
@@ -334,7 +356,60 @@ body {
     transform: scale(1.1);
 }
 
-/* Collaboration Grid */
+/* Address Map Mini - Added below grid, small embed */
+.address-map-mini {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px;
+    background: var(--bg-light);
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 0.75rem;
+}
+
+.address-map-mini i {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.address-info-mini h4 {
+    font-size: 0.8rem;
+    margin: 0 0 2px 0;
+}
+
+.address-info-mini p {
+    font-size: 0.65rem;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.map-embed {
+    flex: 1;
+    margin-left: 5px;
+}
+
+.map-embed iframe {
+    width: 100%;
+    height: 120px; /* Small height */
+    border: 0;
+    border-radius: 5px;
+}
+
+.map-embed small {
+    display: block;
+    text-align: center;
+    font-size: 0.6rem;
+    margin-top: 2px;
+}
+
+.map-embed a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* Collaboration Grid (unchanged) */
 .collaboration-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -361,7 +436,7 @@ body {
     margin-bottom: var(--spacing-sm);
 }
 
-/* Publications */
+/* Publications (unchanged) */
 .publications-list-compact .pub-item {
     background: var(--white);
     padding: var(--spacing-md);
@@ -375,7 +450,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* Contact Footer */
+/* Contact Footer (unchanged, but address now in panel) */
 #contact-footer {
     background: var(--white);
     padding: var(--spacing-lg);
@@ -385,7 +460,7 @@ body {
     margin: var(--spacing-xl) auto;
 }
 
-/* Footer */
+/* Footer (unchanged) */
 footer {
     background: var(--primary-color);
     color: var(--white);
@@ -393,7 +468,7 @@ footer {
     text-align: center;
 }
 
-/* Scroll to Top Button */
+/* Scroll to Top Button (unchanged) */
 #scrollToTopBtn {
     position: fixed;
     bottom: 20px;
@@ -414,7 +489,7 @@ footer {
     opacity: 1;
 }
 
-/* Animations */
+/* Animations (unchanged) */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -456,5 +531,18 @@ footer {
 
     .about-lab-content {
         flex-direction: column;
+    }
+
+    .contact-grid-mini {
+        grid-template-columns: 1fr; /* Stack on mobile */
+    }
+
+    .address-map-mini {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .map-embed iframe {
+        height: 200px; /* Slightly larger on mobile */
     }
 }
