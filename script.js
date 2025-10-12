@@ -171,25 +171,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Publications Section ---
     const publications = [
         {
-            title: "Chloroplast Genome Sequencing of *Rhododendron arboreum* from the Eastern Himalayas: Insights into Phylogeny and Adaptive Evolution",
-            authors: "Chetri, B. K., Sharma, S., & Rai, R.",
-            journal: "Journal of Plant Genomics",
+            title: "Plastome genomics of the crop wild relative Thladiantha cordifolia illuminates the evolution and phylogeny of the gourd family (Cucurbitaceae)",
+            authors: "Bimal K Chetri, SS Sonu, Rahul G Shelke, Sudip Mitra, Lata Rangan",
+            journal: "Genetic Resources and Crop Evolution",
+            year: "2025",
+            link: "https://link.springer.com/article/10.1007/s10722-025-02579-6"
+        },
+        {
+            title: "Ethnomedicinal Practices in Kilikhar, Mongar",
+            authors: "BImal K Chetri, K., Phuntsho Wangdi, Tshering Penjor",
+            journal: "Asian Plant Research Journal",
+            year: "2018",
+            link: "https://d1wqtxts1xzle7.cloudfront.net/59067833/Chetri122018APRJ4578620190428-37384-8w2tn0-libre.pdf?1556505489=&response-content-disposition=inline%3B+filename%3DEthnomedicinal_Practices_in_Kilikhar_Mon.pdf&Expires=1760258951&Signature=K0~XHfL7rt~KHyRb3DbP0D7mkgwyQLWCnFABmOKcKWjQYGXH9jV20DTVsnjtYPnOvVeeRS7INOmg3GVTr7-gXkMTS1El8DKsldrWmSbXuYC801T4RFPRLdTyl0etsNjmyrSkjFBzuYrTWV8oHKkH7r8UR7A~so1l~-DnZjjrEd2ka27gQwv29qoZVJkw~fzUjZIZrm2F8iI0Cku10hQWsqhn2nBtO8trcU-yIcdJ0jAyxSNNOiD9Jx5~2IXuJvsE91HhX47dHsPiDN67Z3LOyIjznaxPFSghoiG-ZNhKuIFSCa-4d5OFManm0IhORzH9ylz4U7pZ0NaEzVG6lAZcyg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA"
+        },
+        {
+            title: "Insights into cucurbitaceae mitogenomes: gene length variation, correlation features, and phylogenetic relationship",
+            authors: "Bimal K Chetri, SS Sonu, Nicolas Dierckxsens, Sudip Mitra, Latha Rangan",
+            journal: "Journal of Plant Biochemistry and Biotechnology",
+            year: "2025",
+            link: "https://doi.org/10.1007/s13562-025-00992-71"
+        },
+        {
+            title: "In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, Albophoma sp. BAPR5",
+            authors: "Jintu Rabha, Bimal Kumar Chetri, Sukanya Das, Dhruva Kumar Jha",
+            journal: "South African Journal of Botany",
             year: "2023",
-            link: "https://scholar.google.com/scholar?q=Chloroplast+Genome+Sequencing+Rhododendron+arboreum+2023"
-        },
-        {
-            title: "Ethnobotanical Survey of Medicinal Plants Used by Indigenous Communities in Eastern Bhutan",
-            authors: "Chetri, B. K., Wangchuk, T., & Dorji, P.",
-            journal: "Ethnobotany Research and Applications",
-            year: "2022",
-            link: "https://scholar.google.com/scholar?q=Ethnobotanical+Survey+Bhutan+2022"
-        },
-        {
-            title: "Mitochondrial Genome Analysis of *Paris polyphylla* Reveals Phylogenetic Relationships and Genetic Diversity",
-            authors: "Sharma, S., Chetri, B. K., & Pradhan, N.",
-            journal: "BMC Plant Biology",
-            year: "2021",
-            link: "https://scholar.google.com/scholar?q=Mitochondrial+Genome+Paris+polyphylla+2021"
+            link: "https://doi.org/10.1016/j.sajb.2023.05.033"
         }
         // Add more publications here following the same structure
     ];
