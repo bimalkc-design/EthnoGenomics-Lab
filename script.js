@@ -21,19 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dynamic Hero Gallery
     const gallery = document.querySelector('.dynamic-hero-gallery');
     const images = [
-        '2.10.jpg',
-        '3.5a.jpg',
-        '3.5b.jpg',
-        '3.6.jpg',
-        '4.2.jpg',
-        '4.4.jpg',
-        '5.0.jpg',
-        '5.2.jpg',
-        'Update_1.jpg',
-        'Update_2.jpg',
-        'Update_3.jpg',
-        'Update_4.jpg',
-        'research_genomics.jpg'
+        'https://via.placeholder.com/800x500?text=Medicinal+Plants',
+        'https://via.placeholder.com/800x500?text=Himalayan+Flora',
+        'https://via.placeholder.com/800x500?text=Genomics+Lab'
     ];
     let currentImage = 0;
 
@@ -49,30 +39,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const current = gallery.querySelector('.hero-gallery-image.active');
         current.classList.remove('active');
         currentImage = (currentImage + 1) % images.length;
-        gallery.children[currentImage + 1].classList.add('active');
+        gallery.children[currentImage + 1].classList.add('active');  // +1 to skip the <h2> header (gallery.children[0] = header)
     }, 5000);
 
-    // Dynamic Publications from publications.json
-    fetch('publications.json')
-        .then(response => response.json())
-        .then(publications => {
-            const pubList = document.getElementById('publications-list');
-            publications.forEach(pub => {
-                const pubItem = document.createElement('div');
-                pubItem.classList.add('pub-item');
-                pubItem.innerHTML = `
-                    <h4>${pub.title}</h4>
-                    <p>${pub.journal}, ${pub.year}</p>
-                    <a href="${pub.doi}" target="_blank" rel="noopener noreferrer">View Publication</a>
-                `;
-                pubList.appendChild(pubItem);
-            });
-        })
-        .catch(error => {
-            console.error('Error loading publications:', error);
-            const pubList = document.getElementById('publications-list');
-            pubList.innerHTML = '<p>Unable to load publications at this time.</p>';
-        });
+    // Dynamic Publications (Sample Data)
+    const publications = [
+        { title: 'Organellar Genome Analysis of Himalayan Medicinal Plants', journal: 'Journal of Plant Genomics', year: 2024, doi: '#' },
+        { title: 'Ethnobotanical Knowledge in Biodiversity Conservation', journal: 'Ethnobotany Research', year: 2023, doi: '#' },
+        { title: 'NGS-Based Phylogenetic Markers for Species Authentication', journal: 'Molecular Biology Reports', year: 2022, doi: '#' }
+    ];
+
+    const pubList = document.getElementById('publications-list');
+    publications.forEach(pub => {
+        const pubItem = document.createElement('div');
+        pubItem.classList.add('pub-item');
+        pubItem.innerHTML = `
+            <h4>${pub.title}</h4>
+            <p>${pub.journal}, ${pub.year}</p>
+            <a href="${pub.doi}" target="_blank" rel="noopener noreferrer">View Publication</a>
+        `;
+        pubList.appendChild(pubItem);
+    });
 
     // Dynamic LinkedIn Contact Item
     const contactGrid = document.querySelector('.contact-grid-mini');
