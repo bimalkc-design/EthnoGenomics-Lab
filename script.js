@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Constants & Configuration ---
     const config = {
+        // Assume gallery images are in the root directory or a specific path like 'assets/'
+        // IMPORTANT: Adjust these paths if your images are in a subfolder (e.g., 'images/2.10.jpg')
+        galleryImageBaseUrl: '', // e.g., 'images/', 'assets/gallery/'
         galleryImages: [
             '2.10.jpg',
             '3.5a.jpg',
@@ -14,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'research_genomics.jpg'
         ],
         galleryCycleInterval: 5000, // 5 seconds
-        scrollOffset: 70, // Adjust for fixed header height
-        googleScholarId: 'YOUR_GOOGLE_SCHOLAR_ID', // Replace with actual ID
+        scrollOffset: 70, // Adjust this value if your fixed header height changes
+        googleScholarId: 'YOUR_GOOGLE_SCHOLAR_ID', // *** REMEMBER TO REPLACE THIS WITH YOUR ACTUAL ID ***
         linkedInProfile: 'https://www.linkedin.com/in/bimal-k-chetri-ph-d-a6b840a5/'
     };
 
@@ -30,13 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
         currentYearSpan: '#current-year',
         sections: 'section[id]',
         navLinks: '.nav-menu-compact a[href^="#"]',
-        googleScholarLink: '.btn[href*="scholar.google.com"]' // Selects the Google Scholar button
+        googleScholarLink: 'a[href*="scholar.google.com"]' // Targets the Google Scholar link
     };
 
     const elements = {};
     for (const key in selectors) {
-        elements[key] = document.querySelectorAll(selectors[key]);
-        if (elements[key].length === 1) elements[key] = elements[key][0]; // Dereference single elements
+        // Collect all elements for multiple selectors, or first for single
+        const found = document.querySelectorAll(selectors[key]);
+        elements[key] = found.length === 1 ? found[0] : found;
     }
 
     // --- Utility Functions ---
@@ -47,7 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function smoothScrollTo(target) {
         if (target) {
-            const offset = elements.navMenu ? elements.navMenu.offsetHeight : config.scrollOffset;
+            // Get header height for accurate scroll position, fallback to config
+            const header = document.querySelector('.main-header-compact');
+            const offset = header ? header.offsetHeight : config.scrollOffset;
             const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
             window.scrollTo({ top: pos, behavior: 'smooth' });
         }
@@ -81,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function highlightActiveNavLink() {
         let currentId = '';
-        const headerHeight = document.querySelector('.main-header-compact').offsetHeight; // Dynamically get header height
+        const headerHeight = document.querySelector('.main-header-compact').offsetHeight;
         const scrollPos = window.scrollY + headerHeight + 10; // Add some buffer
 
         elements.sections.forEach(section => {
@@ -90,7 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        elements.navLinks.forEach(link => {
+        // Ensure elements.navLinks is an iterable NodeList
+        Array.from(elements.navLinks).forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href') === `#${currentId}`) {
                 link.classList.add('active');
@@ -102,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Attaches smooth scroll behavior to navigation links.
      */
     function initSmoothScrolling() {
-        elements.navLinks.forEach(anchor => {
+        Array.from(elements.navLinks).forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
@@ -121,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Dynamic Hero Gallery ---
 
     let currentGalleryIndex = 0;
+    let galleryIntervalId;
 
     /**
      * Creates and appends gallery images to the dynamic gallery container.
@@ -128,13 +136,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function createDynamicGallery() {
         if (!elements.dynamicGallery || config.galleryImages.length === 0) return;
 
+        elements.dynamicGallery.innerHTML = ''; // Clear existing content to prevent duplicates
+
         config.galleryImages.forEach((src, index) => {
             const img = document.createElement('img');
-            // Assuming images are in the root or a known path relative to index.html
-            img.src = src; // Using just the filename as per your provided list
+            img.src = config.galleryImageBaseUrl + src; // Use base URL + filename
             img.alt = `Lab Image ${index + 1}`;
-            img.loading = 'lazy'; // Improve performance
-            if (index === 0) img.classList.add('active'); // First image active initially
+            img.loading = 'lazy';
+            if (index === 0) img.classList.add('active');
             elements.dynamicGallery.appendChild(img);
         });
     }
@@ -148,13 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const images = elements.dynamicGallery.querySelectorAll('img');
         if (images.length === 0) return;
 
-        // Hide current active image
         images[currentGalleryIndex].classList.remove('active');
-
-        // Move to the next image, loop if at end
         currentGalleryIndex = (currentGalleryIndex + 1) % images.length;
-
-        // Show new active image
         images[currentGalleryIndex].classList.add('active');
     }
 
@@ -164,11 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function initDynamicGallery() {
         if (config.galleryImages.length > 0 && elements.dynamicGallery) {
             createDynamicGallery();
-            setInterval(cycleGalleryImages, config.galleryCycleInterval);
+            if (galleryIntervalId) clearInterval(galleryIntervalId); // Clear any old interval
+            galleryIntervalId = setInterval(cycleGalleryImages, config.galleryCycleInterval);
         }
     }
 
-    // --- Publications Section ---
+// --- Publications Section ---
     const publications = [
         {
             title: "Plastome genomics of the crop wild relative Thladiantha cordifolia illuminates the evolution and phylogeny of the gourd family (Cucurbitaceae)",
@@ -199,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
             link: "https://doi.org/10.1016/j.sajb.2023.05.033"
         }
         // Add more publications here following the same structure
+
     ];
 
     /**
@@ -206,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function loadPublications() {
         if (elements.publicationsList) {
-            elements.publicationsList.innerHTML = ''; // Clear existing content
+            elements.publicationsList.innerHTML = '';
             publications.forEach(pub => {
                 const div = document.createElement('div');
                 div.classList.add('publication-item');
@@ -227,21 +233,22 @@ document.addEventListener('DOMContentLoaded', () => {
      * Initializes tab switching behavior for content panes.
      */
     function initTabs() {
-        elements.tabButtons.forEach(button => {
+        // Ensure elements.tabButtons is an iterable NodeList
+        Array.from(elements.tabButtons).forEach(button => {
             button.addEventListener('click', () => {
                 const tabId = button.getAttribute('data-tab');
 
-                elements.tabButtons.forEach(btn => btn.classList.remove('active'));
+                Array.from(elements.tabButtons).forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
 
-                elements.tabPanes.forEach(pane => pane.classList.remove('active'));
+                Array.from(elements.tabPanes).forEach(pane => pane.classList.remove('active'));
                 const activePane = document.getElementById(tabId);
                 if (activePane) activePane.classList.add('active');
             });
         });
         // Ensure the first tab is active on load
         if (elements.tabButtons.length > 0 && elements.tabPanes.length > 0) {
-            elements.tabButtons[0].click(); // Simulate click on the first button
+            elements.tabButtons[0].click();
         }
     }
 
@@ -253,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function initScrollToTop() {
         if (elements.scrollToTopBtn) {
             window.addEventListener('scroll', () => {
-                elements.scrollToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none'; // Show after 300px
+                elements.scrollToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
             });
             elements.scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         }
@@ -271,18 +278,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Updates dynamic links with actual profile IDs.
+     * Updates dynamic links with actual profile IDs and adds LinkedIn.
      */
     function updateDynamicLinks() {
+        // Update Google Scholar link if ID is provided
         if (elements.googleScholarLink && config.googleScholarId !== 'YOUR_GOOGLE_SCHOLAR_ID') {
             elements.googleScholarLink.href = `https://scholar.google.com/citations?user=${config.googleScholarId}`;
         }
 
-        // Add LinkedIn to contact grid if not already present in HTML
+        // Add LinkedIn to contact grid if not already present
         const contactGrid = document.querySelector('.contact-grid');
         if (contactGrid && config.linkedInProfile) {
-            // Check if LinkedIn link already exists to avoid duplication
-            if (!document.querySelector('a[href*="linkedin.com"]')) {
+            // Check if a LinkedIn link already exists to prevent duplicates
+            if (!contactGrid.querySelector('a[href*="linkedin.com"]')) {
                 const linkedInItem = document.createElement('a');
                 linkedInItem.href = config.linkedInProfile;
                 linkedInItem.target = "_blank";
@@ -293,7 +301,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h4>LinkedIn</h4>
                     <p>View Profile</p>
                 `;
-                contactGrid.appendChild(linkedInItem);
+                // Append it. You can adjust the order if needed.
+                // For example, to insert before the QR code:
+                const qrcodeItem = contactGrid.querySelector('.qrcode-item');
+                if (qrcodeItem) {
+                    contactGrid.insertBefore(linkedInItem, qrcodeItem);
+                } else {
+                    contactGrid.appendChild(linkedInItem);
+                }
             }
         }
     }
@@ -306,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initTabs();
         initScrollToTop();
         setCurrentYear();
-        updateDynamicLinks();
+        updateDynamicLinks(); // Call this after all static HTML is parsed
 
         // Initial highlights and scroll listeners
         highlightActiveNavLink();
