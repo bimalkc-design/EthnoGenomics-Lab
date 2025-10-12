@@ -1,188 +1,122 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Mobile Navigation Toggle ---
-    const navToggle = document.querySelector('.nav-toggle-compact');
-    const navMenu = document.querySelector('.main-nav-compact'); // Target the whole nav container for open/close
+    // ... existing nav toggle and other functionalities ...
 
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', () => {
-            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-            navToggle.setAttribute('aria-expanded', !isExpanded);
-            navMenu.classList.toggle('open');
-        });
-
-        // Close nav if clicked outside (optional, but good UX)
-        document.addEventListener('click', (event) => {
-            if (!navMenu.contains(event.target) && !navToggle.contains(event.target) && navMenu.classList.contains('open')) {
-                navMenu.classList.remove('open');
-                navToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-    }
-
-    // --- Dynamic "Flash in Motion" Gallery (Top Section - side-wise) ---
-    // This assumes the HTML structure for .top-side-gallery-wrapper is already in place.
-    const topGalleryWrapper = document.querySelector('.top-side-gallery-wrapper');
-    
-    const topGalleryImages = [
+    // --- Dynamic Hero Gallery (Fade Effect) ---
+    const heroGallery = document.querySelector('.dynamic-hero-gallery');
+    const heroImages = [
         'images/gallery/fieldwork_1.jpg',
         'images/gallery/lab_1.jpg',
         'images/gallery/plant_species_1.jpg',
         'images/gallery/bhutan_landscape.jpg',
-        'images/gallery/fieldwork_2.jpg' // Added more for better "flash" effect
+        'images/gallery/fieldwork_2.jpg'
     ];
-    let currentTopImageIndex = 0;
+    let currentHeroImageIndex = 0;
 
-    function createTopGallery() {
-        if (!topGalleryWrapper) return; // Exit if wrapper doesn't exist
-        topGalleryImages.forEach((src, index) => {
+    function createHeroGallery() {
+        if (!heroGallery) return;
+        heroImages.forEach((src, index) => {
             const img = document.createElement('img');
             img.src = src;
             img.alt = `EthnoGenomics Lab Image ${index + 1}`;
-            img.classList.add('top-side-gallery-image');
             if (index === 0) {
-                img.classList.add('active'); // Set first image as active initially
+                img.classList.add('active');
             }
-            topGalleryWrapper.appendChild(img);
+            heroGallery.appendChild(img);
         });
     }
 
-    function cycleTopGalleryImages() {
-        if (!topGalleryWrapper) return;
-        const images = topGalleryWrapper.querySelectorAll('.top-side-gallery-image');
+    function cycleHeroGalleryImages() {
+        if (!heroGallery) return;
+        const images = heroGallery.querySelectorAll('img');
         if (images.length === 0) return;
 
-        images[currentTopImageIndex].classList.remove('active');
-        currentTopImageIndex = (currentTopImageIndex + 1) % images.length;
-        images[currentTopImageIndex].classList.add('active');
+        images[currentHeroImageIndex].classList.remove('active');
+        currentHeroImageIndex = (currentHeroImageIndex + 1) % images.length;
+        images[currentHeroImageIndex].classList.add('active');
     }
 
-    if (topGalleryImages.length > 0 && topGalleryWrapper) {
-        createTopGallery();
-        setInterval(cycleTopGalleryImages, 4000); // Change image every 4 seconds for flash effect
+    if (heroGallery) {
+        createHeroGallery();
+        setInterval(cycleHeroGalleryImages, 5000); // Change image every 5 seconds
     }
 
 
-    // --- Publications Loading ---
-    const publications = [
-        {
-            title: "Chloroplast Genome Sequencing of *Rhododendron arboreum* from the Eastern Himalayas: Insights into Phylogeny and Adaptive Evolution",
-            authors: "Chetri, B. K., Sharma, S., & Rai, R.",
-            journal: "Journal of Plant Genomics",
-            year: "2023",
-            link: "https://scholar.google.com/scholar?q=Chloroplast+Genome+Sequencing+Rhododendron+arboreum"
-        },
-        {
-            title: "Ethnobotanical Survey of Medicinal Plants Used by Indigenous Communities in Eastern Bhutan",
-            authors: "Chetri, B. K., Gurung, S., & Dendup, C.",
-            journal: "Economic Botany",
-            year: "2022",
-            link: "https://scholar.google.com/scholar?q=Ethnobotanical+Survey+Medicinal+Plants+Bhutan"
-        },
-        {
-            title: "Mitochondrial Genome Analysis of *Swertia chirayita* Reveals Novel Genetic Markers for Species Authentication",
-            authors: "Rai, R., Chetri, B. K., & Sharma, S.",
-            journal: "BMC Plant Biology",
-            year: "2021",
-            link: "https://scholar.google.com/scholar?q=Mitochondrial+Genome+Swertia+chirayita"
-        },
-        {
-            title: "Assessing Carbon Sequestration Potential of Forest Ecosystems in Bhutan using Remote Sensing and GIS",
-            authors: "Wangchuk, T., Chetri, B. K., & Dorji, T.",
-            journal: "Environmental Science & Policy",
-            year: "2020",
-            link: "https://scholar.google.com/scholar?q=Carbon+Sequestration+Bhutan+Remote+Sensing"
-        }
-    ];
+    // --- Tab Functionality for Main Content ---
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanes = document.querySelectorAll('.tab-pane');
 
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Deactivate all buttons and panes
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanes.forEach(pane => pane.classList.remove('active'));
+
+            // Activate clicked button
+            button.classList.add('active');
+
+            // Activate corresponding pane
+            const targetTab = button.dataset.tab;
+            document.getElementById(targetTab).classList.add('active');
+        });
+    });
+
+    // --- Publications Loading (existing logic, just ensure selector is correct) ---
+    // ... your publications array and logic ...
     const publicationsList = document.getElementById('publications-list');
     if (publicationsList) {
-        publications.forEach(pub => {
+        // ... populate publications ...
+    }
+
+    // --- Full Gallery Loading (if dynamic) ---
+    const fullGalleryContainer = document.getElementById('gallery-container');
+    const fullGalleryImages = [
+        'images/gallery/2.10.jpg', 'images/gallery/3.5a.jpg', 'images/gallery/3.5b.jpg',
+        'images/gallery/3.6.jpg', 'images/gallery/4.2.jpg', 'images/gallery/4.4.jpg',
+        'images/gallery/5.0.jpg', 'images/gallery/5.2.jpg',
+        'images/gallery/fieldwork_1.jpg', 'images/gallery/lab_1.jpg', 'images/gallery/plant_species_1.jpg',
+        'images/gallery/bhutan_landscape.jpg', 'images/gallery/fieldwork_2.jpg'
+    ]; // Add more images for the full gallery
+
+    if (fullGalleryContainer) {
+        fullGalleryImages.forEach(src => {
             const div = document.createElement('div');
-            div.classList.add('publication-item');
-            div.innerHTML = `
-                <h4>${pub.title}</h4>
-                <p><strong>Authors:</strong> ${pub.authors}</p>
-                <p><strong>Journal:</strong> ${pub.journal} (${pub.year})</p>
-                <a href="${pub.link}" target="_blank" rel="noopener noreferrer">Read More <i class="fas fa-external-link-alt"></i></a>
-            `;
-            publicationsList.appendChild(div);
+            div.classList.add('gallery-item');
+            div.innerHTML = `<img src="${src}" alt="EthnoGenomics Lab image">`;
+            fullGalleryContainer.appendChild(div);
         });
+        // Optional: Add lightbox functionality here for gallery items
     }
 
-    // --- Scroll to Top Button ---
-    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    // ... scroll-to-top, current year, active nav link logic (adjusted for new header and tab links) ...
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 200) { // Show button after scrolling down 200px (less for compact)
-            scrollToTopBtn.style.display = 'block';
-        } else {
-            scrollToTopBtn.style.display = 'none';
-        }
-    });
-
-    scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // --- Current Year for Footer ---
-    const currentYearSpan = document.getElementById('current-year');
-    if (currentYearSpan) {
-        currentYearSpan.textContent = new Date().getFullYear();
-    }
-
-    // --- Active Nav Link Highlight (adjusting for compact header) ---
-    const sections = document.querySelectorAll('section[id]'); // Select sections with an ID
-    const navLinks = document.querySelectorAll('.nav-menu-compact a'); // Select links in the compact menu
-
+    // Adjust highlightActiveNavLink for tab-based navigation
     function highlightActiveNavLink() {
-        let currentSectionId = '';
-        const headerHeight = document.querySelector('.compact-header').offsetHeight;
-        const scrollPosition = window.scrollY + headerHeight + 10; // Add some offset
-
-        sections.forEach(section => {
-            if (section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
-                currentSectionId = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSectionId}`) {
-                link.classList.add('active');
-            }
-        });
-    }
-
-    window.addEventListener('scroll', highlightActiveNavLink);
-    highlightActiveNavLink(); // Call on load to set initial active link
-
-    // --- Smooth Scrolling for Navigation (updated for new structure) ---
-    document.querySelectorAll('.nav-menu-compact a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                const offset = document.querySelector('.compact-header').offsetHeight; // Use compact header height
-                const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = elementPosition - offset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-
-                // Close mobile nav after clicking a link
-                if (window.innerWidth <= 992) {
-                    navMenu.classList.remove('open');
-                    navToggle.setAttribute('aria-expanded', 'false');
+        // Since main content is tabbed, we only highlight the active tab link based on current active tab
+        const activeTabButton = document.querySelector('.tab-button.active');
+        if (activeTabButton) {
+            const targetTabId = activeTabButton.dataset.tab;
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${targetTabId}`) {
+                    link.classList.add('active');
                 }
-            }
-        });
+            });
+        }
+    }
+    // Also, when a tab button is clicked, update the nav highlight
+    tabButtons.forEach(button => {
+        button.addEventListener('click', highlightActiveNavLink);
     });
+
+    // Initial check for hash in URL to open specific tab (e.g., #contact)
+    if (window.location.hash) {
+        const hash = window.location.hash.substring(1); // Remove '#'
+        const correspondingTabButton = document.querySelector(`.tab-button[data-tab="${hash}"]`);
+        if (correspondingTabButton) {
+            correspondingTabButton.click(); // Simulate a click to open the tab
+        }
+    } else {
+        // Default to 'about' tab if no hash
+        document.querySelector('.tab-button[data-tab="about"]').click();
+    }
 });
