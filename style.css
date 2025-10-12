@@ -132,7 +132,8 @@ body {
 }
 
 .hero-text-area {
-    max-width: 60%;
+    /* Adjusted: Decreased width to make space for the gallery */
+    max-width: 50%; /* Was 60% */
     padding: var(--spacing-lg);
     animation: fadeInUp 1s ease-out;
 }
@@ -175,7 +176,8 @@ body {
     position: absolute;
     right: 0;
     top: 0;
-    width: 40%;
+    /* Adjusted: Increased width to be larger */
+    width: 50%; /* Was 40% */
     height: 100%;
     overflow: hidden;
     background: var(--white);
@@ -436,8 +438,8 @@ footer {
 /* Scroll to Top Button */
 #scrollToTopBtn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 22px; /* Slightly adjusted to accommodate potential scrollbar */
+    right: 22px; /* Slightly adjusted to accommodate potential scrollbar */
     background-color: var(--primary-color);
     color: var(--white);
     border: none;
@@ -448,6 +450,7 @@ footer {
     cursor: pointer;
     opacity: 0;
     transition: var(--transition);
+    box-shadow: var(--shadow); /* Added shadow for better visibility */
 }
 
 #scrollToTopBtn.visible {
@@ -488,13 +491,18 @@ footer {
     .hero-text-area {
         max-width: 100%;
         text-align: center;
+        padding: var(--spacing-md); /* Adjusted padding for smaller screens */
     }
 
     .dynamic-hero-gallery {
-        display: none;
+        display: none; /* Hide on smaller screens if there's not enough space */
     }
 
     .about-lab-content {
         flex-direction: column;
+    }
+
+    .about-lab-contact-mini .contact-grid-mini {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Slightly larger for touch targets */
     }
 }
