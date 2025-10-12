@@ -8,7 +8,7 @@
     <meta name="author" content="Dr. Chetri">
     <meta name="keywords" content="EthnoGenomics, Plant Genomics, Molecular Biology, Ethnobotany, Medicinal Plants, Biodiversity, Traditional Knowledge, Bioinformatics, Bhutan, Research, Dr. Bimal Kumar Chetri">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght=700&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- External CSS -->
@@ -20,10 +20,11 @@
         <header class="main-header-compact">
             <div class="container header-container">
                 <div class="header-brand"><a href="#home">EthnoGenomics Lab</a></div>
+                <!-- Tiny Profile (Small and on the side, de-emphasized) -->
                 <div class="tiny-profile-wrapper">
                     <img src="portrait.jpg" alt="Dr. Chetri">
                     <div class="tiny-profile-info">
-                        <strong>Bimal K Chetri (PhD)</strong>
+                        <strong> Bimal K Chetri (PhD)</strong>
                         <span>Principal Investigator</span>
                     </div>
                 </div>
@@ -33,12 +34,12 @@
                     <li><a href="#about-lab">About the Lab</a></li>
                     <li><a href="#research">Collaboration Areas</a></li>
                     <li><a href="#publications">Publications</a></li>
-                    <li><a href="#about-lab">Contact</a></li>
+                    <li><a href="#contact-footer">Contact</a></li> <!-- Changed to point to the footer contact -->
                 </ul>
             </div>
         </header>
 
-        <!-- Hero Section -->
+        <!-- Hero Section (Compact, with Dynamic Gallery for Visual Interest) -->
         <section class="hero-compact" id="home">
             <div class="hero-text-area">
                 <h1>EthnoGenomics Lab</h1>
@@ -48,10 +49,12 @@
                     <a href="#about-lab" class="btn btn-primary">Explore Our Research <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
-            <div class="dynamic-hero-gallery"></div>
+            <div class="dynamic-hero-gallery">
+                <!-- Images for subtle motion effect -->
+            </div>
         </section>
 
-        <!-- Main Content with Tabs -->
+        <!-- Main Content with Tabs for Compactness and Better UX -->
         <main class="main-content-tabs container">
             <nav class="tab-nav">
                 <button class="tab-button active" data-tab="about-lab">About the Lab</button>
@@ -66,7 +69,7 @@
                             <p>The EthnoGenomics Lab advances plant genomics by integrating ethnobotanical knowledge with molecular techniques. Our core focus includes organellar genome assembly, phylogenetic analysis, and conservation strategies for Himalayan flora.</p>
                             <p>Key research integrates bioinformatics for NGS data analysis, supporting sustainable medicinal plant utilization and biodiversity preservation.</p>
 
-                            <!-- Compact Contact Section with Form -->
+                            <!-- NEW LOCATION FOR COMPACT CONTACT ICONS -->
                             <div class="about-lab-contact-mini">
                                 <h3>Connect with Us</h3>
                                 <div class="contact-grid-mini">
@@ -91,37 +94,16 @@
                                             <p>View Profile</p>
                                         </div>
                                     </a>
-                                    <a href="https://maps.google.com/?q=Kanglung-42002, Trashigang, Bhutan" target="_blank" rel="noopener noreferrer" class="contact-item-mini">
-                                        <i class="fas fa-map-marker-alt"></i>
+                                    <!-- LinkedIn will be added here by JS -->
+                                    <div class="contact-item-mini qrcode-item-mini">
+                                        <a href="https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ" target="_blank" rel="noopener noreferrer">
+                                            <img src="qrcode.png" alt="Google Scholar QR Code" class="qrcode-image-mini">
+                                        </a>
                                         <div class="contact-info-mini">
-                                            <h4>Postal Address</h4>
-                                            <p>Kanglung-42002, Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan, Trashigang, Bhutan</p>
+                                            <h4>Google Scholar</h4>
+                                            <p>Scan to view</p>
                                         </div>
-                                    </a>
-                                </div>
-                                <!-- Contact Form -->
-                                <div class="contact-form-container">
-                                    <h4>Send Us a Message</h4>
-                                    <form id="contact-form" action="#" method="POST">
-                                        <div class="form-group">
-                                            <label for="name">Name</label>
-                                            <input type="text" id="name" name="name" required placeholder="Your Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <input type="email" id="email" name="email" required placeholder="Your Email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="subject">Subject</label>
-                                            <input type="text" id="subject" name="subject" required placeholder="Subject">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="message">Message</label>
-                                            <textarea id="message" name="message" required placeholder="Your Message"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Submit <i class="fas fa-paper-plane"></i></button>
-                                    </form>
-                                    <p id="form-message" class="form-message"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -161,7 +143,7 @@
                         </div>
                     </div>
                     <div class="text-center" style="margin-top: var(--spacing-xl);">
-                        <a href="#about-lab" class="btn btn-primary">Initiate Collaboration <i class="fas fa-handshake"></i></a>
+                        <a href="#about-lab-contact-mini" class="btn btn-primary">Initiate Collaboration <i class="fas fa-handshake"></i></a> <!-- Link to the compact contact -->
                     </div>
                 </div>
 
@@ -172,7 +154,7 @@
                         <!-- Publications populated via JS -->
                     </div>
                     <div class="text-center" style="margin-top: var(--spacing-xl);">
-                        <a href="https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        <a href="https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                             <i class="fas fa-graduation-cap"></i> View All on Google Scholar
                         </a>
                     </div>
@@ -180,10 +162,17 @@
             </div>
         </main>
 
-        <footer id="contact-footer" class="section-card container">
+        <!-- Contact Section - Now only for postal address -->
+        <section id="contact-footer" class="section-card container"> <!-- Changed ID to avoid conflict with the main nav link if any -->
             <h2 class="section-title">Postal Address</h2>
             <p class="section-description">Our physical location for correspondence.</p>
             <p class="text-center" style="margin-top: 30px;">Kanglung-42002, Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan, Trashigang, Bhutan</p>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; <span id="current-year"></span> EthnoGenomics Lab — Faculty of Life Sciences, Sherubtse College. All rights reserved.</p>
+            </div>
         </footer>
 
         <button id="scrollToTopBtn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
