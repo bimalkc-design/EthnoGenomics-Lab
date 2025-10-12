@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
             item.innerHTML = `
                 <img src="${config.updateImageBaseUrl}${update.image}" alt="Update ${index + 1}" onerror="this.src='${config.updateImageBaseUrl}placeholder.jpg'; this.alt='Placeholder Image';">
                 <div class="carousel-caption">
-                    <p class="caption-text">${update.text}</p>
+                    <p>${update.text}</p>
                 </div>
             `;
             elements.recentUpdatesContainer.appendChild(item);
@@ -278,18 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const showSlide = (index) => {
             items.forEach((item, i) => {
                 item.classList.toggle('active', i === index);
-                const caption = item.querySelector('.caption-text');
-                if (caption) {
-                    caption.style.opacity = '0';
-                    caption.style.transform = 'translateY(10px)';
-                    if (i === index) {
-                        setTimeout(() => {
-                            caption.style.transition = 'opacity 0.8s ease-in-out, transform 0.8s ease-in-out';
-                            caption.style.opacity = '1';
-                            caption.style.transform = 'translateY(0)';
-                        }, 50);
-                    }
-                }
             });
             indicators.forEach((indicator, i) => {
                 indicator.classList.toggle('active', i === index);
