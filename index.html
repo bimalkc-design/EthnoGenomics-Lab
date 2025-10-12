@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="dynamic-hero-gallery">
-                <!-- Images for subtle motion effect -->
+                <!-- Images for subtle motion effect - populated by JS -->
             </div>
         </section>
 
@@ -98,7 +98,7 @@
                                         </a>
                                         <!-- LinkedIn will be added here by JS -->
                                         <div class="contact-item-mini qrcode-item-mini">
-                                            <a href="https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ" target="_blank" rel="noopener noreferrer">
+                                            <a class="googleScholarLink" href="https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ" target="_blank" rel="noopener noreferrer">
                                                 <img src="qrcode.png" alt="Google Scholar QR Code" class="qrcode-image-mini">
                                             </a>
                                             <div class="contact-info-mini">
@@ -156,7 +156,8 @@
                             <!-- Publications populated via JS -->
                         </div>
                         <div class="text-center" style="margin-top: var(--spacing-xl);">
-                            <a href="https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            <!-- The googleScholarLink selector will now target this specific link as well -->
+                            <a class="googleScholarLink" href="https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                                 <i class="fas fa-graduation-cap"></i> View All on Google Scholar
                             </a>
                         </div>
@@ -164,24 +165,26 @@
                 </div>
             </main>
 
-            <!-- Recent Updates Side Panel -->
+            <!-- Recent Updates Side Panel - CORRECTED STRUCTURE -->
             <aside class="recent-updates-panel">
                 <div class="updates-container">
                     <h3>Recent Updates</h3>
                     <div class="updates-content">
-                        <div class="update-text-area">
-                            <!-- Update texts will be populated by JS here -->
-                            <p class="current-update-text"></p>
+                        <!-- This div will hold the carousel items with images and text -->
+                        <div class="update-image-carousel" id="recent-updates-carousel">
+                            <!-- Carousel items will be populated by JS here -->
+                            <!-- Example structure for one item (JS will create these):
+                            <div class="carousel-item active">
+                                <img src="update_1.jpg" alt="Update 1">
+                                <div class="carousel-caption">
+                                    <p>The Royal University of Bhutan...</p>
+                                </div>
+                            </div>
+                            -->
                         </div>
-                        <div class="update-image-carousel">
-                            <div class="carousel-track">
-                                <!-- Update images will be populated by JS here -->
-                            </div>
-                            <button class="carousel-nav-btn prev-btn" aria-label="Previous Update"><i class="fas fa-chevron-left"></i></button>
-                            <button class="carousel-nav-btn next-btn" aria-label="Next Update"><i class="fas fa-chevron-right"></i></button>
-                            <div class="carousel-dots">
-                                <!-- Navigation dots will be populated by JS here -->
-                            </div>
+                        <div class="carousel-controls">
+                            <!-- Navigation dots will be populated by JS here -->
+                            <div class="carousel-dots" id="update-carousel-indicators"></div>
                         </div>
                     </div>
                 </div>
@@ -189,7 +192,7 @@
         </div> <!-- End main-content-layout -->
 
         <!-- Contact Section - Now only for postal address -->
-        <section id="contact-footer" class="section-card container"> <!-- Changed ID to avoid conflict with the main nav link if any -->
+        <section id="contact-footer" class="section-card container">
             <h2 class="section-title">Postal Address</h2>
             <p class="section-description">Our physical location for correspondence.</p>
             <p class="text-center" style="margin-top: 30px;">Kanglung-42002, Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan, Trashigang, Bhutan</p>
