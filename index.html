@@ -24,7 +24,7 @@
                 <div class="tiny-profile-wrapper">
                     <img src="portrait.jpg" alt="Dr. Chetri">
                     <div class="tiny-profile-info">
-                        <strong> Bimal K Chetri (PhD)</strong>
+                        <strong>Bimal K Chetri (PhD)</strong>
                         <span>Principal Investigator</span>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <li><a href="#about-lab">About the Lab</a></li>
                     <li><a href="#research">Collaboration Areas</a></li>
                     <li><a href="#publications">Publications</a></li>
-                    <li><a href="#contact-footer">Contact</a></li> <!-- Changed to point to the footer contact -->
+                    <li><a href="#contact-footer">Contact</a></li>
                 </ul>
             </div>
         </header>
@@ -71,7 +71,7 @@
                                 <p>The EthnoGenomics Lab advances plant genomics by integrating ethnobotanical knowledge with molecular techniques. Our core focus includes organellar genome assembly, phylogenetic analysis, and conservation strategies for Himalayan flora.</p>
                                 <p>Key research integrates bioinformatics for NGS data analysis, supporting sustainable medicinal plant utilization and biodiversity preservation.</p>
 
-                                <!-- NEW LOCATION FOR COMPACT CONTACT ICONS -->
+                                <!-- Compact Contact Icons -->
                                 <div class="about-lab-contact-mini">
                                     <h3>Connect with Us</h3>
                                     <div class="contact-grid-mini">
@@ -96,7 +96,6 @@
                                                 <p>View Profile</p>
                                             </div>
                                         </a>
-                                        <!-- LinkedIn will be added here by JS -->
                                         <div class="contact-item-mini qrcode-item-mini">
                                             <a class="googleScholarLink" href="https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ" target="_blank" rel="noopener noreferrer">
                                                 <img src="qrcode.png" alt="Google Scholar QR Code" class="qrcode-image-mini">
@@ -145,7 +144,7 @@
                             </div>
                         </div>
                         <div class="text-center" style="margin-top: var(--spacing-xl);">
-                            <a href="#about-lab-contact-mini" class="btn btn-primary">Initiate Collaboration <i class="fas fa-handshake"></i></a> <!-- Link to the compact contact -->
+                            <a href="#about-lab-contact-mini" class="btn btn-primary">Initiate Collaboration <i class="fas fa-handshake"></i></a>
                         </div>
                     </div>
 
@@ -156,8 +155,7 @@
                             <!-- Publications populated via JS -->
                         </div>
                         <div class="text-center" style="margin-top: var(--spacing-xl);">
-                            <!-- The googleScholarLink selector will now target this specific link as well -->
-                            <a class="googleScholarLink" href="https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            <a class="googleScholarLink" href="https://scholar.google.com/citations?user=Hp0ZnX4AAAAJ" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                                 <i class="fas fa-graduation-cap"></i> View All on Google Scholar
                             </a>
                         </div>
@@ -165,25 +163,15 @@
                 </div>
             </main>
 
-            <!-- Recent Updates Side Panel - CORRECTED STRUCTURE -->
+            <!-- Recent Updates Side Panel -->
             <aside class="recent-updates-panel">
                 <div class="updates-container">
                     <h3>Recent Updates</h3>
                     <div class="updates-content">
-                        <!-- This div will hold the carousel items with images and text -->
                         <div class="update-image-carousel" id="recent-updates-carousel">
-                            <!-- Carousel items will be populated by JS here -->
-                            <!-- Example structure for one item (JS will create these):
-                            <div class="carousel-item active">
-                                <img src="update_1.jpg" alt="Update 1">
-                                <div class="carousel-caption">
-                                    <p>The Royal University of Bhutan...</p>
-                                </div>
-                            </div>
-                            -->
+                            <!-- Carousel items populated by JS -->
                         </div>
                         <div class="carousel-controls">
-                            <!-- Navigation dots will be populated by JS here -->
                             <div class="carousel-dots" id="update-carousel-indicators"></div>
                         </div>
                     </div>
@@ -191,21 +179,28 @@
             </aside>
         </div> <!-- End main-content-layout -->
 
-        <!-- Contact Section - Now only for postal address -->
-        <section id="contact-footer" class="section-card container">
+        <!-- Contact Section - Enhanced for postal address -->
+        <section id="contact-footer" class="section-card contact-footer container">
             <h2 class="section-title">Postal Address</h2>
-            <p class="section-description">Our physical location for correspondence.</p>
-            <p class="text-center" style="margin-top: 30px;">Kanglung-42002, Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan, Trashigang, Bhutan</p>
+            <div class="contact-address-wrapper">
+                <i class="fas fa-map-marker-alt address-icon"></i>
+                <p class="address-text">Kanglung-42002, Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan, Trashigang, Bhutan</p>
+            </div>
         </section>
 
-        <footer>
+        <!-- Footer - Enhanced for copyright -->
+        <footer class="footer-compact">
             <div class="container">
-                <p>&copy; <span id="current-year"></span> EthnoGenomics Lab — Faculty of Life Sciences, Sherubtse College. All rights reserved.</p>
+                <p class="copyright-text">&copy; <span id="current-year"></span> EthnoGenomics Lab &mdash; Faculty of Life Sciences, Sherubtse College. All rights reserved.</p>
             </div>
         </footer>
 
         <button id="scrollToTopBtn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Inline Script for Dynamic Year -->
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
