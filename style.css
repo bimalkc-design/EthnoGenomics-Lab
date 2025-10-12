@@ -180,8 +180,8 @@ a:hover {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    margin-left: auto; /* Pushes it to the right, next to nav */
-    padding-right: var(--spacing-md); /* Space before nav */
+    margin-left: auto;
+    padding-right: var(--spacing-md);
 }
 
 .tiny-profile-wrapper img {
@@ -212,7 +212,7 @@ a:hover {
     color: white;
     text-align: center;
     padding: var(--spacing-xl) var(--spacing-md);
-    min-height: 400px; /* Adjust as needed */
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -257,26 +257,38 @@ a:hover {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    pointer-events: none;
     z-index: 1;
 }
+
 .dynamic-hero-gallery img {
     position: absolute;
-    filter: brightness(0.5);
-    opacity: 0.3;
-    animation: floatEffect 20s infinite ease-in-out;
-}
-.dynamic-hero-gallery img:nth-child(1) { width: 150px; top: 10%; left: 5%; animation-delay: 0s; }
-.dynamic-hero-gallery img:nth-child(2) { width: 200px; top: 50%; right: 10%; animation-delay: 5s; }
-.dynamic-hero-gallery img:nth-child(3) { width: 100px; bottom: 20%; left: 20%; animation-delay: 10s; }
-/* Add more images and adjust styles as needed for effect */
-
-@keyframes floatEffect {
-    0% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
-    50% { transform: translateY(-20px) rotate(5deg); opacity: 0.6; }
-    100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    animation: floatAndFade 5s infinite ease-in-out;
 }
 
+@keyframes floatAndFade {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    20% {
+        opacity: 0.7;
+        transform: translateY(0);
+    }
+    80% {
+        opacity: 0.7;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
 
 /* Main Content with Tabs */
 .main-content-tabs {
@@ -290,7 +302,7 @@ a:hover {
     gap: var(--spacing-sm);
     margin-bottom: var(--spacing-lg);
     border-bottom: 2px solid var(--border-color);
-    flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+    flex-wrap: wrap;
 }
 
 .tab-button {
@@ -302,7 +314,7 @@ a:hover {
     cursor: pointer;
     color: var(--light-text-color);
     transition: color 0.3s ease, border-bottom 0.3s ease;
-    white-space: nowrap; /* Prevent text wrapping within buttons */
+    white-space: nowrap;
 }
 
 .tab-button:hover {
@@ -339,19 +351,19 @@ a:hover {
 /* About the Lab Content - Layout */
 .about-lab-content {
     display: flex;
-    flex-wrap: wrap; /* Allows columns to stack on smaller screens */
+    flex-wrap: wrap;
     gap: var(--spacing-lg);
-    align-items: flex-start; /* Aligns content to the top for better visual balance */
+    align-items: flex-start;
 }
 
 .about-lab-text {
-    flex: 2; /* Takes more space */
-    min-width: 300px; /* Minimum width before wrapping */
+    flex: 2;
+    min-width: 300px;
 }
 
 .about-lab-highlights {
-    flex: 1; /* Takes less space */
-    min-width: 200px; /* Minimum width before wrapping */
+    flex: 1;
+    min-width: 200px;
     background-color: var(--background-light);
     border-radius: 8px;
     padding: var(--spacing-md);
@@ -387,75 +399,74 @@ a:hover {
 .about-lab-highlights li i {
     color: var(--primary-color);
     font-size: 1.1em;
-    min-width: 20px; /* Ensure icon alignment */
+    min-width: 20px;
 }
 
-
-/* --- Compact Contact Section Styles (REALLY SMALLER) --- */
+/* Compact Contact Section Styles */
 .about-lab-contact-mini {
-    margin-top: var(--spacing-sm); /* Reduced top margin */
-    padding-top: var(--spacing-xs); /* Reduced top padding */
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-xs);
     border-top: 1px dashed var(--border-color);
 }
 
 .about-lab-contact-mini h3 {
     text-align: center;
-    margin-bottom: var(--spacing-xs); /* Significantly reduced bottom margin */
+    margin-bottom: var(--spacing-xs);
     color: var(--secondary-color);
-    font-size: 1em; /* Smaller heading */
+    font-size: 1em;
     font-family: var(--font-sans);
-    font-weight: 600; /* Make it a bit bolder since it's smaller */
+    font-weight: 600;
 }
 
 .contact-grid-mini {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Even smaller min-width for grid items */
-    gap: var(--spacing-xs); /* Significantly reduced gap between contact items */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-xs);
     justify-content: center;
 }
 
 .contact-item-mini {
     display: flex;
     align-items: flex-start;
-    gap: 3px; /* Very small gap between icon and text */
-    padding: 4px; /* Very small padding inside contact item */
+    gap: 3px;
+    padding: 4px;
     background-color: var(--background-light);
-    border-radius: 4px; /* Slightly smaller border-radius */
+    border-radius: 4px;
     border: 1px solid var(--border-color);
     color: var(--text-color);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    text-decoration: none; /* Ensure no underline by default */
+    text-decoration: none;
 }
 
 .contact-item-mini:hover {
-    transform: translateY(-1px); /* Minimal hover lift */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Lighter hover shadow */
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     color: var(--primary-color);
     text-decoration: none;
 }
 
 .contact-item-mini i {
-    font-size: 0.9em; /* Significantly smaller icon size */
+    font-size: 0.9em;
     color: var(--primary-color);
-    min-width: 18px; /* Smaller min-width for icon */
+    min-width: 18px;
     text-align: center;
-    padding-top: 1px; /* Fine-tune alignment */
+    padding-top: 1px;
 }
 
 .contact-info-mini h4 {
     margin: 0;
-    font-size: 0.75em; /* Smaller title for contact type */
+    font-size: 0.75em;
     color: var(--secondary-color);
     font-family: var(--font-sans);
-    line-height: 1.2; /* Tighten line height */
+    line-height: 1.2;
 }
 
 .contact-info-mini p {
     margin: 0;
-    font-size: 0.65em; /* Significantly smaller text for contact detail */
+    font-size: 0.65em;
     color: var(--light-text-color);
     word-break: break-word;
-    line-height: 1.2; /* Tighten line height */
+    line-height: 1.2;
 }
 
 .qrcode-item-mini {
@@ -465,15 +476,13 @@ a:hover {
 }
 
 .qrcode-item-mini .qrcode-image-mini {
-    width: 45px; /* Significantly smaller QR code */
+    width: 45px;
     height: 45px;
     border: 1px solid var(--border-color);
     border-radius: 3px;
-    margin-bottom: 2px; /* Reduced margin */
+    margin-bottom: 2px;
     object-fit: contain;
 }
-/* --- End Compact Contact Section Styles --- */
-
 
 /* Collaboration Areas Tab */
 .collaboration-grid {
@@ -527,7 +536,7 @@ a:hover {
     border-radius: 6px;
     border: 1px solid var(--border-color);
     display: flex;
-    align-items: flex-start; /* Align icon and text */
+    align-items: flex-start;
     gap: var(--spacing-sm);
     transition: background-color 0.2s ease;
 }
@@ -539,8 +548,8 @@ a:hover {
 .publication-item i {
     color: var(--primary-color);
     font-size: 1.2em;
-    margin-top: 4px; /* Adjust vertical alignment with text */
-    flex-shrink: 0; /* Prevent icon from shrinking */
+    margin-top: 4px;
+    flex-shrink: 0;
 }
 
 .publication-info {
@@ -566,7 +575,6 @@ a:hover {
     font-weight: 500;
 }
 
-
 /* Footer */
 footer {
     background-color: var(--background-dark);
@@ -574,7 +582,7 @@ footer {
     text-align: center;
     padding: var(--spacing-md) 0;
     font-size: 0.9em;
-    margin-top: var(--spacing-xl); /* Push footer down */
+    margin-top: var(--spacing-xl);
 }
 
 footer a {
@@ -584,7 +592,6 @@ footer a {
 footer a:hover {
     color: var(--secondary-color);
 }
-
 
 /* Scroll to Top Button */
 #scrollToTopBtn {
@@ -685,31 +692,31 @@ footer a:hover {
     }
 
     .contact-grid-mini {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Even smaller min-width for grid items */
-        gap: 4px; /* Tiny gap */
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 4px;
     }
 
     .contact-item-mini {
-        padding: 3px; /* Minimal padding */
+        padding: 3px;
     }
 
     .contact-item-mini i {
-        font-size: 0.8em; /* Super small icon size */
+        font-size: 0.8em;
         min-width: 16px;
     }
 
     .contact-info-mini h4 {
-        font-size: 0.7em; /* Super small font size */
+        font-size: 0.7em;
         line-height: 1.1;
     }
 
     .contact-info-mini p {
-        font-size: 0.6em; /* Super super small font size */
+        font-size: 0.6em;
         line-height: 1.1;
     }
 
     .qrcode-item-mini .qrcode-image-mini {
-        width: 40px; /* Super small QR code */
+        width: 40px;
         height: 40px;
     }
 
@@ -772,6 +779,6 @@ footer a:hover {
     }
 
     .contact-grid-mini {
-        grid-template-columns: 1fr; /* Force single column on smallest screens */
+        grid-template-columns: 1fr;
     }
 }
