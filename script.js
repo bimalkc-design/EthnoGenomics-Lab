@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Dynamic Hero Gallery - Fixed indexing with querySelectorAll for safety
+    // Dynamic Hero Gallery
     const gallery = document.querySelector('.dynamic-hero-gallery');
     const images = [
         '2.10.jpg',
@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         'research_genomics.jpg'
     ];
     let currentImage = 0;
-    const galleryImages = []; // Track images separately
 
     images.forEach((src, index) => {
         const img = document.createElement('img');
@@ -44,14 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
         img.classList.add('hero-gallery-image');
         if (index === 0) img.classList.add('active');
         gallery.appendChild(img);
-        galleryImages.push(img);
     });
 
     setInterval(() => {
         const current = gallery.querySelector('.hero-gallery-image.active');
-        if (current) current.classList.remove('active');
+        current.classList.remove('active');
         currentImage = (currentImage + 1) % images.length;
-        galleryImages[currentImage].classList.add('active');
+        gallery.children[currentImage + 1].classList.add('active');
     }, 5000);
 
     // Dynamic Publications from publications.json
@@ -76,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pubList.innerHTML = '<p>Unable to load publications at this time.</p>';
         });
 
-    // Dynamic LinkedIn Contact Item - Insert before QR or at end
+    // Dynamic LinkedIn Contact Item
     const contactGrid = document.querySelector('.contact-grid-mini');
     const linkedinItem = document.createElement('a');
     linkedinItem.href = 'https://www.linkedin.com/in/bimal-chetri';
@@ -90,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>View Profile</p>
         </div>
     `;
-    contactGrid.appendChild(linkedinItem); // Appends at end
+    contactGrid.appendChild(linkedinItem);
 
     // Scroll to Top Button
     const scrollBtn = document.getElementById('scrollToTopBtn');
