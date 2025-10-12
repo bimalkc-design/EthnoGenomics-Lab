@@ -176,6 +176,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Publications Section ---
     const publications = [
         {
+            title: "De novo plastome assembly of Cymbopogon bhutanicus Noltie, an endemic lemon grass from Bhutan, with geospatial, comparative genomic, and phylogenetic insights",
+            authors: "Mohan Singh Rana, Nicolas Dierckxsens, Pritesh Bhatt, Bimal K Chetri",
+            journal: "Ecological Genetics and Genomics",
+            year: "2025",
+            link: "https://doi.org/10.1016/j.egg.2025.100372"
+        },
+        {
             title: "Plastome genomics of the crop wild relative Thladiantha cordifolia illuminates the evolution and phylogeny of the gourd family (Cucurbitaceae)",
             authors: "Bimal K Chetri, SS Sonu, Rahul G Shelke, Sudip Mitra, Lata Rangan",
             journal: "Genetic Resources and Crop Evolution",
@@ -194,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
             authors: "Bimal K Chetri, SS Sonu, Nicolas Dierckxsens, Sudip Mitra, Latha Rangan",
             journal: "Journal of Plant Biochemistry and Biotechnology",
             year: "2025",
-            link: "https://doi.org/10.1007/s13562-025-00992-71"
+            link: "https://link.springer.com/article/10.1007/s13562-025-00992-7"
         },
         {
             title: "In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, Albophoma sp. BAPR5",
