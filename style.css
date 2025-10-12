@@ -278,13 +278,157 @@ a:hover {
 }
 
 
-/* Main Content with Tabs */
-.main-content-tabs {
+/* Main Content Layout (for side panel integration) */
+.main-content-layout {
+    display: flex;
+    gap: var(--spacing-lg);
     padding-top: var(--spacing-xl);
     padding-bottom: var(--spacing-xl);
+    align-items: flex-start; /* Align content to the top */
 }
 
-.tab-nav {
+.main-content-tabs {
+    flex: 3; /* Main content takes more space */
+    min-width: 0; /* Allow it to shrink */
+}
+
+/* Recent Updates Side Panel */
+.recent-updates-panel {
+    flex: 1; /* Side panel takes less space */
+    min-width: 280px; /* Minimum width for the side panel */
+    max-width: 350px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: var(--spacing-md);
+    position: sticky; /* Make it sticky */
+    top: calc(var(--header-height-compact) + var(--spacing-md)); /* Position below header with some margin */
+    align-self: flex-start; /* Ensure it sticks to the top within its flex container */
+}
+
+.recent-updates-panel .updates-container {
+    padding: 0; /* Remove container padding inside panel */
+    max-width: none; /* Allow it to fill panel width */
+}
+
+.recent-updates-panel h3 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-sm);
+}
+
+.updates-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.update-text-area {
+    min-height: 80px; /* Provide some consistent height for text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--spacing-sm);
+    background-color: var(--background-light);
+    border-radius: 5px;
+    border: 1px dashed var(--border-color);
+}
+
+.current-update-text {
+    font-size: 0.95em;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.4;
+    transition: opacity 0.5s ease-in-out; /* Fade effect for text */
+}
+
+.update-image-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #eee;
+    height: 180px; /* Fixed height for carousel */
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-track img {
+    min-width: 100%;
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+}
+
+.carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-xs);
+    cursor: pointer;
+    font-size: 1.2em;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-nav-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.carousel-nav-btn.prev-btn {
+    left: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.carousel-nav-btn.next-btn {
+    right: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: var(--spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    z-index: 10;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.carousel-dot.active {
+    background-color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+
+/* Main Content with Tabs */
+.main-content-tabs .tab-nav { /* Added specificity */
     display: flex;
     justify-content: center;
     gap: var(--spacing-sm);
@@ -293,7 +437,7 @@ a:hover {
     flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
 }
 
-.tab-button {
+.main-content-tabs .tab-button { /* Added specificity */
     background-color: transparent;
     border: none;
     padding: var(--spacing-sm) var(--spacing-md);
@@ -305,29 +449,29 @@ a:hover {
     white-space: nowrap; /* Prevent text wrapping within buttons */
 }
 
-.tab-button:hover {
+.main-content-tabs .tab-button:hover { /* Added specificity */
     color: var(--primary-color);
 }
 
-.tab-button.active {
+.main-content-tabs .tab-button.active { /* Added specificity */
     color: var(--primary-color);
     border-bottom: 3px solid var(--primary-color);
     font-weight: 700;
 }
 
-.tab-content-wrapper {
+.main-content-tabs .tab-content-wrapper { /* Added specificity */
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     padding: var(--spacing-lg);
 }
 
-.tab-pane {
+.main-content-tabs .tab-pane { /* Added specificity */
     display: none;
     animation: fadeIn 0.5s ease-out;
 }
 
-.tab-pane.active {
+.main-content-tabs .tab-pane.active { /* Added specificity */
     display: block;
 }
 
@@ -478,300 +622,4 @@ a:hover {
 /* Collaboration Areas Tab */
 .collaboration-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-lg);
-}
-
-.collab-item {
-    background-color: var(--background-light);
-    padding: var(--spacing-lg);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid var(--border-color);
-}
-
-.collab-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.collab-item i {
-    font-size: 3em;
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-sm);
-}
-
-.collab-item h3 {
-    margin-top: 0;
-    color: var(--secondary-color);
-}
-
-.collab-item p {
-    color: var(--light-text-color);
-    font-size: 0.95em;
-}
-
-/* Publications List Compact */
-.publications-list-compact {
-    display: grid;
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-lg);
-}
-
-.publication-item {
-    background-color: var(--background-light);
-    padding: var(--spacing-md);
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
-    display: flex;
-    align-items: flex-start; /* Align icon and text */
-    gap: var(--spacing-sm);
-    transition: background-color 0.2s ease;
-}
-
-.publication-item:hover {
-    background-color: #e9ecef;
-}
-
-.publication-item i {
-    color: var(--primary-color);
-    font-size: 1.2em;
-    margin-top: 4px; /* Adjust vertical alignment with text */
-    flex-shrink: 0; /* Prevent icon from shrinking */
-}
-
-.publication-info {
-    flex-grow: 1;
-}
-
-.publication-info h4 {
-    margin: 0 0 var(--spacing-xs) 0;
-    font-size: 1.1em;
-    color: var(--secondary-color);
-    font-family: var(--font-sans);
-    line-height: 1.4;
-}
-
-.publication-info p {
-    margin: 0;
-    font-size: 0.85em;
-    color: var(--light-text-color);
-    line-height: 1.4;
-}
-
-.publication-info a {
-    font-weight: 500;
-}
-
-
-/* Footer */
-footer {
-    background-color: var(--background-dark);
-    color: white;
-    text-align: center;
-    padding: var(--spacing-md) 0;
-    font-size: 0.9em;
-    margin-top: var(--spacing-xl); /* Push footer down */
-}
-
-footer a {
-    color: var(--primary-color);
-}
-
-footer a:hover {
-    color: var(--secondary-color);
-}
-
-
-/* Scroll to Top Button */
-#scrollToTopBtn {
-    display: none;
-    position: fixed;
-    bottom: var(--spacing-md);
-    right: var(--spacing-md);
-    z-index: 999;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-size: 1.2em;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#scrollToTopBtn:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 992px) {
-    .nav-menu-compact {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        top: var(--header-height-compact);
-        left: 0;
-        background-color: #fff;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .nav-menu-compact.active {
-        display: flex;
-    }
-
-    .nav-menu-compact li {
-        text-align: center;
-        width: 100%;
-    }
-
-    .nav-menu-compact li a {
-        display: block;
-        padding: var(--spacing-md);
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .nav-menu-compact li:last-child a {
-        border-bottom: none;
-    }
-
-    .nav-toggle {
-        display: block;
-    }
-
-    .header-container {
-        padding: 0 var(--spacing-sm);
-    }
-
-    .tiny-profile-wrapper {
-        margin-left: 0;
-        order: 3;
-        padding-right: 0;
-    }
-
-    .hero-compact h1 {
-        font-size: 2.5em;
-    }
-
-    .hero-tagline {
-        font-size: 1.2em;
-    }
-
-    .main-content-tabs {
-        padding: var(--spacing-lg) var(--spacing-sm);
-    }
-
-    .tab-button {
-        padding: var(--spacing-sm);
-        font-size: 1em;
-    }
-
-    .about-lab-content {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .about-lab-text,
-    .about-lab-highlights {
-        min-width: unset;
-        width: 100%;
-    }
-
-    .contact-grid-mini {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Even smaller min-width for grid items */
-        gap: 4px; /* Tiny gap */
-    }
-
-    .contact-item-mini {
-        padding: 3px; /* Minimal padding */
-    }
-
-    .contact-item-mini i {
-        font-size: 0.8em; /* Super small icon size */
-        min-width: 16px;
-    }
-
-    .contact-info-mini h4 {
-        font-size: 0.7em; /* Super small font size */
-        line-height: 1.1;
-    }
-
-    .contact-info-mini p {
-        font-size: 0.6em; /* Super super small font size */
-        line-height: 1.1;
-    }
-
-    .qrcode-item-mini .qrcode-image-mini {
-        width: 40px; /* Super small QR code */
-        height: 40px;
-    }
-
-    .collab-item {
-        padding: var(--spacing-md);
-    }
-
-    .collab-item i {
-        font-size: 2.5em;
-    }
-
-    .collaboration-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero-compact {
-        padding: var(--spacing-lg) var(--spacing-sm);
-    }
-
-    .hero-compact h1 {
-        font-size: 2em;
-    }
-
-    .hero-tagline {
-        font-size: 1em;
-    }
-
-    .btn {
-        padding: var(--spacing-sm) var(--spacing-md);
-        font-size: 0.9em;
-    }
-
-    .tiny-profile-wrapper {
-        display: none;
-    }
-
-    .header-brand {
-        font-size: 1.3em;
-    }
-}
-
-@media (max-width: 480px) {
-    .header-brand {
-        font-size: 1.2em;
-    }
-
-    .nav-toggle {
-        font-size: 1.3em;
-    }
-
-    .tab-nav {
-        gap: var(--spacing-xs);
-    }
-
-    .tab-button {
-        padding: var(--spacing-xs) var(--spacing-sm);
-        font-size: 0.9em;
-    }
-
-    .contact-grid-mini {
-        grid-template-columns: 1fr; /* Force single column on smallest screens */
-    }
-}
+    grid
