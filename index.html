@@ -1,23 +1,182 @@
-/* General Variables (if not already defined) */
-:root {
-    --primary-color: #28a745; /* A shade of green for nature/plants */
-    --secondary-color: #0056b3; /* A complementary blue */
-    --text-color: #333;
-    --light-text-color: #666;
-    --background-light: #f8f9fa;
-    --background-dark: #343a40;
-    --border-color: #dee2e6;
-    --spacing-xs: 5px;
-    --spacing-sm: 10px;
-    --spacing-md: 20px;
-    --spacing-lg: 30px;
-    --spacing-xl: 50px;
-    --font-sans: 'Montserrat', sans-serif;
-    --font-serif: 'Playfair Display', serif;
-    --max-width-container: 1200px;
-    --header-height-compact: 70px;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EthnoGenomics Lab — Bimal K Chetri (PhD)</title>
+    <meta name="description" content="Official website of EthnoGenomics Lab by Bimal K Chetri (PhD) Specializing in Plant Genomics, Organellar Genome Mining, Ethnobotany, Medicinal Plant Research, and Traditional Knowledge integration.">
+    <meta name="author" content="Dr. Chetri">
+    <meta name="keywords" content="EthnoGenomics, Plant Genomics, Molecular Biology, Ethnobotany, Medicinal Plants, Biodiversity, Traditional Knowledge, Bioinformatics, Bhutan, Research, Dr. Bimal Kumar Chetri">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght=700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <!-- Header with Compact Navigation -->
+        <header class="main-header-compact">
+            <div class="container header-container">
+                <div class="header-brand"><a href="#home">EthnoGenomics Lab</a></div>
+                <!-- Tiny Profile (Small and on the side, de-emphasized) -->
+                <div class="tiny-profile-wrapper">
+                    <img src="portrait.jpg" alt="Dr. Chetri">
+                    <div class="tiny-profile-info">
+                        <strong> Bimal K Chetri (PhD)</strong>
+                        <span>Principal Investigator</span>
+                    </div>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+                <ul class="nav-menu-compact">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about-lab">About the Lab</a></li>
+                    <li><a href="#research">Collaboration Areas</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#contact-footer">Contact</a></li> <!-- Changed to point to the footer contact -->
+                </ul>
+            </div>
+        </header>
 
-/* Base Styles */
-body {
-    f
+        <!-- Hero Section (Compact, with Dynamic Gallery for Visual Interest) -->
+        <section class="hero-compact" id="home">
+            <div class="hero-text-area">
+                <h1>EthnoGenomics Lab</h1>
+                <p class="hero-tagline">Integrating Genomics and Traditional Knowledge for Plant Conservation</p>
+                <p class="hero-mission">Our lab focuses on organellar genome mining, species authentication, and biodiversity conservation through advanced bioinformatics and molecular biology, emphasizing Himalayan medicinal plants.</p>
+                <div class="hero-cta">
+                    <a href="#about-lab" class="btn btn-primary">Explore Our Research <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="dynamic-hero-gallery">
+                <!-- Images for subtle motion effect -->
+            </div>
+        </section>
+
+        <!-- Main Content with Tabs for Compactness and Better UX -->
+        <main class="main-content-tabs container">
+            <nav class="tab-nav">
+                <button class="tab-button active" data-tab="about-lab">About the Lab</button>
+                <button class="tab-button" data-tab="research">Collaboration Areas</button>
+                <button class="tab-button" data-tab="publications">Publications</button>
+            </nav>
+            <div class="tab-content-wrapper">
+                <!-- About the Lab Tab -->
+                <div class="tab-pane active" id="about-lab">
+                    <div class="about-lab-content">
+                        <div class="about-lab-text">
+                            <p>The EthnoGenomics Lab advances plant genomics by integrating ethnobotanical knowledge with molecular techniques. Our core focus includes organellar genome assembly, phylogenetic analysis, and conservation strategies for Himalayan flora.</p>
+                            <p>Key research integrates bioinformatics for NGS data analysis, supporting sustainable medicinal plant utilization and biodiversity preservation.</p>
+
+                            <!-- NEW LOCATION FOR COMPACT CONTACT ICONS -->
+                            <div class="about-lab-contact-mini">
+                                <h3>Connect with Us</h3>
+                                <div class="contact-grid-mini">
+                                    <a href="mailto:bimal_kum.sherubtse@rub.edu.bt" class="contact-item-mini">
+                                        <i class="fas fa-envelope"></i>
+                                        <div class="contact-info-mini">
+                                            <h4>Email</h4>
+                                            <p>bimal_kum.sherubtse@rub.edu.bt</p>
+                                        </div>
+                                    </a>
+                                    <a href="https://orcid.org/0000-0002-2154-7676" target="_blank" rel="noopener noreferrer" class="contact-item-mini">
+                                        <i class="fab fa-orcid"></i>
+                                        <div class="contact-info-mini">
+                                            <h4>ORCID</h4>
+                                            <p>View Profile</p>
+                                        </div>
+                                    </a>
+                                    <a href="https://www.researchgate.net/profile/Bimal-Chetri" target="_blank" rel="noopener noreferrer" class="contact-item-mini">
+                                        <i class="fab fa-researchgate"></i>
+                                        <div class="contact-info-mini">
+                                            <h4>ResearchGate</h4>
+                                            <p>View Profile</p>
+                                        </div>
+                                    </a>
+                                    <!-- LinkedIn will be added here by JS -->
+                                    <div class="contact-item-mini qrcode-item-mini">
+                                        <a href="https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ" target="_blank" rel="noopener noreferrer">
+                                            <img src="qrcode.png" alt="Google Scholar QR Code" class="qrcode-image-mini">
+                                        </a>
+                                        <div class="contact-info-mini">
+                                            <h4>Google Scholar</h4>
+                                            <p>Scan to view</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="about-lab-highlights">
+                            <h3>Core Expertise</h3>
+                            <ul>
+                                <li><i class="fas fa-dna"></i> Organellar Genome Mining & Annotation</li>
+                                <li><i class="fas fa-dna"></i> Molecular Phylogeny</li>
+                                <li><i class="fas fa-laptop-code"></i> Bioinformatics & NGS Analysis</li>
+                                <li><i class="fas fa-leaf"></i> Ethnobotany & Traditional Knowledge Integration</li>
+                                <li><i class="fas fa-seedling"></i> Medicinal Plant Conservation</li>
+                                <li><i class="fas fa-globe-asia"></i> Himalayan Biodiversity Studies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Collaboration Areas Tab -->
+                <div class="tab-pane" id="research">
+                    <p class="section-description">Opportunities for collaboration in genomics, ethnobotany, and ecological research.</p>
+                    <div class="collaboration-grid">
+                        <div class="collab-item">
+                            <i class="fas fa-dna"></i>
+                            <h3>Organellar Genomics</h3>
+                            <p>Collaborate on NGS-based genome assembly, annotation, and phylogenetic marker development for medicinal plants.</p>
+                        </div>
+                        <div class="collab-item">
+                            <i class="fas fa-leaf"></i>
+                            <h3>Ethnobotany & Conservation</h3>
+                            <p>Partner on integrating traditional knowledge for species authentication and sustainable resource management.</p>
+                        </div>
+                        <div class="collab-item">
+                            <i class="fas fa-cloud"></i>
+                            <h3>GHG Inventory & Ecology</h3>
+                            <p>Join efforts in assessing greenhouse gas dynamics and ecological impacts in Himalayan ecosystems.</p>
+                        </div>
+                    </div>
+                    <div class="text-center" style="margin-top: var(--spacing-xl);">
+                        <a href="#about-lab-contact-mini" class="btn btn-primary">Initiate Collaboration <i class="fas fa-handshake"></i></a> <!-- Link to the compact contact -->
+                    </div>
+                </div>
+
+                <!-- Publications Tab -->
+                <div class="tab-pane" id="publications">
+                    <p class="section-description">Selected peer-reviewed works in plant genomics and related fields.</p>
+                    <div class="publications-list-compact" id="publications-list">
+                        <!-- Publications populated via JS -->
+                    </div>
+                    <div class="text-center" style="margin-top: var(--spacing-xl);">
+                        <a href="https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            <i class="fas fa-graduation-cap"></i> View All on Google Scholar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Contact Section - Now only for postal address -->
+        <section id="contact-footer" class="section-card container"> <!-- Changed ID to avoid conflict with the main nav link if any -->
+            <h2 class="section-title">Postal Address</h2>
+            <p class="section-description">Our physical location for correspondence.</p>
+            <p class="text-center" style="margin-top: 30px;">Kanglung-42002, Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan, Trashigang, Bhutan</p>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; <span id="current-year"></span> EthnoGenomics Lab — Faculty of Life Sciences, Sherubtse College. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <button id="scrollToTopBtn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
