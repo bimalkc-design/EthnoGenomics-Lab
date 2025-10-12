@@ -18,12 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Dynamic Hero Gallery
+    // Dynamic Hero Gallery - REVERTED TO ORIGINAL IMAGES + FIXED OFFSET
     const gallery = document.querySelector('.dynamic-hero-gallery');
     const images = [
-        'https://via.placeholder.com/800x500?text=Medicinal+Plants',
-        'https://via.placeholder.com/800x500?text=Himalayan+Flora',
-        'https://via.placeholder.com/800x500?text=Genomics+Lab'
+        '2.10.jpg',
+        '3.5a.jpg',
+        '3.5b.jpg',
+        '3.6.jpg',
+        '4.2.jpg',
+        '4.4.jpg',
+        '5.0.jpg',
+        '5.2.jpg',
+        'Update_1.jpg',
+        'Update_2.jpg',
+        'Update_3.jpg',
+        'Update_4.jpg',
+        'research_genomics.jpg'
     ];
     let currentImage = 0;
 
@@ -39,10 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const current = gallery.querySelector('.hero-gallery-image.active');
         current.classList.remove('active');
         currentImage = (currentImage + 1) % images.length;
-        gallery.children[currentImage + 1].classList.add('active');  // +1 to skip the <h2> header (gallery.children[0] = header)
+        gallery.children[currentImage + 1].classList.add('active');  // FIXED: +1 skips header
     }, 5000);
 
-    // Dynamic Publications (Sample Data)
+    // Dynamic Publications - YOUR NEW HARDCODED SAMPLES (NO FETCH)
     const publications = [
         { title: 'Organellar Genome Analysis of Himalayan Medicinal Plants', journal: 'Journal of Plant Genomics', year: 2024, doi: '#' },
         { title: 'Ethnobotanical Knowledge in Biodiversity Conservation', journal: 'Ethnobotany Research', year: 2023, doi: '#' },
