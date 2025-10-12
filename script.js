@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Configuration ---
     const config = {
-        galleryImageBaseUrl: '', // Adjust to 'images/' if needed
+        galleryImageBaseUrl: 'images/', // Updated to match likely folder structure
         galleryImages: [
             '2.10.jpg', '3.5a.jpg', '3.5b.jpg', '3.6.jpg', '4.2.jpg',
             '4.4.jpg', '5.0.jpg', '5.2.jpg', 'pp.jpg', 'research_genomics.jpg'
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollOffset: 70,
         googleScholarId: 'Hp0ZnX4AAAAJ',
         linkedInProfile: 'https://www.linkedin.com/in/bimal-k-chetri-ph-d-a6b840a5/',
-        updateImageBaseUrl: '', // Adjust to 'updates/' if needed
+        updateImageBaseUrl: 'updates/', // Updated to match likely folder structure
         recentUpdates: [
             {
                 text: "The Royal University of Bhutan - Sherubtse and 'Ovidius' University of Constanţa (Romania) invite you to the scientific lecture 'Bhutan: From Local Wisdom to Sustainable Approach' by Assoc. Prof. Dr. Bimal K. CHETRI. Join us on Thursday, October 9, 2025, 10:00 – 11:00 AM, in room E216, building B, campus.",
@@ -126,7 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Dynamic Hero Gallery ---
     function createDynamicGallery() {
-        if (!elements.dynamicGallery || config.galleryImages.length === 0) return;
+        if (!elements.dynamicGallery || config.galleryImages.length === 0) {
+            console.warn('Dynamic gallery container or images not found.');
+            return;
+        }
         elements.dynamicGallery.innerHTML = '';
         config.galleryImages.forEach((imgName, index) => {
             const img = document.createElement('img');
@@ -136,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             img.style.opacity = '0';
             img.style.transition = `opacity 1s ease-in-out ${index * 0.5}s`;
             img.onerror = () => {
+                console.warn(`Failed to load image: ${img.src}`);
                 img.src = config.galleryImageBaseUrl + 'placeholder.jpg';
                 img.alt = 'Placeholder Image';
             };
@@ -144,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             Array.from(elements.dynamicGallery.children).forEach(img => {
-                img.style.opacity = '1';
+                img.style.opacity = '0.3'; // Match CSS animation starting opacity
             });
         }, 100);
     }
@@ -230,7 +234,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Recent Updates Carousel ---
     function setupRecentUpdatesCarousel() {
-        if (!elements.recentUpdatesContainer || !elements.updateCarouselIndicators || config.recentUpdates.length === 0) return;
+        if (!elements.recentUpdatesContainer || !elements.updateCarouselIndicators || config.recentUpdates.length === 0) {
+            console.warn('Recent updates carousel elements or data not found.');
+            return;
+        }
 
         elements.recentUpdatesContainer.innerHTML = '';
         elements.updateCarouselIndicators.innerHTML = '';
@@ -263,7 +270,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const indicators = elements.updateCarouselIndicators.querySelectorAll('.carousel-indicator');
         let currentIndex = 0;
 
-        if (items.length === 0) return;
+        if (items.length === 0) {
+            console.warn('No carousel items found.');
+            return;
+        }
 
         const showSlide = (index) => {
             items.forEach((item, i) => {
