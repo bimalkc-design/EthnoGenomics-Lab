@@ -1,12 +1,12 @@
 /* General Variables */
 :root {
-    --primary-color: #2e7d32; /* Forest green for EthnoGenomics theme */
-    --secondary-color: #1e88e5; /* Vibrant blue for contrast */
+    --primary-color: #28a745; /* Green for nature theme */
+    --secondary-color: #0056b3; /* Blue for contrast */
     --text-color: #333;
     --light-text-color: #666;
-    --background-light: #f5f7fa;
-    --background-dark: #1b5e20; /* Darker green for footer */
-    --border-color: #e0e0e0;
+    --background-light: #f8f9fa;
+    --background-dark: #1b5e20; /* Dark green for footer */
+    --border-color: #dee2e6;
     --spacing-xs: 5px;
     --spacing-sm: 10px;
     --spacing-md: 20px;
@@ -77,7 +77,7 @@ a:hover {
 }
 
 .btn:hover {
-    background-color: var(--secondary-color);
+    background-color: #218838;
     transform: translateY(-2px);
     text-decoration: none;
 }
@@ -87,7 +87,7 @@ a:hover {
 }
 
 .btn-primary:hover {
-    background-color: #1b5e20; /* Darker green for hover */
+    background-color: #218838;
 }
 
 .text-center {
@@ -114,21 +114,21 @@ a:hover {
     color: var(--light-text-color);
 }
 
-/* Contact Footer Section */
+/* Enhanced Contact Footer */
 .contact-footer {
-    padding: 20px 0;
+    padding: 15px 0;
     background: var(--background-light);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin: 20px auto;
+    margin: 15px auto;
     max-width: 600px;
 }
 
 .contact-footer .section-title {
     font-size: 1.8rem;
     color: var(--primary-color);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .contact-address-wrapper {
@@ -136,8 +136,8 @@ a:hover {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 15px;
-    background: #ffffff;
+    padding: 12px;
+    background: #fff;
     border: 1px solid var(--border-color);
     border-radius: 6px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -150,29 +150,29 @@ a:hover {
 
 .address-icon {
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 .address-text {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--text-color);
     margin: 0;
     font-family: var(--font-sans);
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
-/* Footer */
+/* Enhanced Footer */
 .footer-compact {
     background: var(--background-dark);
     color: var(--background-light);
-    padding: 15px 0;
+    padding: 12px 0;
     text-align: center;
     border-top: 2px solid var(--primary-color);
 }
 
 .copyright-text {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin: 0;
     font-family: var(--font-sans);
     font-weight: 300;
@@ -360,7 +360,6 @@ a:hover {
     min-width: 0;
 }
 
-/* Recent Updates Side Panel */
 .recent-updates-panel {
     flex: 1;
     min-width: 280px;
@@ -388,7 +387,6 @@ a:hover {
     padding-bottom: var(--spacing-sm);
 }
 
-/* Recent Updates Carousel */
 #recent-updates-carousel {
     position: relative;
     width: 100%;
@@ -462,7 +460,7 @@ a:hover {
     border-color: var(--primary-color);
 }
 
-/* Main Content with Tabs */
+/* Tabs */
 .main-content-tabs .tab-nav {
     display: flex;
     justify-content: center;
@@ -515,7 +513,7 @@ a:hover {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* About the Lab Content */
+/* About the Lab */
 .about-lab-content {
     display: flex;
     flex-wrap: wrap;
@@ -651,14 +649,14 @@ a:hover {
     object-fit: contain;
 }
 
-/* Collaboration Areas Tab */
+/* Collaboration Areas */
 .collaboration-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-lg);
 }
 
-.collaboration-item {
+.collab-item {
     background-color: var(--background-light);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -667,37 +665,37 @@ a:hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.collaboration-item:hover {
+.collab-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-.collaboration-item i {
+.collab-item i {
     font-size: 3em;
     color: var(--primary-color);
     margin-bottom: var(--spacing-sm);
 }
 
-.collaboration-item h4 {
+.collab-item h3 {
     font-size: 1.3em;
     color: var(--secondary-color);
     margin-top: 0;
     margin-bottom: var(--spacing-xs);
 }
 
-.collaboration-item p {
+.collab-item p {
     font-size: 0.95em;
     color: var(--light-text-color);
 }
 
-/* Publications Tab */
+/* Publications */
 #publications-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-#publications-list li {
+#publications-list .publication-item {
     background-color: var(--background-light);
     border: 1px solid var(--border-color);
     border-radius: 5px;
@@ -708,36 +706,33 @@ a:hover {
     transition: box-shadow 0.2s ease;
 }
 
-#publications-list li:hover {
+#publications-list .publication-item:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
 }
 
-#publications-list li a {
-    font-weight: 600;
+#publications-list .publication-item h4 {
+    font-size: 1.1em;
     color: var(--secondary-color);
+    margin: 0 0 var(--spacing-xs);
+}
+
+#publications-list .publication-item p {
+    margin: 0 0 var(--spacing-xs);
+    color: var(--text-color);
+}
+
+#publications-list .publication-item a {
+    font-weight: 600;
+    color: var(--primary-color);
     text-decoration: none;
 }
 
-#publications-list li a:hover {
+#publications-list .publication-item a:hover {
     text-decoration: underline;
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
-#publications-list li span {
-    display: block;
-    color: var(--text-color);
-    margin-top: 2px;
-}
-
-#publications-list li em {
-    display: block;
-    font-style: normal;
-    color: var(--light-text-color);
-    font-size: 0.9em;
-    margin-top: 2px;
-}
-
-/* Scroll Up Button */
+/* Scroll to Top Button */
 #scrollToTopBtn {
     position: fixed;
     bottom: var(--spacing-md);
@@ -771,7 +766,7 @@ a:hover {
     background-color: var(--secondary-color);
 }
 
-/* Accessibility Enhancements */
+/* Accessibility */
 :focus {
     outline: 3px solid var(--primary-color);
     outline-offset: 2px;
@@ -883,8 +878,8 @@ a:hover {
     }
 
     .contact-footer {
-        padding: 15px;
-        margin: 15px;
+        padding: 12px;
+        margin: 12px;
     }
 
     .contact-address-wrapper {
@@ -894,11 +889,11 @@ a:hover {
     }
 
     .address-icon {
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
 
     .address-text {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
     }
 
     .footer-compact {
@@ -906,7 +901,7 @@ a:hover {
     }
 
     .copyright-text {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 }
 
@@ -937,12 +932,8 @@ a:hover {
         font-size: 1.5rem;
     }
 
-    .contact-address-wrapper {
-        padding: 8px;
-    }
-
     .address-text {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 }
 
@@ -963,9 +954,9 @@ a:hover {
     }
 }
 
-/* Reduced Motion Preference */
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-    .btn, .collaboration-item, #scrollToTopBtn, .carousel-item, .nav-menu-compact li a, .contact-address-wrapper, .contact-item-mini {
+    .btn, .collab-item, #scrollToTopBtn, .carousel-item, .nav-menu-compact li a, .contact-address-wrapper, .contact-item-mini {
         transition: none;
     }
 
