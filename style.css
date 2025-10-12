@@ -389,6 +389,17 @@ a:hover {
     border-bottom: 1px solid var(--border-color);
     padding-bottom: var(--spacing-sm);
 }
+
+#recent-updates-carousel {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: var(--spacing-sm);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
 .carousel-item {
     position: absolute;
     top: 0;
@@ -401,17 +412,7 @@ a:hover {
     flex-direction: column;
     justify-content: flex-end;
 }
-.carousel-caption {
-    position: relative;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: var(--spacing-sm);
-    text-align: center;
-    box-sizing: border-box;
-    font-size: 0.9em;
-    z-index: 2;
-}
+
 .carousel-item.active {
     opacity: 1;
 }
@@ -424,6 +425,13 @@ a:hover {
     top: 0;
     left: 0;
     filter: brightness(0.8);
+    animation: flashEffect 1.5s infinite ease-in-out;
+}
+
+@keyframes flashEffect {
+    0% { filter: brightness(0.8); }
+    50% { filter: brightness(1.2); }
+    100% { filter: brightness(0.8); }
 }
 
 .carousel-caption {
@@ -431,11 +439,18 @@ a:hover {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     color: white;
-    padding: var(--spacing-sm);
+    padding: var(--spacing-xs);
     text-align: center;
     box-sizing: border-box;
-    font-size: 0.9em;
+    font-size: 0.7em; /* Very small font size for captions */
     z-index: 2;
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+.carousel-caption p {
+    margin: 0;
+    line-height: 1.2;
+    font-size: 0.7em; /* Ensure very small text */
 }
 
 #update-carousel-indicators {
@@ -965,6 +980,10 @@ a:hover {
     .dynamic-hero-gallery img {
         animation: none;
         opacity: 0.3;
+    }
+
+    .carousel-item img {
+        animation: none;
     }
 
     @keyframes fadeIn {
