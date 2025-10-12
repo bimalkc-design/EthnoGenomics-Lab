@@ -275,7 +275,7 @@ a:hover {
 
 /* Hero Section */
 .hero-compact {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hero-bg.jpg') center center no-repeat;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/hero-bg.jpg') center center no-repeat;
     background-size: cover;
     color: white;
     text-align: center;
@@ -332,13 +332,16 @@ a:hover {
 .dynamic-hero-gallery img {
     position: absolute;
     filter: brightness(0.5);
-    opacity: 0.3;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
     animation: floatEffect 20s infinite ease-in-out;
 }
 
 .dynamic-hero-gallery img:nth-child(1) { width: 150px; top: 10%; left: 5%; animation-delay: 0s; }
 .dynamic-hero-gallery img:nth-child(2) { width: 200px; top: 50%; right: 10%; animation-delay: 5s; }
 .dynamic-hero-gallery img:nth-child(3) { width: 100px; bottom: 20%; left: 20%; animation-delay: 10s; }
+.dynamic-hero-gallery img:nth-child(4) { width: 120px; top: 30%; left: 70%; animation-delay: 2s; }
+.dynamic-hero-gallery img:nth-child(5) { width: 180px; bottom: 10%; right: 15%; animation-delay: 7s; }
 
 @keyframes floatEffect {
     0% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
@@ -461,7 +464,7 @@ a:hover {
 }
 
 /* Tabs */
-.main-content-tabs .tab-nav {
+.tab-nav {
     display: flex;
     justify-content: center;
     gap: var(--spacing-sm);
@@ -470,7 +473,7 @@ a:hover {
     flex-wrap: wrap;
 }
 
-.main-content-tabs .tab-button {
+.tab-button {
     background-color: transparent;
     border: none;
     padding: var(--spacing-sm) var(--spacing-md);
@@ -482,29 +485,29 @@ a:hover {
     white-space: nowrap;
 }
 
-.main-content-tabs .tab-button:hover {
+.tab-button:hover {
     color: var(--primary-color);
 }
 
-.main-content-tabs .tab-button.active {
+.tab-button.active {
     color: var(--primary-color);
     border-bottom: 3px solid var(--primary-color);
     font-weight: 700;
 }
 
-.main-content-tabs .tab-content-wrapper {
+.tab-content-wrapper {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     padding: var(--spacing-lg);
 }
 
-.main-content-tabs .tab-pane {
+.tab-pane {
     display: none;
     animation: fadeIn 0.5s ease-out;
 }
 
-.main-content-tabs .tab-pane.active {
+.tab-pane.active {
     display: block;
 }
 
@@ -640,7 +643,7 @@ a:hover {
     text-align: center;
 }
 
-.qrcode-item-mini .qrcode-image-mini {
+.qrcode-image-mini {
     width: 45px;
     height: 45px;
     border: 1px solid var(--border-color);
@@ -695,7 +698,7 @@ a:hover {
     margin: 0;
 }
 
-#publications-list .publication-item {
+.publication-item {
     background-color: var(--background-light);
     border: 1px solid var(--border-color);
     border-radius: 5px;
@@ -706,28 +709,28 @@ a:hover {
     transition: box-shadow 0.2s ease;
 }
 
-#publications-list .publication-item:hover {
+.publication-item:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
 }
 
-#publications-list .publication-item h4 {
+.publication-item h4 {
     font-size: 1.1em;
     color: var(--secondary-color);
     margin: 0 0 var(--spacing-xs);
 }
 
-#publications-list .publication-item p {
+.publication-item p {
     margin: 0 0 var(--spacing-xs);
     color: var(--text-color);
 }
 
-#publications-list .publication-item a {
+.publication-item a {
     font-weight: 600;
     color: var(--primary-color);
     text-decoration: none;
 }
 
-#publications-list .publication-item a:hover {
+.publication-item a:hover {
     text-decoration: underline;
     color: var(--secondary-color);
 }
@@ -853,12 +856,12 @@ a:hover {
         padding-right: var(--spacing-sm);
     }
 
-    .main-content-tabs .tab-nav {
+    .tab-nav {
         flex-direction: column;
         align-items: center;
     }
 
-    .main-content-tabs .tab-button {
+    .tab-button {
         width: 100%;
         text-align: center;
         padding: var(--spacing-md);
