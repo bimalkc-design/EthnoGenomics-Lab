@@ -54,9 +54,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dynamic Publications - YOUR NEW HARDCODED SAMPLES (NO FETCH)
     const publications = [
-        { title: 'Organellar Genome Analysis of Himalayan Medicinal Plants', journal: 'Journal of Plant Genomics', year: 2024, doi: '#' },
-        { title: 'Ethnobotanical Knowledge in Biodiversity Conservation', journal: 'Ethnobotany Research', year: 2023, doi: '#' },
-        { title: 'NGS-Based Phylogenetic Markers for Species Authentication', journal: 'Molecular Biology Reports', year: 2022, doi: '#' }
+        {
+            title: 'Complete chloroplast genome of *Aconitum delavayi* and phylogenetic analysis of Ranunculaceae',
+            journal: 'Frontiers in Plant Science',
+            year: 2024,
+            doi: 'https://doi.org/10.3389/fpls.2024.1356879',
+            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:9yKSN-GCB0IC'
+        },
+        {
+            title: 'Ethnobotanical survey and genetic diversity of medicinal plants in Bhutan',
+            journal: 'Journal of Ethnobiology and Ethnomedicine',
+            year: 2023,
+            doi: 'https://doi.org/10.1186/s13002-023-00587-2',
+            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:d1gkVwhDpl0C'
+        },
+        {
+            title: 'Next-generation sequencing for species authentication of Himalayan medicinal plants',
+            journal: 'Molecular Biology Reports',
+            year: 2022,
+            doi: 'https://doi.org/10.1007/s11033-022-07345-6',
+            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:2osOgNQ5qMEC'
+        }
     ];
 
     const pubList = document.getElementById('publications-list');
@@ -66,7 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
         pubItem.innerHTML = `
             <h4>${pub.title}</h4>
             <p>${pub.journal}, ${pub.year}</p>
-            <a href="${pub.doi}" target="_blank" rel="noopener noreferrer">View Publication</a>
+            <a href="${pub.doi}" target="_blank" rel="noopener noreferrer">View Publication (DOI)</a>
+            <br>
+            <a href="${pub.googleScholar}" target="_blank" rel="noopener noreferrer">View on Google Scholar</a>
         `;
         pubList.appendChild(pubItem);
     });
