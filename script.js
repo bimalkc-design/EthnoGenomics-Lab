@@ -58,31 +58,25 @@ document.addEventListener('DOMContentLoaded', () => {
             title: '<strong>Chetri, B.K.</strong>, Sonu, S.S., Shelke, R.G. et al. Plastome genomics of the crop wild relative <em>Thladiantha cordifolia</em> illuminates the evolution and phylogeny of the gourd family (Cucurbitaceae)',
             journal: 'Genetic Resources and Crop Evolution, 72: 10441–10456',
             year: 2025,
-            doi: 'https://doi.org/10.1007/s10722-025-02579-6',
-            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder1'
+            doi: 'https://doi.org/10.1007/s10722-025-02579-6'
         },
         {
             title: 'Mohan Singh Rana, Nicolas Dierckxsens, Pritesh Bhatt, <strong>Chetri, B.K.</strong> De novo plastome assembly of <em>Cymbopogon bhutanicus</em> Noltie, an endemic lemon grass from Bhutan, with geospatial, comparative genomic, and phylogenetic insights',
             journal: 'Ecological Genetics and Genomics, 36: 100372',
             year: 2025,
-            doi: 'https://doi.org/10.1016/j.egg.2025.100372',
-            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder2'
-        },
+            doi: 'https://doi.org/10.1016/j.egg.2025.100372'
         {
             title: '<strong>Chetri, B.K.</strong>, Sonu, S.S., Dierckxsens, N. et al. Insights into cucurbitaceae mitogenomes: gene length variation, correlation features, and phylogenetic relationship',
             journal: 'Journal of Plant Biochemistry and Biotechnology',
             year: 2025,
-            doi: 'https://doi.org/10.1007/s13562-025-00992-7',
-            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder3'
+            doi: 'https://doi.org/10.1007/s13562-025-00992-7'
         },
         {
             title: 'Jintu Rabha, <strong>Chetri, B.K.</strong>, Sukanya Das, Dhruva Kumar Jha, In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, <em>Albophoma</em> sp. BAPR5',
             journal: 'South African Journal of Botany, 158: 347–368',
             year: 2023,
-            doi: 'https://doi.org/10.1016/j.sajb.2023.05.033',
-            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder4'
-        }
-    ];
+            doi: 'https://doi.org/10.1016/j.sajb.2023.05.033'    
+            ];
 
     const pubList = document.getElementById('publications-list');
     publications.forEach(pub => {
