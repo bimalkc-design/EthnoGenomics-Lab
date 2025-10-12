@@ -1,792 +1,383 @@
-/* General Variables */
-:root {
-    --primary-color: #28a745;
-    --secondary-color: #0056b3;
-    --text-color: #333;
-    --light-text-color: #666;
-    --background-light: #f8f9fa;
-    --background-dark: #343a40;
-    --border-color: #dee2e6;
-    --spacing-xs: 5px;
-    --spacing-sm: 10px;
-    --spacing-md: 20px;
-    --spacing-lg: 30px;
-    --spacing-xl: 50px;
-    --font-sans: 'Montserrat', sans-serif;
-    --font-serif: 'Playfair Display', serif;
-    --max-width-container: 1200px;
-    --header-height-compact: 70px;
-}
-
-/* Base Styles */
-body {
-    font-family: var(--font-sans);
-    line-height: 1.6;
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-light);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.main-wrapper {
-    flex: 1;
-}
-
-.container {
-    max-width: var(--max-width-container);
-    margin: 0 auto;
-    padding: 0 var(--spacing-md);
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
-    color: var(--secondary-color);
-    margin-top: var(--spacing-lg);
-    margin-bottom: var(--spacing-sm);
-}
-
-h1 { font-size: 2.8em; }
-h2 { font-size: 2.2em; }
-h3 { font-size: 1.8em; }
-h4 { font-size: 1.4em; }
-
-a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: var(--secondary-color);
-    text-decoration: underline;
-}
-
-.btn {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: white;
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border: none;
-    cursor: pointer;
-    font-size: 1em;
-}
-
-.btn:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
-    text-decoration: none;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-}
-
-.btn-primary:hover {
-    background-color: #218838;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.section-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    padding: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl);
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: var(--spacing-md);
-    color: var(--secondary-color);
-}
-
-.section-description {
-    text-align: center;
-    margin-bottom: var(--spacing-lg);
-    color: var(--light-text-color);
-}
-
-/* Header Compact */
-.main-header-compact {
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: var(--spacing-sm) 0;
-}
-
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: var(--header-height-compact);
-}
-
-.header-brand {
-    font-family: var(--font-serif);
-    font-size: 1.5em;
-    font-weight: 700;
-}
-
-.header-brand a {
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-.nav-menu-compact {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: var(--spacing-md);
-}
-
-.nav-menu-compact li a {
-    color: var(--text-color);
-    font-weight: 500;
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: 4px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.nav-menu-compact li a:hover,
-.nav-menu-compact li a.active {
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-}
-
-.nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5em;
-    cursor: pointer;
-    color: var(--text-color);
-}
-
-/* Tiny Profile */
-.tiny-profile-wrapper {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    margin-left: auto;
-    padding-right: var(--spacing-md);
-}
-
-.tiny-profile-wrapper img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--primary-color);
-}
-
-.tiny-profile-info {
-    display: flex;
-    flex-direction: column;
-    font-size: 0.85em;
-    line-height: 1.2;
-    color: var(--light-text-color);
-}
-
-.tiny-profile-info strong {
-    color: var(--text-color);
-    font-weight: 500;
-}
-
-/* Hero Section */
-.hero-compact {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hero-bg.jpg') center center no-repeat;
-    background-size: cover;
-    color: white;
-    text-align: center;
-    padding: var(--spacing-xl) var(--spacing-md);
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-text-area {
-    max-width: 800px;
-    position: relative;
-    z-index: 2;
-}
-
-.hero-compact h1 {
-    font-size: 3.5em;
-    margin-bottom: var(--spacing-sm);
-    color: white;
-}
-
-.hero-tagline {
-    font-size: 1.5em;
-    font-weight: 300;
-    margin-bottom: var(--spacing-md);
-}
-
-.hero-mission {
-    font-size: 1.1em;
-    margin-bottom: var(--spacing-lg);
-    opacity: 0.9;
-}
-
-.hero-cta .btn {
-    font-size: 1.1em;
-    padding: var(--spacing-sm) var(--spacing-lg);
-}
-
-.dynamic-hero-gallery {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.dynamic-hero-gallery .gallery-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    will-change: opacity, transform; /* Optimize animation performance */
-}
-
-@keyframes floatAndFade {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    20% {
-        opacity: 0.8;
-        transform: translateY(0);
-    }
-    80% {
-        opacity: 0.8;
-        transform: translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-}
-
-/* Main Content with Tabs */
-.main-content-tabs {
-    padding-top: var(--spacing-xl);
-    padding-bottom: var(--spacing-xl);
-}
-
-.tab-nav {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-lg);
-    border-bottom: 2px solid var(--border-color);
-    flex-wrap: wrap;
-}
-
-.tab-button {
-    background-color: transparent;
-    border: none;
-    padding: var(--spacing-sm) var(--spacing-md);
-    font-size: 1.1em;
-    font-weight: 500;
-    cursor: pointer;
-    color: var(--light-text-color);
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-    white-space: nowrap;
-}
-
-.tab-button:hover {
-    color: var(--primary-color);
-}
-
-.tab-button.active {
-    color: var(--primary-color);
-    border-bottom: 3px solid var(--primary-color);
-    font-weight: 700;
-}
-
-.tab-content-wrapper {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    padding: var(--spacing-lg);
-}
-
-.tab-pane {
-    display: none;
-    animation: fadeIn 0.5s ease-out;
-}
-
-.tab-pane.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* About the Lab Content - Layout */
-.about-lab-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-lg);
-    align-items: flex-start;
-}
-
-.about-lab-text {
-    flex: 2;
-    min-width: 300px;
-}
-
-.about-lab-highlights {
-    flex: 1;
-    min-width: 200px;
-    background-color: var(--background-light);
-    border-radius: 8px;
-    padding: var(--spacing-md);
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
-}
-
-.about-lab-highlights h3 {
-    margin-top: 0;
-    color: var(--primary-color);
-    font-size: 1.5em;
-}
-
-.about-lab-highlights ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.about-lab-highlights li {
-    padding: var(--spacing-xs) 0;
-    border-bottom: 1px dotted var(--border-color);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    font-size: 0.95em;
-    color: var(--text-color);
-}
-
-.about-lab-highlights li:last-child {
-    border-bottom: none;
-}
-
-.about-lab-highlights li i {
-    color: var(--primary-color);
-    font-size: 1.1em;
-    min-width: 20px;
-}
-
-/* Compact Contact Section Styles */
-.about-lab-contact-mini {
-    margin-top: var(--spacing-sm);
-    padding-top: var(--spacing-xs);
-    border-top: 1px dashed var(--border-color);
-}
-
-.about-lab-contact-mini h3 {
-    text-align: center;
-    margin-bottom: var(--spacing-xs);
-    color: var(--secondary-color);
-    font-size: 1em;
-    font-family: var(--font-sans);
-    font-weight: 600;
-}
-
-.contact-grid-mini {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: var(--spacing-xs);
-    justify-content: center;
-}
-
-.contact-item-mini {
-    display: flex;
-    align-items: flex-start;
-    gap: 3px;
-    padding: 4px;
-    background-color: var(--background-light);
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    text-decoration: none;
-}
-
-.contact-item-mini:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-.contact-item-mini i {
-    font-size: 0.9em;
-    color: var(--primary-color);
-    min-width: 18px;
-    text-align: center;
-    padding-top: 1px;
-}
-
-.contact-info-mini h4 {
-    margin: 0;
-    font-size: 0.75em;
-    color: var(--secondary-color);
-    font-family: var(--font-sans);
-    line-height: 1.2;
-}
-
-.contact-info-mini p {
-    margin: 0;
-    font-size: 0.65em;
-    color: var(--light-text-color);
-    word-break: break-word;
-    line-height: 1.2;
-}
-
-.qrcode-item-mini {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.qrcode-item-mini .qrcode-image-mini {
-    width: 45px;
-    height: 45px;
-    border: 1px solid var(--border-color);
-    border-radius: 3px;
-    margin-bottom: 2px;
-    object-fit: contain;
-}
-
-/* Collaboration Areas Tab */
-.collaboration-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-lg);
-}
-
-.collab-item {
-    background-color: var(--background-light);
-    padding: var(--spacing-lg);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid var(--border-color);
-}
-
-.collab-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.collab-item i {
-    font-size: 3em;
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-sm);
-}
-
-.collab-item h3 {
-    margin-top: 0;
-    color: var(--secondary-color);
-}
-
-.collab-item p {
-    color: var(--light-text-color);
-    font-size: 0.95em;
-}
-
-/* Publications List Compact */
-.publications-list-compact {
-    display: grid;
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-lg);
-}
-
-.publication-item {
-    background-color: var(--background-light);
-    padding: var(--spacing-md);
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
-    display: flex;
-    align-items: flex-start;
-    gap: var(--spacing-sm);
-    transition: background-color 0.2s ease;
-}
-
-.publication-item:hover {
-    background-color: #e9ecef;
-}
-
-.publication-item i {
-    color: var(--primary-color);
-    font-size: 1.2em;
-    margin-top: 4px;
-    flex-shrink: 0;
-}
-
-.publication-info {
-    flex-grow: 1;
-}
-
-.publication-info h4 {
-    margin: 0 0 var(--spacing-xs) 0;
-    font-size: 1.1em;
-    color: var(--secondary-color);
-    font-family: var(--font-sans);
-    line-height: 1.4;
-}
-
-.publication-info p {
-    margin: 0;
-    font-size: 0.85em;
-    color: var(--light-text-color);
-    line-height: 1.4;
-}
-
-.publication-info a {
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-}
-
-/* Footer */
-footer {
-    background-color: var(--background-dark);
-    color: white;
-    text-align: center;
-    padding: var(--spacing-md) 0;
-    font-size: 0.9em;
-    margin-top: var(--spacing-xl);
-}
-
-footer a {
-    color: var(--primary-color);
-}
-
-footer a:hover {
-    color: var(--secondary-color);
-}
-
-/* Scroll to Top Button */
-#scrollToTopBtn {
-    display: none;
-    position: fixed;
-    bottom: var(--spacing-md);
-    right: var(--spacing-md);
-    z-index: 999;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-size: 1.2em;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#scrollToTopBtn:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 992px) {
-    .nav-menu-compact {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        top: var(--header-height-compact);
-        left: 0;
-        background-color: #fff;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Constants & Configuration ---
+    const config = {
+        galleryImageBaseUrl: 'images/', // Adjust if images are in a subfolder
+        galleryImages: [
+            '2.10.jpg',
+            '3.5a.jpg',
+            '3.5b.jpg',
+            '3.6.jpg',
+            '4.2.jpg',
+            '4.4.jpg',
+            '5.0.jpg',
+            '5.2.jpg',
+            'pp.jpg',
+            'research_genomics.jpg'
+        ],
+        updateImages: [
+            { src: 'update1.jpg', caption: 'New publication on Cymbopogon genomics' },
+            { src: 'update2.jpg', caption: 'Fieldwork in Himalayan biodiversity' },
+            { src: 'update3.jpg', caption: 'Collaboration with global genomics team' }
+        ],
+        galleryCycleInterval: 5000, // 5 seconds for hero gallery animation
+        updateCycleInterval: 4000, // 4 seconds for updates carousel
+        scrollOffset: 70,
+        googleScholarId: 'Hp0ZnX4AAAAJ',
+        linkedInProfile: 'https://www.linkedin.com/in/bimal-k-chetri-ph-d-a6b840a5/'
+    };
+
+    const selectors = {
+        navToggle: '.nav-toggle',
+        navMenu: '.nav-menu-compact',
+        dynamicGallery: '.dynamic-hero-gallery',
+        publicationsList: '#publications-list',
+        tabButtons: '.tab-button',
+        tabPanes: '.tab-pane',
+        scrollToTopBtn: '#scrollToTopBtn',
+        currentYearSpan: '#current-year',
+        sections: 'section[id]',
+        navLinks: '.nav-menu-compact a[href^="#"]',
+        googleScholarLink: 'a[href*="scholar.google.com"]',
+        updateCarousel: '#recent-updates-carousel',
+        updateIndicators: '#update-carousel-indicators'
+    };
+
+    const elements = {};
+    for (const key in selectors) {
+        const found = document.querySelectorAll(selectors[key]);
+        elements[key] = found.length === 1 ? found[0] : found;
     }
 
-    .nav-menu-compact.active {
-        display: flex;
+    // --- Utility Functions ---
+    function smoothScrollTo(target) {
+        if (target) {
+            const header = document.querySelector('.main-header-compact');
+            const offset = header ? header.offsetHeight : config.scrollOffset;
+            const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: pos, behavior: 'smooth' });
+        }
     }
 
-    .nav-menu-compact li {
-        text-align: center;
-        width: 100%;
+    // --- Navigation & Header ---
+    function initMobileNav() {
+        if (elements.navToggle && elements.navMenu) {
+            elements.navToggle.addEventListener('click', () => {
+                const isExpanded = elements.navToggle.getAttribute('aria-expanded') === 'true';
+                elements.navToggle.setAttribute('aria-expanded', !isExpanded);
+                elements.navMenu.classList.toggle('open');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (
+                    !elements.navMenu.contains(event.target) &&
+                    !elements.navToggle.contains(event.target) &&
+                    elements.navMenu.classList.contains('open')
+                ) {
+                    elements.navMenu.classList.remove('open');
+                    elements.navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
     }
 
-    .nav-menu-compact li a {
-        display: block;
-        padding: var(--spacing-md);
-        border-bottom: 1px solid var(--border-color);
+    function highlightActiveNavLink() {
+        let currentId = '';
+        const headerHeight = document.querySelector('.main-header-compact')?.offsetHeight || config.scrollOffset;
+        const scrollPos = window.scrollY + headerHeight + 10;
+
+        elements.sections.forEach((section) => {
+            if (section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
+                currentId = section.id;
+            }
+        });
+
+        Array.from(elements.navLinks).forEach((link) => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentId}`) {
+                link.classList.add('active');
+            }
+        });
     }
 
-    .nav-menu-compact li:last-child a {
-        border-bottom: none;
+    function initSmoothScrolling() {
+        Array.from(elements.navLinks).forEach((anchor) => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                smoothScrollTo(target);
+
+                if (window.innerWidth <= 992 && elements.navMenu.classList.contains('open')) {
+                    elements.navMenu.classList.remove('open');
+                    elements.navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
     }
 
-    .nav-toggle {
-        display: block;
+    // --- Dynamic Hero Gallery ---
+    function createDynamicGallery() {
+        if (!elements.dynamicGallery || config.galleryImages.length === 0) {
+            console.warn('Dynamic gallery container not found or no images provided.');
+            return;
+        }
+
+        elements.dynamicGallery.innerHTML = '';
+        const totalImages = config.galleryImages.length;
+        const animationDuration = config.galleryCycleInterval / 1000;
+
+        config.galleryImages.forEach((src, index) => {
+            const img = document.createElement('img');
+            const fullSrc = config.galleryImageBaseUrl + src;
+            img.src = fullSrc;
+            img.alt = `Lab Image ${index + 1}`;
+            img.loading = 'lazy';
+            img.classList.add('gallery-image');
+            img.style.animation = `floatAndFade ${animationDuration}s infinite ease-in-out`;
+            img.style.animationDelay = `${(index * animationDuration) / totalImages}s`;
+
+            img.onerror = () => {
+                console.error(`Failed to load hero image: ${fullSrc}`);
+                img.style.display = 'none';
+            };
+            img.onload = () => {
+                console.log(`Hero image loaded: ${fullSrc}`);
+            };
+
+            elements.dynamicGallery.appendChild(img);
+        });
     }
 
-    .header-container {
-        padding: 0 var(--spacing-sm);
+    function initDynamicGallery() {
+        if (config.galleryImages.length > 0 && elements.dynamicGallery) {
+            createDynamicGallery();
+        } else {
+            console.warn('Hero gallery initialization skipped.');
+        }
     }
 
-    .tiny-profile-wrapper {
-        margin-left: 0;
-        order: 3;
-        padding-right: 0;
+    // --- Recent Updates Carousel ---
+    function createUpdateCarousel() {
+        if (!elements.updateCarousel || !elements.updateIndicators || config.updateImages.length === 0) {
+            console.warn('Update carousel or indicators not found, or no update images provided.');
+            return;
+        }
+
+        elements.updateCarousel.innerHTML = '';
+        elements.updateIndicators.innerHTML = '';
+        const totalImages = config.updateImages.length;
+
+        // Create carousel items
+        config.updateImages.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.classList.add('carousel-item');
+            if (index === 0) div.classList.add('active');
+            div.innerHTML = `
+                <img src="${config.galleryImageBaseUrl}${item.src}" alt="${item.caption}" loading="lazy">
+                <p class="carousel-caption">${item.caption}</p>
+            `;
+            elements.updateCarousel.appendChild(div);
+
+            const dot = document.createElement('span');
+            dot.classList.add('carousel-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.dataset.index = index;
+            dot.addEventListener('click', () => setActiveCarouselItem(index));
+            elements.updateIndicators.appendChild(dot);
+
+            div.onerror = () => {
+                console.error(`Failed to load update image: ${config.galleryImageBaseUrl}${item.src}`);
+                div.style.display = 'none';
+            };
+        });
+
+        // Auto-cycle carousel
+        let currentIndex = 0;
+        function setActiveCarouselItem(index) {
+            const items = elements.updateCarousel.querySelectorAll('.carousel-item');
+            const dots = elements.updateIndicators.querySelectorAll('.carousel-dot');
+            items.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+                dots[i].classList.toggle('active', i === index);
+            });
+            currentIndex = index;
+        }
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalImages;
+            setActiveCarouselItem(currentIndex);
+        }, config.updateCycleInterval);
     }
 
-    .hero-compact h1 {
-        font-size: 2.5em;
+    function initUpdateCarousel() {
+        if (config.updateImages.length > 0 && elements.updateCarousel) {
+            createUpdateCarousel();
+        } else {
+            console.warn('Update carousel initialization skipped.');
+        }
     }
 
-    .hero-tagline {
-        font-size: 1.2em;
+    // --- Publications Section ---
+    const publications = [
+        {
+            title: "De novo plastome assembly of Cymbopogon bhutanicus Noltie, an endemic lemon grass from Bhutan, with geospatial, comparative genomic, and phylogenetic insights",
+            authors: "Mohan Singh Rana, Nicolas Dierckxsens, Pritesh Bhatt, Bimal K Chetri",
+            journal: "Ecological Genetics and Genomics",
+            year: "2025",
+            link: "https://doi.org/10.1016/j.egg.2025.100372"
+        },
+        {
+            title: "Plastome genomics of the crop wild relative Thladiantha cordifolia illuminates the evolution and phylogeny of the gourd family (Cucurbitaceae)",
+            authors: "Bimal K Chetri, SS Sonu, Rahul G Shelke, Sudip Mitra, Lata Rangan",
+            journal: "Genetic Resources and Crop Evolution",
+            year: "2025",
+            link: "https://link.springer.com/article/10.1007/s10722-025-02579-6"
+        },
+        {
+            title: "Ethnomedicinal Practices in Kilikhar, Mongar",
+            authors: "Bimal K Chetri, K., Phuntsho Wangdi, Tshering Penjor",
+            journal: "Asian Plant Research Journal",
+            year: "2018",
+            link: "https://d1wqtxts1xzle7.cloudfront.net/59067833/Chetri122018APRJ4578620190428-37384-8w2tn0-libre.pdf"
+        },
+        {
+            title: "Insights into cucurbitaceae mitogenomes: gene length variation, correlation features, and phylogenetic relationship",
+            authors: "Bimal K Chetri, SS Sonu, Nicolas Dierckxsens, Sudip Mitra, Latha Rangan",
+            journal: "Journal of Plant Biochemistry and Biotechnology",
+            year: "2025",
+            link: "https://link.springer.com/article/10.1007/s40009-025-01633-2"
+        },
+        {
+            title: "In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, Albophoma sp. BAPR5",
+            authors: "Jintu Rabha, Bimal Kumar Chetri, Sukanya Das, Dhruva Kumar Jha",
+            journal: "South African Journal of Botany",
+            year: "2023",
+            link: "https://doi.org/10.1016/j.sajb.2023.05.033"
+        }
+    ];
+
+    function loadPublications() {
+        if (!elements.publicationsList) {
+            console.warn('Publications list container not found.');
+            return;
+        }
+
+        elements.publicationsList.innerHTML = '';
+        publications.forEach((pub) => {
+            const div = document.createElement('div');
+            div.classList.add('publication-item');
+            div.innerHTML = `
+                <i class="fas fa-book"></i>
+                <div class="publication-info">
+                    <h4>${pub.title}</h4>
+                    <p><strong>Authors:</strong> ${pub.authors}</p>
+                    <p><strong>Journal:</strong> ${pub.journal} (${pub.year})</p>
+                    <a href="${pub.link}" target="_blank" rel="noopener noreferrer">Read More <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            `;
+            elements.publicationsList.appendChild(div);
+        });
     }
 
-    .main-content-tabs {
-        padding: var(--spacing-lg) var(--spacing-sm);
+    // --- Tab Functionality ---
+    function initTabs() {
+        Array.from(elements.tabButtons).forEach((button) => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+
+                Array.from(elements.tabButtons).forEach((btn) => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                Array.from(elements.tabPanes).forEach((pane) => pane.classList.remove('active'));
+                const activePane = document.getElementById(tabId);
+                if (activePane) activePane.classList.add('active');
+            });
+        });
+        if (elements.tabButtons.length > 0 && elements.tabPanes.length > 0) {
+            elements.tabButtons[0].click();
+        }
     }
 
-    .tab-button {
-        padding: var(--spacing-sm);
-        font-size: 1em;
+    // --- Scroll to Top Button ---
+    function initScrollToTop() {
+        if (elements.scrollToTopBtn) {
+            window.addEventListener('scroll', () => {
+                elements.scrollToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+            });
+            elements.scrollToTopBtn.addEventListener('click', () =>
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+            );
+        }
     }
 
-    .about-lab-content {
-        flex-direction: column;
-        align-items: stretch;
+    // --- Footer & Dynamic Content ---
+    function setCurrentYear() {
+        if (elements.currentYearSpan) {
+            elements.currentYearSpan.textContent = new Date().getFullYear();
+        }
     }
 
-    .about-lab-text,
-    .about-lab-highlights {
-        min-width: unset;
-        width: 100%;
+    function updateDynamicLinks() {
+        const googleScholarBaseUrl = 'https://scholar.google.com/citations?user=';
+        if (
+            elements.googleScholarLink &&
+            config.googleScholarId &&
+            config.googleScholarId !== 'YOUR_GOOGLE_SCHOLAR_ID'
+        ) {
+            elements.googleScholarLink.forEach((link) => {
+                if (
+                    link.href.startsWith(googleScholarBaseUrl) ||
+                    link.href === 'https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ'
+                ) {
+                    link.href = googleScholarBaseUrl + config.googleScholarId;
+                }
+            });
+        }
+
+        const contactGrid = document.querySelector('.contact-grid-mini');
+        if (contactGrid && config.linkedInProfile) {
+            if (!contactGrid.querySelector('a[href*="linkedin.com"]')) {
+                const linkedInItem = document.createElement('a');
+                linkedInItem.href = config.linkedInProfile;
+                linkedInItem.target = '_blank';
+                linkedInItem.rel = 'noopener noreferrer';
+                linkedInItem.classList.add('contact-item-mini');
+                linkedInItem.innerHTML = `
+                    <i class="fab fa-linkedin"></i>
+                    <div class="contact-info-mini">
+                        <h4>LinkedIn</h4>
+                        <p>View Profile</p>
+                    </div>
+                `;
+                const qrcodeItem = contactGrid.querySelector('.qrcode-item-mini');
+                if (qrcodeItem) {
+                    contactGrid.insertBefore(linkedInItem, qrcodeItem);
+                } else {
+                    contactGrid.appendChild(linkedInItem);
+                }
+            }
+        }
     }
 
-    .contact-grid-mini {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 4px;
+    // --- Initialize All Functionalities ---
+    function initialize() {
+        try {
+            initMobileNav();
+            initDynamicGallery();
+            initUpdateCarousel();
+            loadPublications();
+            initTabs();
+            initScrollToTop();
+            setCurrentYear();
+            updateDynamicLinks();
+            highlightActiveNavLink();
+            window.addEventListener('scroll', highlightActiveNavLink);
+            initSmoothScrolling();
+            console.log('Initialization complete.');
+        } catch (error) {
+            console.error('Initialization error:', error);
+        }
     }
 
-    .contact-item-mini {
-        padding: 3px;
-    }
-
-    .contact-item-mini i {
-        font-size: 0.8em;
-        min-width: 16px;
-    }
-
-    .contact-info-mini h4 {
-        font-size: 0.7em;
-        line-height: 1.1;
-    }
-
-    .contact-info-mini p {
-        font-size: 0.6em;
-        line-height: 1.1;
-    }
-
-    .qrcode-item-mini .qrcode-image-mini {
-        width: 40px;
-        height: 40px;
-    }
-
-    .collab-item {
-        padding: var(--spacing-md);
-    }
-
-    .collab-item i {
-        font-size: 2.5em;
-    }
-
-    .collaboration-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero-compact {
-        padding: var(--spacing-lg) var(--spacing-sm);
-        min-height: 300px; /* Reduce height for smaller screens */
-    }
-
-    .hero-compact h1 {
-        font-size: 2em;
-    }
-
-    .hero-tagline {
-        font-size: 1em;
-    }
-
-    .btn {
-        padding: var(--spacing-sm) var(--spacing-md);
-        font-size: 0.9em;
-    }
-
-    .tiny-profile-wrapper {
-        display: none;
-    }
-
-    .header-brand {
-        font-size: 1.3em;
-    }
-}
-
-@media (max-width: 480px) {
-    .header-brand {
-        font-size: 1.2em;
-    }
-
-    .nav-toggle {
-        font-size: 1.3em;
-    }
-
-    .tab-nav {
-        gap: var(--spacing-xs);
-    }
-
-    .tab-button {
-        padding: var(--spacing-xs) var(--spacing-sm);
-        font-size: 0.9em;
-    }
-
-    .contact-grid-mini {
-        grid-template-columns: 1fr;
-    }
-
-    .dynamic-hero-gallery .gallery-image {
-        object-fit: contain; /* Prevent cropping on very small screens */
-    }
-}
+    initialize();
+});
