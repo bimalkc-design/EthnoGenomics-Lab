@@ -1,60 +1,235 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', () => {
-
-    // --- Global Variables ---
-    const mainNav = document.querySelector('.main-nav');
-    const sections = document.querySelectorAll('main section');
-    const navLinks = document.querySelectorAll('.nav-menu a');
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-    const galleryTrack = document.querySelector('.gallery-track');
-
-    // --- Helper Function for Debouncing ---
-    // Useful for scroll events to limit how often a function runs
-    const debounce = (func, delay) => {
-        let timeout;
-        return function(...args) {
-            const context = this;
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(context, args), delay);
-        };
-    };
-
-    // --- Set current year in footer ---
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-
     // --- Smooth Scrolling for Navigation ---
-    navMenu.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
+
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
             if (targetElement) {
-                const headerOffset = mainNav.offsetHeight;
-                const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = elementPosition - headerOffset - 20; // Extra padding
+                const offset = document.querySelector('.main-nav').offsetHeight; // Get nav height
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = targetElement.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset;
 
                 window.scrollTo({
                     top: offsetPosition,
-                    behavior: 'smooth'
+                    behavior: "smooth"
                 });
-            }
-            // Close mobile menu if open
-            if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
+
+                // Close mobile nav after clicking a link
+                if (window.innerWidth <= 992) {
+                    navMenu.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
             }
         });
     });
 
-    // --- Highlight active navigation link on scroll (Debounced) ---
-    const updateActiveNavLink = () => {
+    // --- Mobile Navigation Toggle ---
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', !isExpanded);
+            navMenu.classList.toggle('open');
+        });
+    }
+
+    // --- Dynamic "Flash in Motion" Gallery (Top Section) ---
+    const topGalleryWrapper = document.createElement('div');
+    topGalleryWrapper.classList.add('top-gallery-wrapper');
+    const heroContent = document.querySelector('.hero-content');
+    heroContent.appendChild(topGalleryWrapper); // Append to hero content
+
+    const topGalleryImages = [
+        'images/gallery/fieldwork_1.jpg',
+        'images/gallery/lab_1.jpg',
+        'images/gallery/plant_species_1.jpg',
+        'images/gallery/bhutan_landscape.jpg'
+    ];
+    let currentTopImageIndex = 0;
+
+    function createTopGallery() {
+        topGalleryImages.forEach((src, index) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `EthnoGenomics Lab Image ${index + 1}`;
+            img.classList.add('top-gallery-image');
+            if (index === 0) {
+                img.classList.add('active'); // Set first image as active initially
+            }
+            topGalleryWrapper.appendChild(img);
+        });
+    }
+
+    function cycleTopGalleryImages() {
+        const images = topGalleryWrapper.querySelectorAll('.top-gallery-image');
+        images[currentTopImageIndex].classList.remove('active');
+        currentTopImageIndex = (currentTopImageIndex + 1) % images.length;
+        images[currentTopImageIndex].classList.add('active');
+    }
+
+    if (topGalleryImages.length > 0) {
+        createTopGallery();
+        setInterval(cycleTopGalleryImages, 4000); // Change image every 4 seconds
+    }
+
+
+    // --- Gallery Section (Main Content) ---
+    const galleryImages = [
+        'images/gallery/fieldwork_1.jpg',
+        'images/gallery/lab_1.jpg',
+        'images/gallery/plant_species_1.jpg',
+        'images/gallery/fieldwork_2.jpg',
+        'images/gallery/lab_2.jpg',
+        'images/gallery/plant_species_2.jpg',
+        'images/gallery/bhutan_landscape.jpg',
+        'images/gallery/research_team.jpg',
+        'images/gallery/herbarium_specimen.jpg'
+    ];
+
+    const galleryTrack = document.querySelector('.gallery-track');
+    const galleryModal = document.createElement('div');
+    galleryModal.classList.add('gallery-modal');
+    galleryModal.innerHTML = `
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    `;
+    document.body.appendChild(galleryModal);
+
+    const modalImg = document.getElementById('img01');
+    const captionText = document.getElementById('caption');
+    const closeBtn = document.querySelector('.gallery-modal .close-btn');
+
+    closeBtn.onclick = function() {
+        galleryModal.style.display = "none";
+    }
+
+    galleryImages.forEach((src, index) => {
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('gallery-item');
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `EthnoGenomics Lab - ${src.split('/').pop().replace('.jpg', '').replace(/_/g, ' ')}`;
+        img.loading = 'lazy'; // Lazy load images
+
+        img.onclick = function() {
+            galleryModal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+        imgContainer.appendChild(img);
+        galleryTrack.appendChild(imgContainer);
+    });
+
+    // Gallery Motion effect (horizontal scroll simulation)
+    const galleryContainer = document.getElementById('gallery-container');
+    if (galleryContainer) {
+        let scrollAmount = 0;
+        const scrollSpeed = 0.5; // pixels per frame
+
+        function animateGalleryScroll() {
+            scrollAmount += scrollSpeed;
+            if (scrollAmount >= galleryTrack.scrollWidth - galleryContainer.clientWidth) {
+                scrollAmount = 0; // Reset scroll if end reached
+            }
+            galleryContainer.scrollLeft = scrollAmount;
+            requestAnimationFrame(animateGalleryScroll);
+        }
+        // Start scrolling only if content overflows
+        if (galleryTrack.scrollWidth > galleryContainer.clientWidth) {
+            // animateGalleryScroll(); // Uncomment to enable continuous scroll
+        }
+    }
+
+
+    // --- Publications Loading ---
+    const publications = [
+        {
+            title: "Chloroplast Genome Sequencing of *Rhododendron arboreum* from the Eastern Himalayas: Insights into Phylogeny and Adaptive Evolution",
+            authors: "Chetri, B. K., Sharma, S., & Rai, R.",
+            journal: "Journal of Plant Genomics",
+            year: "2023",
+            link: "https://example.com/pub1"
+        },
+        {
+            title: "Ethnobotanical Survey of Medicinal Plants Used by Indigenous Communities in Eastern Bhutan",
+            authors: "Chetri, B. K., Gurung, S., & Dendup, C.",
+            journal: "Economic Botany",
+            year: "2022",
+            link: "https://example.com/pub2"
+        },
+        {
+            title: "Mitochondrial Genome Analysis of *Swertia chirayita* Reveals Novel Genetic Markers for Species Authentication",
+            authors: "Rai, R., Chetri, B. K., & Sharma, S.",
+            journal: "BMC Plant Biology",
+            year: "2021",
+            link: "https://example.com/pub3"
+        },
+        {
+            title: "Assessing Carbon Sequestration Potential of Forest Ecosystems in Bhutan using Remote Sensing and GIS",
+            authors: "Wangchuk, T., Chetri, B. K., & Dorji, T.",
+            journal: "Environmental Science & Policy",
+            year: "2020",
+            link: "https://example.com/pub4"
+        }
+    ];
+
+    const publicationsList = document.getElementById('publications-list');
+    if (publicationsList) {
+        publications.forEach(pub => {
+            const div = document.createElement('div');
+            div.classList.add('publication-item');
+            div.innerHTML = `
+                <h4>${pub.title}</h4>
+                <p><strong>Authors:</strong> ${pub.authors}</p>
+                <p><strong>Journal:</strong> ${pub.journal} (${pub.year})</p>
+                <a href="${pub.link}" target="_blank" rel="noopener noreferrer">Read More <i class="fas fa-external-link-alt"></i></a>
+            `;
+            publicationsList.appendChild(div);
+        });
+    }
+
+    // --- Scroll to Top Button ---
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) { // Show button after scrolling down 300px
+            scrollToTopBtn.style.display = 'block';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // --- Current Year for Footer ---
+    const currentYearSpan = document.getElementById('current-year');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // --- Active Nav Link Highlight ---
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    function highlightActiveNavLink() {
         let current = '';
         sections.forEach(section => {
-            // Adjust offset to trigger active state slightly before section reaches top
-            const sectionTop = section.offsetTop - mainNav.offsetHeight - 100;
-            if (window.pageYOffset >= sectionTop) {
+            const sectionTop = section.offsetTop - document.querySelector('.main-nav').offsetHeight - 50; // Adjust for nav height
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
                 current = section.getAttribute('id');
             }
         });
@@ -65,214 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.classList.add('active');
             }
         });
-    };
-
-    window.addEventListener('scroll', debounce(updateActiveNavLink, 50));
-    updateActiveNavLink(); // Set initial active link on load
-
-    // --- Mobile Navigation Toggle ---
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            navToggle.querySelector('i').classList.toggle('fa-bars');
-            navToggle.querySelector('i').classList.toggle('fa-times'); // Change icon on toggle
-        });
-        // Close menu if clicking outside (optional)
-        document.addEventListener('click', (e) => {
-            if (!mainNav.contains(e.target) && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                navToggle.querySelector('i').classList.add('fa-bars');
-                navToggle.querySelector('i').classList.remove('fa-times');
-            }
-        });
     }
 
-    // --- Scroll to Top Button ---
-    const toggleScrollToTopButton = () => {
-      if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-        scrollToTopBtn.classList.add('show');
-      } else {
-        scrollToTopBtn.classList.remove('show');
-      }
-    };
-
-    window.addEventListener('scroll', debounce(toggleScrollToTopButton, 100));
-    toggleScrollToTopButton(); // Set initial state
-
-    scrollToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-
-    // --- Publications loader from publications.json ---
-    const loadPublications = async () => {
-        const listContainer = document.getElementById('publications-list');
-        if (!listContainer) return;
-
-        try {
-            const res = await fetch('publications.json');
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            const data = await res.json();
-
-            if (data.length === 0) {
-                listContainer.innerHTML = '<p>No publications to display yet.</p>';
-                return;
-            }
-
-            const ol = document.createElement('ol');
-            data.forEach(pub => {
-                const li = document.createElement('li');
-                const author = pub.author || 'N/A';
-                const year = pub.year ? `(${pub.year})` : '(N/A)';
-                const title = pub.title ? `<em>${pub.title}</em>` : 'No Title';
-                const journal = pub.journal ? `.${pub.journal}` : '';
-                const volume = pub.volume ? `, Vol. ${pub.volume}` : '';
-                const pages = pub.pages ? `, pp. ${pub.pages}` : '';
-                const doi = pub.doi ? ` <a href="https://doi.org/${pub.doi}" target="_blank" rel="noopener noreferrer" class="pub-link"><i class="fas fa-external-link-alt"></i> DOI</a>` : '';
-
-                li.innerHTML = `<strong>${author}</strong> ${year}. ${title}${journal}${volume}${pages}${doi}`;
-                ol.appendChild(li);
-            });
-            listContainer.appendChild(ol);
-        } catch (error) {
-            console.error('Error fetching publications:', error);
-            listContainer.innerHTML = '<p class="error-message">Failed to load publications. Please check <code>publications.json</code> or your network connection.</p>';
-        }
-    };
-    loadPublications();
-
-
-    // --- Dynamic Gallery Loader with Lightbox ---
-    if (galleryTrack) {
-        const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
-
-        async function fetchGalleryImageNames() {
-            // **IMPORTANT: Replace this array with YOUR ACTUAL .JPG (or other image) FILENAMES.**
-            // These should be in the same folder as index.html
-            const allImagesInFolder = [
-                'field1.jpg', 'lab1.png', 'specimen1.jpeg', 'team.jpg', 'plant_sample_1.jpg',
-                'microscopy.jpg', 'forest_view.jpg', 'research_group.jpg', 'herbarium_specimen.jpg',
-                'data_analysis.jpg', 'field_research_2.jpg', 'lab_bench.jpg', 'plant_closeup.jpg',
-                // Add all your other image filenames here
-            ];
-
-            const filteredImages = allImagesInFolder.filter(name =>
-                imageExtensions.some(ext => name.toLowerCase().endsWith(ext)) &&
-                name.toLowerCase() !== 'qrcode.png' &&
-                name.toLowerCase() !== 'portrait.jpg' &&
-                name.toLowerCase().indexOf('research_') === -1 // Exclude images used in research section
-            );
-            return filteredImages;
-        }
-
-        async function loadGallery() {
-            const imgArray = await fetchGalleryImageNames();
-            if (imgArray.length === 0) {
-                console.log('No eligible images found for the gallery.');
-                galleryTrack.parentElement.style.display = 'none';
-                return;
-            }
-
-            // Create enough duplicates for continuous loop. 3 copies ensure smooth loop across various screen sizes
-            const totalCopies = 3;
-            let loadedImagesCount = 0;
-            let totalImagesToLoad = imgArray.length * totalCopies;
-
-            for (let i = 0; i < totalCopies; i++) {
-                imgArray.forEach(src => {
-                    const img = document.createElement('img');
-                    img.src = src;
-                    img.alt = src.split('.')[0].replace(/_/g, ' ');
-                    img.loading = 'lazy'; // Improve performance
-                    img.dataset.src = src; // Store original src for lightbox
-                    galleryTrack.appendChild(img);
-
-                    img.onload = () => {
-                        loadedImagesCount++;
-                        if (loadedImagesCount === totalImagesToLoad) {
-                            // All images loaded, now calculate animation duration
-                            const trackWidth = galleryTrack.scrollWidth / totalCopies;
-                            const animationDuration = trackWidth / 60; // Adjust 60 for speed (px/s)
-                            galleryTrack.style.animationDuration = `${animationDuration}s`;
-                        }
-                    };
-                    img.onerror = () => {
-                        console.warn(`Failed to load gallery image: ${img.src}`);
-                        img.remove(); // Remove broken image from DOM
-                        totalImagesToLoad--; // Adjust total count
-                    };
-                });
-            }
-            addLightboxListeners();
-        }
-
-        // --- Lightbox/Modal functionality ---
-        const lightbox = document.createElement('div');
-        lightbox.id = 'lightbox';
-        document.body.appendChild(lightbox);
-
-        const addLightboxListeners = () => {
-            const galleryImages = galleryTrack.querySelectorAll('img');
-            galleryImages.forEach(image => {
-                image.addEventListener('click', e => {
-                    lightbox.classList.add('active');
-                    const img = document.createElement('img');
-                    img.src = e.target.dataset.src; // Use data-src for original image
-                    img.alt = e.target.alt;
-
-                    // Clear previous content
-                    while (lightbox.firstChild) {
-                        lightbox.removeChild(lightbox.firstChild);
-                    }
-                    lightbox.appendChild(img);
-                });
-            });
-
-            lightbox.addEventListener('click', e => {
-                if (e.target !== e.currentTarget) return; // Only close if clicking on the overlay itself
-                lightbox.classList.remove('active');
-            });
-        };
-
-        loadGallery();
-    }
-
-
-    // --- Intersection Observer for "Reveal on Scroll" Animations ---
-    const observerOptions = {
-        root: null, // viewport
-        rootMargin: '0px',
-        threshold: 0.1 // 10% of element visible
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Stop observing once animated
-            }
-        });
-    }, observerOptions);
-
-    sections.forEach(section => {
-        section.classList.add('hidden-section'); // Add initial hidden class
-        observer.observe(section);
-    });
-
-    // Also observe research cards for a slight delay effect
-    document.querySelectorAll('.research-card').forEach(card => {
-        card.classList.add('hidden-card');
-        observer.observe(card);
-    });
-
-    // And about items
-    document.querySelectorAll('.about-item').forEach(item => {
-        item.classList.add('hidden-item');
-        observer.observe(item);
-    });
-
+    window.addEventListener('scroll', highlightActiveNavLink);
+    highlightActiveNavLink(); // Call on load to set initial active link
 });
