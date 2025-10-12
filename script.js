@@ -14,28 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabPanes.forEach(pane => pane.classList.remove('active'));
             button.classList.add('active');
-            document.addEventListener('DOMContentLoaded', () => {
-                // ... (other code remains unchanged)
-            
-                // Dynamic Publications - Updated to retain only DOI link
-                const publications = [
-                    // ... (publications array remains unchanged)
-                ];
-            
-                const pubList = document.getElementById('publications-list');
-                publications.forEach(pub => {
-                    const pubItem = document.createElement('div');
-                    pubItem.classList.add('pub-item');
-                    pubItem.innerHTML = `
-                        <h4>${pub.title}</h4>
-                        <p>${pub.journal}, ${pub.year}</p>
-                        <a href="${pub.doi}" target="_blank" rel="noopener noreferrer">View Publication (DOI)</a>
-                    `;
-                    pubList.appendChild(pubItem);
-                });
-            
-                // ... (rest of the code remains unchanged)
-            });
+            document.getElementById(button.dataset.tab).classList.add('active');
         });
     });
 
@@ -73,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gallery.children[currentImage + 1].classList.add('active');  // FIXED: +1 skips header
     }, 5000);
 
-    // Dynamic Publications - Updated with provided publications (only DOI link retained)
+    // Dynamic Publications - Updated with provided publications
     const publications = [
         {
             title: '<strong>Chetri, B.K.</strong>, Sonu, S.S., Shelke, R.G. et al. Plastome genomics of the crop wild relative <em>Thladiantha cordifolia</em> illuminates the evolution and phylogeny of the gourd family (Cucurbitaceae)',
@@ -84,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             title: 'Mohan Singh Rana, Nicolas Dierckxsens, Pritesh Bhatt, <strong>Chetri, B.K.</strong> De novo plastome assembly of <em>Cymbopogon bhutanicus</em> Noltie, an endemic lemon grass from Bhutan, with geospatial, comparative genomic, and phylogenetic insights',
-            journal: 'Ec富 Ecological Genetics and Genomics, 36: 100372',
+            journal: 'Ecological Genetics and Genomics, 36: 100372',
             year: 2025,
             doi: 'https://doi.org/10.1016/j.egg.2025.100372',
             googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder2'
@@ -97,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder3'
         },
         {
-            title: 'Jintu Rabha, <strong>Chetri, B.K.</ levy Sukanya Das, Dhruva Kumar Jha, In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, <em>Albophoma</em> sp. BAPR5',
+            title: 'Jintu Rabha, <strong>Chetri, B.K.</strong>, Sukanya Das, Dhruva Kumar Jha, In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, <em>Albophoma</em> sp. BAPR5',
             journal: 'South African Journal of Botany, 158: 347–368',
             year: 2023,
             doi: 'https://doi.org/10.1016/j.sajb.2023.05.033',
@@ -113,6 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <h4>${pub.title}</h4>
             <p>${pub.journal}, ${pub.year}</p>
             <a href="${pub.doi}" target="_blank" rel="noopener noreferrer">View Publication (DOI)</a>
+            <br>
+            <a href="${pub.googleScholar}" target="_blank" rel="noopener noreferrer">View on Google Scholar</a>
         `;
         pubList.appendChild(pubItem);
     });
@@ -148,5 +129,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Set Current Year in Footer
-    document.getElementById('current-year').text環境Content = new Date().getFullFullYear();
+    document.getElementById('current-year').textContent = new Date().getFullYear();
 });
