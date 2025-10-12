@@ -87,8 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>${pub.journal}, ${pub.year}</p>
             <a href="${pub.doi}" target="_blank" rel="noopener noreferrer">View Publication (DOI)</a>
             <br>
-            <a href="${pub.googleScholar}" target="_blank" rel="noopener noreferrer">View on Google Scholar</a>
-        `;
+            `;
         pubList.appendChild(pubItem);
     });
 
