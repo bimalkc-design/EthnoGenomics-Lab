@@ -1,25 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Constants & Configuration ---
+    // --- Configuration ---
     const config = {
-        // Assume gallery images are in the root directory or a specific path like 'assets/'
-        // IMPORTANT: Adjust these paths if your images are in a subfolder (e.g., 'images/2.10.jpg')
-        galleryImageBaseUrl: '', // e.g., 'images/', 'assets/gallery/'
+        galleryImageBaseUrl: '', // Adjust to 'images/' if needed
         galleryImages: [
-            '2.10.jpg',
-            '3.5a.jpg',
-            '3.5b.jpg',
-            '3.6.jpg',
-            '4.2.jpg',
-            '4.4.jpg',
-            '5.0.jpg',
-            '5.2.jpg',
-            'pp.jpg',
-            'research_genomics.jpg'
+            '2.10.jpg', '3.5a.jpg', '3.5b.jpg', '3.6.jpg', '4.2.jpg',
+            '4.4.jpg', '5.0.jpg', '5.2.jpg', 'pp.jpg', 'research_genomics.jpg'
         ],
-        galleryCycleInterval: 5000, // 5 seconds (this will now only control the animation delays, not a strict cycle)
-        scrollOffset: 70, // Adjust this value if your fixed header height changes
-        googleScholarId: 'Hp0ZnX4AAAAJ', // *** REMEMBER TO REPLACE THIS WITH YOUR ACTUAL ID, just the ID part ***
-        linkedInProfile: 'https://www.linkedin.com/in/bimal-k-chetri-ph-d-a6b840a5/'
+        galleryCycleInterval: 5000,
+        scrollOffset: 70,
+        googleScholarId: 'Hp0ZnX4AAAAJ',
+        linkedInProfile: 'https://www.linkedin.com/in/bimal-k-chetri-ph-d-a6b840a5/',
+        updateImageBaseUrl: '', // Adjust to 'updates/' if needed
+        recentUpdates: [
+            {
+                text: "The Royal University of Bhutan - Sherubtse and 'Ovidius' University of Constanţa (Romania) invite you to the scientific lecture 'Bhutan: From Local Wisdom to Sustainable Approach' by Assoc. Prof. Dr. Bimal K. CHETRI. Join us on Thursday, October 9, 2025, 10:00 – 11:00 AM, in room E216, building B, campus.",
+                image: "update_1.jpg"
+            },
+            {
+                text: "Dr. Chetri's expertise: high-altitude medicinal plants, genomics, plant flow cytometry, and ecophysiology. Specializing in molecular and ecological study of high-altitude medicinal plants, integrating plant genomics and molecular phylogeny for adaptive mechanisms, therapeutic potential, and conservation strategies.",
+                image: "Update_2.jpg"
+            },
+            {
+                text: "Significant contributions to understanding plant adaptation in extreme environments, with extensive publications on plastome and mitogenome analyses, nuclear DNA content estimation, and ethnobotanical research.",
+                image: "Update_3.jpg"
+            },
+            {
+                text: "Key Expertise Areas: High-altitude medicinal plants, Genomics, Plant flow cytometry, Molecular phylogeny, Organellar genome mining, Evolutionary dynamics, Ethnobotany, Plant conservation.",
+                image: "Update_4.jpg"
+            },
+            {
+                text: "Organizers: Dr. Liviu-Daniel GALAŢCHI & Dr. Bimal-Kumar CHETRI",
+                image: "5.0.jpg"
+            }
+        ],
+        updateCarouselInterval: 6000
     };
 
     const selectors = {
@@ -33,25 +47,23 @@ document.addEventListener('DOMContentLoaded', () => {
         currentYearSpan: '#current-year',
         sections: 'section[id]',
         navLinks: '.nav-menu-compact a[href^="#"]',
-        googleScholarLink: 'a[href*="scholar.google.com"]' // Targets the Google Scholar link
+        googleScholarLink: '.googleScholarLink',
+        recentUpdatesContainer: '#recent-updates-carousel',
+        updateCarouselIndicators: '#update-carousel-indicators',
+        contactGridMini: '.contact-grid-mini'
     };
 
     const elements = {};
     for (const key in selectors) {
-        // Collect all elements for multiple selectors, or first for single
         const found = document.querySelectorAll(selectors[key]);
         elements[key] = found.length === 1 ? found[0] : found;
     }
 
-    // --- Utility Functions ---
+    let updateCarouselIntervalId = null;
 
-    /**
-     * Smoothly scrolls to a target element.
-     * @param {HTMLElement} target - The element to scroll to.
-     */
+    // --- Utility Functions ---
     function smoothScrollTo(target) {
         if (target) {
-            // Get header height for accurate scroll position, fallback to config
             const header = document.querySelector('.main-header-compact');
             const offset = header ? header.offsetHeight : config.scrollOffset;
             const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
@@ -59,44 +71,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Navigation & Header ---
-
-    /**
-     * Initializes mobile navigation toggle functionality.
-     */
+    // --- Navigation ---
     function initMobileNav() {
         if (elements.navToggle && elements.navMenu) {
             elements.navToggle.addEventListener('click', () => {
                 const isExpanded = elements.navToggle.getAttribute('aria-expanded') === 'true';
                 elements.navToggle.setAttribute('aria-expanded', !isExpanded);
-                elements.navMenu.classList.toggle('open');
+                elements.navMenu.classList.toggle('active');
             });
 
-            // Close nav when clicking outside
             document.addEventListener('click', (event) => {
-                if (!elements.navMenu.contains(event.target) && !elements.navToggle.contains(event.target) && elements.navMenu.classList.contains('open')) {
-                    elements.navMenu.classList.remove('open');
+                if (!elements.navMenu.contains(event.target) && !elements.navToggle.contains(event.target) && elements.navMenu.classList.contains('active')) {
+                    elements.navMenu.classList.remove('active');
                     elements.navToggle.setAttribute('aria-expanded', 'false');
                 }
             });
         }
     }
 
-    /**
-     * Highlights the active navigation link based on scroll position.
-     */
     function highlightActiveNavLink() {
         let currentId = '';
-        const headerHeight = document.querySelector('.main-header-compact').offsetHeight;
-        const scrollPos = window.scrollY + headerHeight + 10; // Add some buffer
+        const header = document.querySelector('.main-header-compact');
+        const headerHeight = header ? header.offsetHeight : config.scrollOffset;
+        const scrollPos = window.scrollY + headerHeight + 10;
 
-        elements.sections.forEach(section => {
+        Array.from(elements.sections).forEach(section => {
             if (section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
                 currentId = section.id;
             }
         });
 
-        // Ensure elements.navLinks is an iterable NodeList
         Array.from(elements.navLinks).forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href') === `#${currentId}`) {
@@ -105,9 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /**
-     * Attaches smooth scroll behavior to navigation links.
-     */
     function initSmoothScrolling() {
         Array.from(elements.navLinks).forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -115,10 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetId = this.getAttribute('href');
                 const target = document.querySelector(targetId);
                 smoothScrollTo(target);
-
-                // Close mobile nav after clicking a link
-                if (window.innerWidth <= 992 && elements.navMenu.classList.contains('open')) {
-                    elements.navMenu.classList.remove('open');
+                if (window.innerWidth <= 768 && elements.navMenu.classList.contains('active')) {
+                    elements.navMenu.classList.remove('active');
                     elements.navToggle.setAttribute('aria-expanded', 'false');
                 }
             });
@@ -126,40 +125,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Dynamic Hero Gallery ---
-
-    // Removed currentGalleryIndex and galleryIntervalId as the animation is now CSS-driven
-    // The images will float in and out based on their CSS animation delays.
-
-    /**
-     * Creates and appends gallery images to the dynamic gallery container.
-     */
     function createDynamicGallery() {
         if (!elements.dynamicGallery || config.galleryImages.length === 0) return;
-
-        elements.dynamicGallery.innerHTML = ''; // Clear existing content to prevent duplicates
-
-        config.galleryImages.forEach((src, index) => {
+        elements.dynamicGallery.innerHTML = '';
+        config.galleryImages.forEach((imgName, index) => {
             const img = document.createElement('img');
-            img.src = config.galleryImageBaseUrl + src; // Use base URL + filename
+            img.src = config.galleryImageBaseUrl + imgName;
             img.alt = `Lab Image ${index + 1}`;
-            img.loading = 'lazy';
-            // Removed img.classList.add('active'); as animation is now CSS-driven
+            img.classList.add('gallery-image');
+            img.style.opacity = '0';
+            img.style.transition = `opacity 1s ease-in-out ${index * 0.5}s`;
+            img.onerror = () => {
+                img.src = config.galleryImageBaseUrl + 'placeholder.jpg';
+                img.alt = 'Placeholder Image';
+            };
             elements.dynamicGallery.appendChild(img);
         });
+
+        setTimeout(() => {
+            Array.from(elements.dynamicGallery.children).forEach(img => {
+                img.style.opacity = '1';
+            });
+        }, 100);
     }
 
-    /**
-     * Initializes the dynamic image gallery.
-     */
     function initDynamicGallery() {
         if (config.galleryImages.length > 0 && elements.dynamicGallery) {
             createDynamicGallery();
-            // Removed setInterval as the animation is now handled purely by CSS keyframes
-            // The images will animate based on the 'floatAndFade' animation with individual delays.
         }
     }
 
-// --- Publications Section ---
+    // --- Publications ---
     const publications = [
         {
             title: "De novo plastome assembly of Cymbopogon bhutanicus Noltie, an endemic lemon grass from Bhutan, with geospatial, comparative genomic, and phylogenetic insights",
@@ -177,17 +173,17 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             title: "Ethnomedicinal Practices in Kilikhar, Mongar",
-            authors: "BImal K Chetri, K., Phuntsho Wangdi, Tshering Penjor",
+            authors: "Bimal K Chetri, K., Phuntsho Wangdi, Tshering Penjor",
             journal: "Asian Plant Research Journal",
             year: "2018",
-            link: "https://d1wqtxts1xzle7.cloudfront.net/59067833/Chetri122018APRJ4578620190428-37384-8w2tn0-libre.pdf?1556505489=&response-content-disposition=inline%3B+filename%3DEthnomedicinal_Practices_in_Kilikhar_Mon.pdf&Expires=1760258951&Signature=K0~XHfL7rt~KHyRb3DbP0D7mkgwyQLWCnFABmOKcKWjQYGXH9jV20DTVsnjtYPnOvVeeRS7INOmg3GVTr7-gXkMTS1El8DKsldrWmSbXuYC801T4RFPRLdTyl0etsNjmyrSkjFBzuYrTWV8oHKkH7r8UR7A~so1l~-DnZjjrEd2ka27gQwv29qoZVJkw~fzUjZIZrm2F8iI0Cku10hQWsqhn2nBtO8trcU-yIcdJ0jAyxSNNOiD9Jx5~2IXuJvsE91HhX47dHsPiDN67Z3LOyIjznaxPFSghoiG-ZNhKuIFSCa-4d5OFManm0IhORzH9ylz4U2pZ0NaEzVG6lAZcyg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA"
+            link: "https://d1wqtxts1xzle7.cloudfront.net/59067833/Chetri122018APRJ4578620190428-37384-8w2tn0-libre.pdf?1556505489=&response-content-disposition=inline%3B+filename%3DEthnomedicinal_Practices_in_Kilikhar_Mon.pdf&Expires=1760258951&Signature=K0~XHfL7rt~KHyRb3DbP0D7mkgwyQLWCnFABmOKcKWjQYGXH9jV20DTVsnjtYPnOvVeeRS7INOmg3GVTr7-gXkMTS1El8DKsldrWmSbXuYC801T4RFPRLdTyl0etsNjmyrSkjFBzuYrTWV8oHKkH7r8UR7A~so1l~-DnZjjrEd2ka27gQwv29qoZVJkw~fzUjZIZrm2F8iI0Cku10hQWsqhn2nBtO8trcU-yIcdJ0jAyxSNNOiD9Jx5~2IXuJvsE91HhX47dHsPiDN67Z3LOzIjznaxPFSghoiG-ZNhKuIFSCa-4d5OFManm0IhORzH9ylz4U2pZ0NaEzVG6lAZcyg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA"
         },
         {
             title: "Insights into cucurbitaceae mitogenomes: gene length variation, correlation features, and phylogenetic relationship",
             authors: "Bimal K Chetri, SS Sonu, Nicolas Dierckxsens, Sudip Mitra, Latha Rangan",
             journal: "Journal of Plant Biochemistry and Biotechnology",
             year: "2025",
-            link: "https://link.springer.com/article/10.1007/s40009-025-01633-2"
+            link: "https://link.springer.com/article/10.1007/s13562-025-00992-7"
         },
         {
             title: "In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, Albophoma sp. BAPR5",
@@ -196,13 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
             year: "2023",
             link: "https://doi.org/10.1016/j.sajb.2023.05.033"
         }
-        // Add more publications here following the same structure
-
     ];
 
-    /**
-     * Populates the publications list from the 'publications' array.
-     */
     function loadPublications() {
         if (elements.publicationsList) {
             elements.publicationsList.innerHTML = '';
@@ -220,108 +211,148 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Tab Functionality ---
-
-    /**
-     * Initializes tab switching behavior for content panes.
-     */
+    // --- Tabs ---
     function initTabs() {
-        // Ensure elements.tabButtons is an iterable NodeList
-        Array.from(elements.tabButtons).forEach(button => {
-            button.addEventListener('click', () => {
-                const tabId = button.getAttribute('data-tab');
-
-                Array.from(elements.tabButtons).forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                Array.from(elements.tabPanes).forEach(pane => pane.classList.remove('active'));
-                const activePane = document.getElementById(tabId);
-                if (activePane) activePane.classList.add('active');
-            });
-        });
-        // Ensure the first tab is active on load
         if (elements.tabButtons.length > 0 && elements.tabPanes.length > 0) {
+            Array.from(elements.tabButtons).forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    Array.from(elements.tabButtons).forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    Array.from(elements.tabPanes).forEach(pane => pane.classList.remove('active'));
+                    const activePane = document.getElementById(tabId);
+                    if (activePane) activePane.classList.add('active');
+                });
+            });
             elements.tabButtons[0].click();
         }
     }
 
-    // --- Scroll to Top Button ---
+    // --- Recent Updates Carousel ---
+    function setupRecentUpdatesCarousel() {
+        if (!elements.recentUpdatesContainer || !elements.updateCarouselIndicators || config.recentUpdates.length === 0) return;
 
-    /**
-     * Manages the visibility and click behavior of the "Scroll to Top" button.
-     */
+        elements.recentUpdatesContainer.innerHTML = '';
+        elements.updateCarouselIndicators.innerHTML = '';
+
+        config.recentUpdates.forEach((update, index) => {
+            const item = document.createElement('div');
+            item.classList.add('carousel-item');
+            if (index === 0) item.classList.add('active');
+            item.innerHTML = `
+                <img src="${config.updateImageBaseUrl}${update.image}" alt="Update ${index + 1}" onerror="this.src='${config.updateImageBaseUrl}placeholder.jpg'; this.alt='Placeholder Image';">
+                <div class="carousel-caption">
+                    <p>${update.text}</p>
+                </div>
+            `;
+            elements.recentUpdatesContainer.appendChild(item);
+
+            const indicator = document.createElement('button');
+            indicator.classList.add('carousel-indicator');
+            if (index === 0) indicator.classList.add('active');
+            indicator.setAttribute('data-slide-to', index);
+            indicator.type = 'button';
+            elements.updateCarouselIndicators.appendChild(indicator);
+        });
+
+        startUpdateCarousel();
+    }
+
+    function startUpdateCarousel() {
+        const items = elements.recentUpdatesContainer.querySelectorAll('.carousel-item');
+        const indicators = elements.updateCarouselIndicators.querySelectorAll('.carousel-indicator');
+        let currentIndex = 0;
+
+        if (items.length === 0) return;
+
+        const showSlide = (index) => {
+            items.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === index);
+            });
+        };
+
+        const nextSlide = () => {
+            currentIndex = (currentIndex + 1) % items.length;
+            showSlide(currentIndex);
+        };
+
+        if (updateCarouselIntervalId) clearInterval(updateCarouselIntervalId);
+        updateCarouselIntervalId = setInterval(nextSlide, config.updateCarouselInterval);
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                showSlide(currentIndex);
+                clearInterval(updateCarouselIntervalId);
+                updateCarouselIntervalId = setInterval(nextSlide, config.updateCarouselInterval);
+            });
+        });
+    }
+
+    // --- Scroll to Top ---
     function initScrollToTop() {
         if (elements.scrollToTopBtn) {
             window.addEventListener('scroll', () => {
-                elements.scrollToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+                elements.scrollToTopBtn.classList.toggle('show', window.scrollY > 300);
             });
-            elements.scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            elements.scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
         }
     }
 
-    // --- Footer & Dynamic Content ---
-
-    /**
-     * Sets the current year in the footer.
-     */
+    // --- Footer & Links ---
     function setCurrentYear() {
         if (elements.currentYearSpan) {
             elements.currentYearSpan.textContent = new Date().getFullYear();
         }
     }
 
-    /**
-     * Updates dynamic links with actual profile IDs and adds LinkedIn.
-     */
     function updateDynamicLinks() {
-        // Update Google Scholar link if ID is provided
-        // Make sure the config.googleScholarId only contains the ID, not the full URL.
         const googleScholarBaseUrl = 'https://scholar.google.com/citations?user=';
-        if (elements.googleScholarLink && config.googleScholarId && config.googleScholarId !== 'YOUR_GOOGLE_SCHOLAR_ID') { // Check against placeholder
-            // If the current href is just the base URL, update it. Otherwise, assume it's already correct.
-            if (elements.googleScholarLink.href.startsWith(googleScholarBaseUrl) || elements.googleScholarLink.href === 'https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ') {
-                 elements.googleScholarLink.href = googleScholarBaseUrl + config.googleScholarId;
-            }
+        if (config.googleScholarId && elements.googleScholarLink) {
+            Array.from(elements.googleScholarLink).forEach(link => {
+                link.href = googleScholarBaseUrl + config.googleScholarId;
+            });
         }
 
-        // Add LinkedIn to contact grid if not already present
-        const contactGrid = document.querySelector('.contact-grid');
-        if (contactGrid && config.linkedInProfile) {
-            // Check if a LinkedIn link already exists to prevent duplicates
-            if (!contactGrid.querySelector('a[href*="linkedin.com"]')) {
+        if (elements.contactGridMini && config.linkedInProfile) {
+            if (!elements.contactGridMini.querySelector('a[href*="linkedin.com"]')) {
                 const linkedInItem = document.createElement('a');
                 linkedInItem.href = config.linkedInProfile;
-                linkedInItem.target = "_blank";
-                linkedInItem.rel = "noopener noreferrer";
-                linkedInItem.classList.add('contact-item');
+                linkedInItem.target = '_blank';
+                linkedInItem.rel = 'noopener noreferrer';
+                linkedInItem.classList.add('contact-item-mini');
                 linkedInItem.innerHTML = `
                     <i class="fab fa-linkedin"></i>
-                    <h4>LinkedIn</h4>
-                    <p>View Profile</p>
+                    <div class="contact-info-mini">
+                        <h4>LinkedIn</h4>
+                        <p>View Profile</p>
+                    </div>
                 `;
-                // Append it. You can adjust the order if needed.
-                // For example, to insert before the QR code:
-                const qrcodeItem = contactGrid.querySelector('.qrcode-item');
+                const qrcodeItem = elements.contactGridMini.querySelector('.qrcode-item-mini');
                 if (qrcodeItem) {
-                    contactGrid.insertBefore(linkedInItem, qrcodeItem);
+                    elements.contactGridMini.insertBefore(linkedInItem, qrcodeItem);
                 } else {
-                    contactGrid.appendChild(linkedInItem);
+                    elements.contactGridMini.appendChild(linkedInItem);
                 }
             }
         }
     }
 
-    // --- Initialize All Functionalities ---
+    // --- Initialize ---
     function initialize() {
         initMobileNav();
         initDynamicGallery();
         loadPublications();
         initTabs();
+        setupRecentUpdatesCarousel();
         initScrollToTop();
         setCurrentYear();
-        updateDynamicLinks(); // Call this after all static HTML is parsed
-
-        // Initial highlights and scroll listeners
+        updateDynamicLinks();
         highlightActiveNavLink();
         window.addEventListener('scroll', highlightActiveNavLink);
         initSmoothScrolling();
