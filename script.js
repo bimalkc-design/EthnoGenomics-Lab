@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Configuration ---
     const config = {
-        galleryImageBaseUrl: 'images/', // Updated to match likely folder structure
+        galleryImageBaseUrl: 'images/',
         galleryImages: [
             '2.10.jpg', '3.5a.jpg', '3.5b.jpg', '3.6.jpg', '4.2.jpg',
             '4.4.jpg', '5.0.jpg', '5.2.jpg', 'pp.jpg', 'research_genomics.jpg'
@@ -10,26 +10,26 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollOffset: 70,
         googleScholarId: 'Hp0ZnX4AAAAJ',
         linkedInProfile: 'https://www.linkedin.com/in/bimal-k-chetri-ph-d-a6b840a5/',
-        updateImageBaseUrl: 'updates/', // Updated to match likely folder structure
+        updateImageBaseUrl: 'updates/',
         recentUpdates: [
             {
-                text: "The Royal University of Bhutan - Sherubtse and 'Ovidius' University of Constanţa (Romania) invite you to the scientific lecture 'Bhutan: From Local Wisdom to Sustainable Approach' by Assoc. Prof. Dr. Bimal K. CHETRI. Join us on Thursday, October 9, 2025, 10:00 – 11:00 AM, in room E216, building B, campus.",
+                text: "Lecture: 'Bhutan: Local Wisdom to Sustainability' by Dr. Bimal K. Chetri, Oct 9, 2025, 10 AM, Ovidius University.",
                 image: "update_1.jpg"
             },
             {
-                text: "Dr. Chetri's expertise: high-altitude medicinal plants, genomics, plant flow cytometry, and ecophysiology. Specializing in molecular and ecological study of high-altitude medicinal plants, integrating plant genomics and molecular phylogeny for adaptive mechanisms, therapeutic potential, and conservation strategies.",
+                text: "Expertise in high-altitude medicinal plants, genomics, and conservation strategies.",
                 image: "Update_2.jpg"
             },
             {
-                text: "Significant contributions to understanding plant adaptation in extreme environments, with extensive publications on plastome and mitogenome analyses, nuclear DNA content estimation, and ethnobotanical research.",
+                text: "Contributions to plastome, mitogenome, and ethnobotanical research.",
                 image: "Update_3.jpg"
             },
             {
-                text: "Key Expertise Areas: High-altitude medicinal plants, Genomics, Plant flow cytometry, Molecular phylogeny, Organellar genome mining, Evolutionary dynamics, Ethnobotany, Plant conservation.",
+                text: "Focus: Genomics, molecular phylogeny, ethnobotany, plant conservation.",
                 image: "Update_4.jpg"
             },
             {
-                text: "Organizers: Dr. Liviu-Daniel GALAŢCHI & Dr. Bimal-Kumar CHETRI",
+                text: "Organizers: Dr. L-D Galaţchi & Dr. Bimal K. Chetri",
                 image: "5.0.jpg"
             }
         ],
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             Array.from(elements.dynamicGallery.children).forEach(img => {
-                img.style.opacity = '0.3'; // Match CSS animation starting opacity
+                img.style.opacity = '0.3';
             });
         }, 100);
     }
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             title: "In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, Albophoma sp. BAPR5",
-            authors: "Jintu Rabha, Bimal Kumar Chetri, Sukanya Das, Dhruva Kumar Jha",
+            authors: "Jintu Rabha, Bimal K Chetri, Sukanya Das, Dhruva Kumar Jha",
             journal: "South African Journal of Botany",
             year: "2023",
             link: "https://doi.org/10.1016/j.sajb.2023.05.033"
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
             item.innerHTML = `
                 <img src="${config.updateImageBaseUrl}${update.image}" alt="Update ${index + 1}" onerror="this.src='${config.updateImageBaseUrl}placeholder.jpg'; this.alt='Placeholder Image';">
                 <div class="carousel-caption">
-                    <p>${update.text}</p>
+                    <p class="caption-text">${update.text}</p>
                 </div>
             `;
             elements.recentUpdatesContainer.appendChild(item);
@@ -278,6 +278,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const showSlide = (index) => {
             items.forEach((item, i) => {
                 item.classList.toggle('active', i === index);
+                const caption = item.querySelector('.caption-text');
+                if (caption) {
+                    caption.style.opacity = '0';
+                    caption.style.transform = 'translateY(10px)';
+                    if (i === index) {
+                        setTimeout(() => {
+                            caption.style.transition = 'opacity 0.8s ease-in-out, transform 0.8s ease-in-out';
+                            caption.style.opacity = '1';
+                            caption.style.transform = 'translateY(0)';
+                        }, 50);
+                    }
+                }
             });
             indicators.forEach((indicator, i) => {
                 indicator.classList.toggle('active', i === index);
