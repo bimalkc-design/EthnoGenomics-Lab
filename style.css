@@ -1,109 +1,94 @@
-/* --- Compact Contact Section Styles (MODIFIED FOR SMALLER SIZE) --- */
+/* --- Compact Contact Section Styles (MODIFIED FOR SMALLER SIZE, QR CODE REMOVED) --- */
 .about-lab-contact-mini {
-    margin-top: var(--spacing-sm); /* Further reduced top margin */
-    padding-top: var(--spacing-xs); /* Further reduced top padding */
+    margin-top: var(--spacing-sm); /* 10px */
+    padding-top: var(--spacing-xs); /* 5px */
     border-top: 1px dashed var(--border-color);
 }
 
 .about-lab-contact-mini h3 {
     text-align: center;
-    margin-bottom: var(--spacing-xs); /* Further reduced bottom margin */
+    margin-bottom: var(--spacing-xs); /* 5px */
     color: var(--secondary-color);
-    font-size: 1em; /* Even smaller heading */
+    font-size: 1em; /* Smaller heading */
     font-family: var(--font-sans);
 }
 
 .contact-grid-mini {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Smaller min-width for grid items */
-    gap: var(--spacing-xs); /* Further reduced gap between contact items */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-xs); /* 5px */
     justify-content: center;
 }
 
 .contact-item-mini {
     display: flex;
     align-items: flex-start;
-    gap: 6px; /* Smaller gap between icon and text */
-    padding: 6px; /* Smaller padding inside contact item */
+    gap: 6px;
+    padding: 6px;
     background-color: var(--background-light);
-    border-radius: 4px; /* Smaller border-radius */
+    border-radius: 4px;
     border: 1px solid var(--border-color);
     color: var(--text-color);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .contact-item-mini:hover {
-    transform: translateY(-1px); /* Minimal hover lift */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06); /* Smaller hover shadow */
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
     color: var(--primary-color);
     text-decoration: none;
 }
 
 .contact-item-mini i {
-    font-size: 1em; /* Smaller icon size */
+    font-size: 1em;
     color: var(--primary-color);
-    min-width: 20px; /* Smaller min-width for icon */
+    min-width: 20px;
     text-align: center;
-    padding-top: 2px; /* Fine-tune alignment */
+    padding-top: 2px;
 }
 
 .contact-info-mini h4 {
     margin: 0;
-    font-size: 0.8em; /* Smaller title for contact type */
+    font-size: 0.8em;
     color: var(--secondary-color);
     font-family: var(--font-sans);
 }
 
 .contact-info-mini p {
     margin: 0;
-    font-size: 0.65em; /* Smaller text for contact detail */
+    font-size: 0.65em;
     color: var(--light-text-color);
     word-break: break-word;
 }
 
-.qrcode-item-mini {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.qrcode-item-mini .qrcode-image-mini {
-    width: 50px; /* Smaller QR code */
-    height: 50px;
-    border: 1px solid var(--border-color);
-    border-radius: 3px; /* Smaller border-radius */
-    margin-bottom: 6px; /* Smaller margin */
-    object-fit: contain;
-}
-
 /* Contact Form Styles (Adjusted for Smaller Size) */
 .contact-form-container {
-    margin-top: 1.5rem; /* Reduced margin */
-    padding: 1rem; /* Reduced padding */
+    margin-top: 1.5rem;
+    padding: 1rem;
     background: #f9f9f9;
-    border-radius: 6px; /* Smaller border-radius */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Lighter shadow */
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .form-group {
-    margin-bottom: 1rem; /* Reduced margin */
+    margin-bottom: 1rem;
 }
 
 .form-group label {
     display: block;
-    font-size: 0.8rem; /* Smaller label font */
+    font-size: 0.8rem;
     font-weight: 500;
-    margin-bottom: 0.3rem; /* Smaller margin */
+    margin-bottom: 0.3rem;
     color: var(--text-color);
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 0.5rem; /* Smaller padding */
+    padding: 0.5rem;
     border: 1px solid #ddd;
-    border-radius: 3px; /* Smaller border-radius */
-    font-size: 0.85rem; /* Smaller input font */
+    border-radius: 3px;
+    font-size: 0.85rem;
     font-family: var(--font-sans);
     transition: border-color 0.3s ease;
 }
@@ -115,31 +100,31 @@
 }
 
 .form-group textarea {
-    min-height: 80px; /* Smaller textarea height */
+    min-height: 80px;
     resize: vertical;
 }
 
 .btn-primary {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem; /* Smaller gap */
-    padding: 0.5rem 1rem; /* Smaller padding */
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
     background: var(--primary-color);
     color: #fff;
     border: none;
-    border-radius: 3px; /* Smaller border-radius */
-    font-size: 0.85rem; /* Smaller font */
+    border-radius: 3px;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
 .btn-primary:hover {
-    background: #218838; /* Darker green for hover */
+    background: #218838;
 }
 
 .form-message {
-    margin-top: 0.75rem; /* Smaller margin */
-    font-size: 0.75rem; /* Smaller font */
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
     color: var(--text-color);
 }
 
@@ -154,58 +139,53 @@
 /* Responsive Adjustments for Contact Section */
 @media (max-width: 768px) {
     .contact-grid-mini {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Smaller min-width */
-        gap: 6px; /* Smaller gap */
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 6px;
     }
 
     .contact-item-mini {
-        padding: 4px; /* Even smaller padding */
+        padding: 4px;
     }
 
     .contact-item-mini i {
-        font-size: 0.9em; /* Smaller icon */
+        font-size: 0.9em;
         min-width: 18px;
     }
 
     .contact-info-mini h4 {
-        font-size: 0.75em; /* Smaller title */
+        font-size: 0.75em;
     }
 
     .contact-info-mini p {
-        font-size: 0.6em; /* Smaller text */
-    }
-
-    .qrcode-item-mini .qrcode-image-mini {
-        width: 40px; /* Smaller QR code */
-        height: 40px;
+        font-size: 0.6em;
     }
 
     .contact-form-container {
-        padding: 0.75rem; /* Smaller padding */
+        padding: 0.75rem;
     }
 
     .form-group label {
-        font-size: 0.75rem; /* Smaller label */
+        font-size: 0.75rem;
     }
 
     .form-group input,
     .form-group textarea {
-        font-size: 0.8rem; /* Smaller input font */
-        padding: 0.4rem; /* Smaller padding */
+        font-size: 0.8rem;
+        padding: 0.4rem;
     }
 
     .btn-primary {
-        padding: 0.4rem 0.8rem; /* Smaller button padding */
-        font-size: 0.8rem; /* Smaller button font */
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
     }
 }
 
 @media (max-width: 480px) {
     .contact-grid-mini {
-        grid-template-columns: 1fr; /* Single column */
+        grid-template-columns: 1fr;
     }
 
     .about-lab-contact-mini h3 {
-        font-size: 0.9em; /* Smaller heading */
+        font-size: 0.9em;
     }
 }
