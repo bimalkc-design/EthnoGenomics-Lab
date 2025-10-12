@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ],
         galleryCycleInterval: 5000, // 5 seconds
         scrollOffset: 70, // Adjust this value if your fixed header height changes
-        googleScholarId: 'YOUR_GOOGLE_SCHOLAR_ID', // *** REMEMBER TO REPLACE THIS WITH YOUR ACTUAL ID ***
+        googleScholarId: 'https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ', // *** REMEMBER TO REPLACE THIS WITH YOUR ACTUAL ID ***
         linkedInProfile: 'https://www.linkedin.com/in/bimal-k-chetri-ph-d-a6b840a5/'
     };
 
@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function updateDynamicLinks() {
         // Update Google Scholar link if ID is provided
-        if (elements.googleScholarLink && config.googleScholarId !== 'YOUR_GOOGLE_SCHOLAR_ID') {
+        if (elements.googleScholarLink && config.googleScholarId !== 'https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ') {
             elements.googleScholarLink.href = `https://scholar.google.com/citations?user=${config.googleScholarId}`;
         }
 
