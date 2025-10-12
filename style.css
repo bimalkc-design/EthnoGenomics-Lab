@@ -196,11 +196,11 @@ body {
 .hero-gallery-image {
     position: absolute;
     width: 100%;
-    height: calc(100% - 50px);
-    object-fit: contain;
+    height: calc(100% - 50px); /* Adjust for header height */
+    object-fit: cover;
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    top: 50px;
+    top: 50px; /* Offset for header */
 }
 
 .hero-gallery-image.active {
@@ -300,47 +300,40 @@ body {
     transform: translateX(10px);
 }
 
-.about-lab-contact-mini h3 {
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-}
-
-.contact-grid-mini {
+.about-lab-contact-mini .contact-grid-mini {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Reduced min width */
+    gap: var(--spacing-sm);
 }
 
 .contact-item-mini {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: var(--spacing-sm);
     text-decoration: none;
     color: var(--text-color);
     transition: var(--transition);
-    font-size: 0.8rem;
+    font-size: 0.75rem; /* Reduced font size */
 }
 
 .contact-item-mini i {
-    font-size: 1rem;
+    font-size: 1rem; /* Reduced icon size */
 }
 
 .contact-item-mini:hover {
     color: var(--primary-color);
 }
 
-.contact-info-mini h4 {
-    font-size: 0.8rem;
-    margin: 0;
+.contact-item-mini h4 {
+    font-size: 0.9rem; /* Reduced heading size */
 }
 
-.contact-info-mini p {
-    font-size: 0.7rem;
-    margin: 0;
+.contact-item-mini p {
+    font-size: 0.7rem; /* Reduced paragraph size */
 }
 
 .qrcode-image-mini {
-    width: 30px;
+    width: 30px; /* Reduced QR code size */
     height: 30px;
     transition: transform 0.3s ease;
 }
@@ -349,21 +342,17 @@ body {
     transform: scale(1.1);
 }
 
-.address-mini {
-    margin-top: 10px;
-    padding-top: 5px;
-    border-top: 1px solid #eee;
+.qrcode-item-mini {
+    background: var(--bg-light);
+    padding: var(--spacing-sm);
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
 }
 
-.address-mini h4 {
-    font-size: 0.8rem;
-    margin-bottom: 2px;
-}
-
-.address-mini p {
-    font-size: 0.7rem;
-    margin-bottom: 5px;
-    line-height: 1.2;
+.qrcode-item-mini:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Collaboration Grid */
@@ -415,6 +404,25 @@ body {
     box-shadow: var(--shadow);
     text-align: center;
     margin: var(--spacing-xl) auto;
+}
+
+.live-map {
+    margin-top: var(--spacing-lg);
+    text-align: center;
+}
+
+.live-map h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.live-map iframe {
+    max-width: 800px;
+    width: 100%;
+    height: 400px;
+    box-shadow: var(--shadow);
 }
 
 /* Footer */
