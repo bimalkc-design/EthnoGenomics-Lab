@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const current = gallery.querySelector('.hero-gallery-image.active');
         current.classList.remove('active');
         currentImage = (currentImage + 1) % images.length;
-        gallery.children[currentImage].classList.add('active');
+        gallery.children[currentImage + 1].classList.add('active'); // Offset by 1 due to header
     }, 5000);
 
     // Dynamic Publications from publications.json
