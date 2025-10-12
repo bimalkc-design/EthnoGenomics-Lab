@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'pp.jpg',
             'research_genomics.jpg'
         ],
-        galleryCycleInterval: 5000, // 5 seconds
+        galleryCycleInterval: 5000, // 5 seconds (this will now only control the animation delays, not a strict cycle)
         scrollOffset: 70, // Adjust this value if your fixed header height changes
-        googleScholarId: 'https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ', // *** REMEMBER TO REPLACE THIS WITH YOUR ACTUAL ID ***
+        googleScholarId: 'Hp0ZnX4AAAAJ', // *** REMEMBER TO REPLACE THIS WITH YOUR ACTUAL ID, just the ID part ***
         linkedInProfile: 'https://www.linkedin.com/in/bimal-k-chetri-ph-d-a6b840a5/'
     };
 
@@ -127,8 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Dynamic Hero Gallery ---
 
-    let currentGalleryIndex = 0;
-    let galleryIntervalId;
+    // Removed currentGalleryIndex and galleryIntervalId as the animation is now CSS-driven
+    // The images will float in and out based on their CSS animation delays.
 
     /**
      * Creates and appends gallery images to the dynamic gallery container.
@@ -143,23 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
             img.src = config.galleryImageBaseUrl + src; // Use base URL + filename
             img.alt = `Lab Image ${index + 1}`;
             img.loading = 'lazy';
-            if (index === 0) img.classList.add('active');
+            // Removed img.classList.add('active'); as animation is now CSS-driven
             elements.dynamicGallery.appendChild(img);
         });
-    }
-
-    /**
-     * Cycles through gallery images for a flashing effect.
-     */
-    function cycleGalleryImages() {
-        if (!elements.dynamicGallery) return;
-
-        const images = elements.dynamicGallery.querySelectorAll('img');
-        if (images.length === 0) return;
-
-        images[currentGalleryIndex].classList.remove('active');
-        currentGalleryIndex = (currentGalleryIndex + 1) % images.length;
-        images[currentGalleryIndex].classList.add('active');
     }
 
     /**
@@ -168,8 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function initDynamicGallery() {
         if (config.galleryImages.length > 0 && elements.dynamicGallery) {
             createDynamicGallery();
-            if (galleryIntervalId) clearInterval(galleryIntervalId); // Clear any old interval
-            galleryIntervalId = setInterval(cycleGalleryImages, config.galleryCycleInterval);
+            // Removed setInterval as the animation is now handled purely by CSS keyframes
+            // The images will animate based on the 'floatAndFade' animation with individual delays.
         }
     }
 
@@ -194,14 +180,14 @@ document.addEventListener('DOMContentLoaded', () => {
             authors: "BImal K Chetri, K., Phuntsho Wangdi, Tshering Penjor",
             journal: "Asian Plant Research Journal",
             year: "2018",
-            link: "https://d1wqtxts1xzle7.cloudfront.net/59067833/Chetri122018APRJ4578620190428-37384-8w2tn0-libre.pdf?1556505489=&response-content-disposition=inline%3B+filename%3DEthnomedicinal_Practices_in_Kilikhar_Mon.pdf&Expires=1760258951&Signature=K0~XHfL7rt~KHyRb3DbP0D7mkgwyQLWCnFABmOKcKWjQYGXH9jV20DTVsnjtYPnOvVeeRS7INOmg3GVTr7-gXkMTS1El8DKsldrWmSbXuYC801T4RFPRLdTyl0etsNjmyrSkjFBzuYrTWV8oHKkH7r8UR7A~so1l~-DnZjjrEd2ka27gQwv29qoZVJkw~fzUjZIZrm2F8iI0Cku10hQWsqhn2nBtO8trcU-yIcdJ0jAyxSNNOiD9Jx5~2IXuJvsE91HhX47dHsPiDN67Z3LOyIjznaxPFSghoiG-ZNhKuIFSCa-4d5OFManm0IhORzH9ylz4U7pZ0NaEzVG6lAZcyg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA"
+            link: "https://d1wqtxts1xzle7.cloudfront.net/59067833/Chetri122018APRJ4578620190428-37384-8w2tn0-libre.pdf?1556505489=&response-content-disposition=inline%3B+filename%3DEthnomedicinal_Practices_in_Kilikhar_Mon.pdf&Expires=1760258951&Signature=K0~XHfL7rt~KHyRb3DbP0D7mkgwyQLWCnFABmOKcKWjQYGXH9jV20DTVsnjtYPnOvVeeRS7INOmg3GVTr7-gXkMTS1El8DKsldrWmSbXuYC801T4RFPRLdTyl0etsNjmyrSkjFBzuYrTWV8oHKkH7r8UR7A~so1l~-DnZjjrEd2ka27gQwv29qoZVJkw~fzUjZIZrm2F8iI0Cku10hQWsqhn2nBtO8trcU-yIcdJ0jAyxSNNOiD9Jx5~2IXuJvsE91HhX47dHsPiDN67Z3LOyIjznaxPFSghoiG-ZNhKuIFSCa-4d5OFManm0IhORzH9ylz4U2pZ0NaEzVG6lAZcyg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA"
         },
         {
             title: "Insights into cucurbitaceae mitogenomes: gene length variation, correlation features, and phylogenetic relationship",
             authors: "Bimal K Chetri, SS Sonu, Nicolas Dierckxsens, Sudip Mitra, Latha Rangan",
             journal: "Journal of Plant Biochemistry and Biotechnology",
             year: "2025",
-            link: "https://link.springer.com/article/10.1007/s13562-025-00992-7"
+            link: "https://link.springer.com/article/10.1007/s40009-025-01633-2"
         },
         {
             title: "In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, Albophoma sp. BAPR5",
@@ -289,8 +275,13 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function updateDynamicLinks() {
         // Update Google Scholar link if ID is provided
-        if (elements.googleScholarLink && config.googleScholarId !== 'https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ') {
-            elements.googleScholarLink.href = `https://scholar.google.com/citations?user=${config.googleScholarId}`;
+        // Make sure the config.googleScholarId only contains the ID, not the full URL.
+        const googleScholarBaseUrl = 'https://scholar.google.com/citations?user=';
+        if (elements.googleScholarLink && config.googleScholarId && config.googleScholarId !== 'YOUR_GOOGLE_SCHOLAR_ID') { // Check against placeholder
+            // If the current href is just the base URL, update it. Otherwise, assume it's already correct.
+            if (elements.googleScholarLink.href.startsWith(googleScholarBaseUrl) || elements.googleScholarLink.href === 'https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ') {
+                 elements.googleScholarLink.href = googleScholarBaseUrl + config.googleScholarId;
+            }
         }
 
         // Add LinkedIn to contact grid if not already present
