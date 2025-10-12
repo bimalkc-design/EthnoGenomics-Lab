@@ -1,128 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- ... existing meta, fonts, FontAwesome ... -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<section id="about" class="section">
+  <h2>About EthnoGenomics Lab</h2>
+  <p>
+    The <strong>EthnoGenomics Laboratory</strong> at the Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan, 
+    is dedicated to advancing research in <em>plant genomics, ethnobotany, and molecular biodiversity studies</em>. 
+    Our work bridges traditional knowledge systems with genomic science to document, conserve, and sustainably utilize 
+    Bhutan’s rich herbal and medicinal plant diversity.
+  </p>
+  
+  <div class="about-grid">
+    <div class="about-text">
+      <h3>Our Research Focus</h3>
+      <ul class="expertise">
+        <li><i class="fas fa-dna"></i> Organellar genome mining and comparative genomics</li>
+        <li><i class="fas fa-leaf"></i> Molecular authentication of medicinal plants</li>
+        <li><i class="fas fa-seedling"></i> Ethnobotanical documentation and conservation biology</li>
+        <li><i class="fas fa-laptop-code"></i> Bioinformatics pipeline development for genomic data analysis</li>
+      </ul>
+    </div>
 
-<div class="main-wrapper">
-
-    <!-- Compact Header -->
-    <header class="main-header-compact">
-        <div class="container header-container">
-            <div class="header-brand"><a href="#home">EthnoGenomics</a></div>
-            <div class="tiny-profile-wrapper">
-                <img src="portrait.jpg" alt="Dr. Bimal Kumar Chetri">
-                <div class="tiny-profile-info">
-                    <strong>Dr. Bimal K. Chetri</strong>
-                    <span>PI, EthnoGenomics Lab</span>
-                </div>
-            </div>
-            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><i class="fas fa-bars"></i></button>
-            <nav class="main-nav-compact">
-                <ul class="nav-menu-compact">
-                    <li><a href="#about">About Lab</a></li>
-                    <li><a href="#collaboration">Collaboration</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero/Welcome Section with Dynamic Gallery -->
-    <section class="hero-compact" id="home">
-        <div class="container">
-            <div class="hero-text-area">
-                <h1>Welcome to EthnoGenomics Lab</h1>
-                <p class="hero-tagline">Bridging Traditional Knowledge with Molecular Insights for Plant Conservation & Discovery</p>
-                <p class="hero-mission">At EthnoGenomics, we delve into the genetic architecture of medicinal and herbal plants, integrating advanced genomics with rich ethnobotanical wisdom...</p>
-                <div class="hero-cta">
-                    <a href="#about" class="btn btn-primary">Learn More About Our Lab <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="dynamic-hero-gallery">
-                <!-- Images will be dynamically loaded/managed by JS for fade effect -->
-                <img src="images/gallery/fieldwork_1.jpg" alt="Ethnobotany fieldwork" class="active">
-                <img src="images/gallery/lab_1.jpg" alt="Genomics lab work">
-                <img src="images/gallery/plant_species_1.jpg" alt="Diverse plant species">
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Content Area with Tabs/Accordions -->
-    <main class="container main-content-tabs">
-        <div class="tab-nav">
-            <button class="tab-button active" data-tab="about">About the Lab</button>
-            <button class="tab-button" data-tab="collaboration">Collaboration Areas</button>
-            <button class="tab-button" data-tab="publications">Publications</button>
-            <button class="tab-button" data-tab="gallery">Photo Gallery</button>
-            <button class="tab-button" data-tab="contact">Contact</button>
-        </div>
-
-        <div class="tab-content-wrapper">
-            <!-- About the Lab Tab Pane -->
-            <div id="about" class="tab-pane active">
-                <h2 class="section-title">About the EthnoGenomics Lab</h2>
-                <p class="section-description">Our mission and the researcher leading the way...</p>
-                <div class="about-lab-content">
-                    <div class="about-profile-card">
-                        <img src="portrait.jpg" alt="Dr. Bimal Kumar Chetri" class="portrait-about">
-                        <h3>Dr. Bimal Kumar Chetri <span class="degree">(PhD)</span></h3>
-                        <p class="profile-title-sm">Principal Investigator, EthnoGenomics Lab</p>
-                        <!-- ... tags and CV button ... -->
-                    </div>
-                    <div class="about-lab-text">
-                        <p>Dr. Chetri's academic journey culminates in a **PhD from IIT Guwahati**...</p>
-                        <!-- ... expertise, teaching, services ... -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Collaboration Areas Tab Pane -->
-            <div id="collaboration" class="tab-pane">
-                <h2 class="section-title">Areas for Collaboration</h2>
-                <p class="section-description">Our core research areas where we actively seek partnerships...</p>
-                <div class="collaboration-grid">
-                    <!-- ... existing research cards ... -->
-                </div>
-            </div>
-
-            <!-- Publications Tab Pane -->
-            <div id="publications" class="tab-pane">
-                <h2 class="section-title">Selected Publications</h2>
-                <p class="section-description">A selection of my peer-reviewed publications...</p>
-                <div id="publications-list" class="publications-list-compact">
-                    <!-- Publications populated by JS -->
-                </div>
-                <!-- ... Google Scholar button ... -->
-            </div>
-
-            <!-- Full Gallery Section (now a tab) -->
-            <div id="gallery" class="tab-pane">
-                <h2 class="section-title">EthnoGenomics Photo Gallery</h2>
-                <p class="section-description">A visual journey through fieldwork, laboratory sessions...</p>
-                <div id="gallery-container" class="gallery-grid">
-                  <!-- Images will be populated here by script.js, now as a static grid -->
-                </div>
-                <p class="text-center gallery-tip"><i class="fas fa-info-circle"></i> Click on any image to view it larger!</p>
-            </div>
-
-            <!-- Contact Section (now a tab) -->
-            <div id="contact" class="tab-pane">
-                <h2 class="section-title">Connect With EthnoGenomics Lab</h2>
-                <p class="section-description">Feel free to reach out for collaborations...</p>
-                <div class="contact-grid">
-                    <!-- ... existing contact items ... -->
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- ... footer and scroll-to-top button ... -->
-</div>
-<script src="script.js"></script>
-</body>
-</html>
+    <div class="about-side">
+      <h3>Collaboration Areas</h3>
+      <p>
+        We actively collaborate with researchers and institutions in:
+      </p>
+      <ul>
+        <li>Medicinal plant genomics and phylogenetics</li>
+        <li>Ethnobotany and traditional knowledge integration</li>
+        <li>Bioinformatics and molecular data visualization</li>
+        <li>GHG inventory and ecological modelling</li>
+      </ul>
+      <a href="#contact" class="btn-outline"><i class="fas fa-handshake"></i> Partner with Us</a>
+    </div>
+  </div>
+</section>
