@@ -21,6 +21,10 @@
     --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.08); /* Medium shadow for hover/prominent elements */
     --box-shadow-strong: 0 8px 20px rgba(0, 0, 0, 0.12); /* Stronger shadow for interactive states */
     --transition-speed: 0.3s ease-out; /* Smooth transitions */
+
+    /* Navigation Specific Colors */
+    --nav-item-hover-bg: rgba(255, 255, 255, 0.1); /* Subtle white overlay for hover */
+    --nav-item-active-bg: var(--primary-color); /* Primary color for active background */
 }
 
 /* Base Styles */
@@ -226,31 +230,42 @@ p {
     gap: var(--spacing-xl);
 }
 .nav-menu-compact a {
-    color: var(--light-text-color);
+    color: var(--light-text-color); /* All menu text is light */
     font-weight: 400;
-    padding: var(--spacing-xs) 0;
+    padding: var(--spacing-xs) var(--spacing-sm); /* Add horizontal padding for hover effect */
     position: relative;
     font-size: 1em;
-    transition: color var(--transition-speed);
+    transition: all var(--transition-speed); /* Transition all properties */
     text-decoration: none;
+    border-radius: var(--border-radius); /* Slightly rounded background for hover */
 }
 .nav-menu-compact a:hover {
-    color: var(--accent-color);
-    text-decoration: none;
+    color: var(--accent-color); /* Text color changes on hover */
+    background-color: var(--nav-item-hover-bg); /* Subtle background on hover */
+    text-decoration: none; /* Remove underline from hover */
 }
 .nav-menu-compact a.active {
-    color: var(--accent-color);
+    color: var(--light-text-color); /* Active text remains light */
     font-weight: 600;
+    background-color: var(--nav-item-active-bg); /* Distinct background for active */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for active item */
 }
 .nav-menu-compact a.active::after {
+    /* Retain the underline for active state, potentially adjust its color */
     content: '';
     position: absolute;
-    left: 0;
-    bottom: -5px; /* Position the underline slightly below text */
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -5px;
+    width: calc(100% - var(--spacing-sm) * 2); /* Adjust width to match text padding */
     height: 2px;
     background-color: var(--accent-color);
     transition: width var(--transition-speed);
+    border-radius: 1px;
+}
+.nav-menu-compact a.active:hover { /* Override hover background for active item */
+    background-color: var(--nav-item-active-bg);
+    color: var(--light-text-color);
 }
 
 
@@ -499,12 +514,13 @@ p {
 }
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjusted min-width to fit 5 items */
     gap: var(--spacing-md);
+    justify-content: center; /* Center items if they don't fill the full width */
 }
 .contact-item {
     text-align: center;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-sm); /* Adjusted padding for smaller width */
     background-color: var(--background-color);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-light);
@@ -515,24 +531,25 @@ p {
 .contact-item:hover {
     transform: translateY(-5px);
     box-shadow: var(--box-shadow-strong);
-    color: var(--primary-color); /* Highlight text on hover */
+    color: var(--primary-color);
 }
 .contact-item i {
-    font-size: 2.5em;
+    font-size: 2em; /* Smaller icons */
     color: var(--primary-color);
     margin-bottom: var(--spacing-sm);
 }
 .contact-item h4 {
-    font-size: 1.2em;
+    font-size: 1em; /* Smaller heading */
     margin-bottom: var(--spacing-xs);
+    line-height: 1.2; /* Tighter line height */
 }
 .contact-item p {
-    font-size: 0.95em;
+    font-size: 0.85em; /* Smaller paragraph */
     color: #6c757d;
     margin-bottom: 0;
 }
 .qrcode-item img {
-    width: 120px;
+    width: 100px; /* Adjusted QR code size */
     height: auto;
     margin: 0 auto var(--spacing-sm);
     border: 1px solid var(--border-color);
@@ -610,12 +627,18 @@ footer a:hover {
         display: block;
         padding: var(--spacing-sm) var(--spacing-md);
         font-size: 1.05em;
+        background-color: transparent; /* Remove background for default mobile links */
+        border-radius: 0; /* Remove border radius for default mobile links */
+    }
+    .nav-menu-compact a:hover { /* Mobile hover */
+        background-color: var(--nav-item-hover-bg);
     }
     .nav-menu-compact a.active {
         background-color: var(--primary-color);
         border-left: 4px solid var(--accent-color);
         border-radius: 0 var(--border-radius) var(--border-radius) 0; /* Rounded right edges */
         color: var(--light-text-color); /* Ensure text is light on active background */
+        box-shadow: none; /* Remove shadow for mobile active state */
     }
     .nav-menu-compact a.active::after { /* Hide underline for mobile active state */
         display: none;
@@ -650,7 +673,8 @@ footer a:hover {
         grid-template-columns: 1fr; /* Stack collaboration items */
     }
     .contact-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjust contact grid */
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Allow wrapping if needed */
+        gap: var(--spacing-md);
     }
 }
 
@@ -691,5 +715,11 @@ footer a:hover {
     }
     .section-card {
         padding: var(--spacing-lg);
+    }
+    .contact-item h4 {
+        font-size: 0.9em;
+    }
+    .contact-item p {
+        font-size: 0.8em;
     }
 }
