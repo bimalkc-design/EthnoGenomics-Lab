@@ -21,14 +21,29 @@ document.addEventListener('DOMContentLoaded', () => {
         googleScholarId: 'Hp0ZnX4AAAAJ', // *** REMEMBER TO REPLACE THIS WITH YOUR ACTUAL ID, just the ID part ***
         linkedInProfile: 'https://www.linkedin.com/in/bimal-k-chetri-ph-d-a6b840a5/',
         
-        // --- NEW: Recent Updates Configuration ---
+        // --- NEW: Recent Updates Configuration (as specified in the original request) ---
         updateImageBaseUrl: '', // e.g., 'updates/', 'assets/updates/'
         recentUpdates: [
-            { text: "New collaborative project initiated on Himalayan biodiversity.", image: "Update_1.jpg" },
-            { text: "Paper published in 'Ecological Genetics and Genomics' journal.", image: "Update_2.jpg" },
-            { text: "Workshop on NGS data analysis successfully concluded.", image: "Update_3.jpg" },
-            { text: "Field expedition to collect medicinal plant samples.", image: "Update_4.jpg" },
-            { text: "Lab welcomes new PhD student focusing on organellar genomics.", image: "Update_5.jpg" }
+            { 
+                text: "The Royal University of Bhutan - Sherubtse and 'Ovidius' University of Constanţa (Romania) invite you to the scientific lecture 'Bhutan: From Local Wisdom to Sustainable Approach' by Assoc. Prof. Dr. Bimal K. CHETRI (The Royal University of Bhutan - Sherubtse). Join us on Thursday, October 9, 2025, 10:00 – 11:00 AM, in room E216, building B, campus.", 
+                image: "update_1.jpg" // Using update_1.jpg as requested
+            },
+            { 
+                text: "Dr. Chetri's expertise: high-altitude medicinal plants, genomics, plant flow cytometry, and ecophysiology. Specializing in molecular and ecological study of high-altitude medicinal plants, integrating plant genomics and molecular phylogeny for adaptive mechanisms, therapeutic potential, and conservation strategies.", 
+                image: "Update_2.jpg" // Using Update_2.jpg
+            },
+            { 
+                text: "Significant contributions to understanding plant adaptation in extreme environments, with extensive publications on plastome and mitogenome analyses, nuclear DNA content estimation, and ethnobotanical research.", 
+                image: "Update_3.jpg" // Using Update_3.jpg
+            },
+            { 
+                text: "Key Expertise Areas: High-altitude medicinal plants, Genomics, Plant flow cytometry, Molecular phylogeny, Organellar genome mining, Evolutionary dynamics, Ethnobotany, Plant conservation.", 
+                image: "Update_4.jpg" // Using Update_4.jpg
+            },
+            { 
+                text: "Organizers: Dr. Liviu-Daniel GALAŢCHI & Dr. Bimal-Kumar CHETRI", 
+                image: "5.0.jpg" // Example: Using another image from your existing list if no specific "Update_5.jpg" is meant for this
+            }
         ],
         updateCarouselInterval: 6000 // 6 seconds for automatic slide change
     };
@@ -57,15 +72,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const recentUpdatesContainer = document.querySelector(selectors.recentUpdatesContainer);
     const updateCarouselIndicators = document.querySelector(selectors.updateCarouselIndicators);
 
-    let currentGalleryImageIndex = 0;
+    // --- State Variables ---
+    let currentGalleryImageIndex = 0; // Though currently unused due to new animateGalleryImages logic
     let updateCarouselIntervalId;
 
     // --- Helper Functions ---
+
+    /**
+     * Toggles the active class on the mobile navigation menu and its toggle button.
+     */
     const toggleNavMenu = () => {
         navMenu.classList.toggle('active');
         navToggle.classList.toggle('active'); // Animate the hamburger icon
     };
 
+    /**
+     * Smoothly scrolls the window to a target element, accounting for a fixed header.
+     * @param {string} targetId The ID of the element to scroll to.
+     */
     const smoothScroll = (targetId) => {
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
@@ -80,11 +104,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    /**
+     * Animates the gallery images by fading them in one by one.
+     * Images remain visible after fading in.
+     */
     const animateGalleryImages = () => {
         if (!dynamicGallery) return;
 
         dynamicGallery.innerHTML = ''; // Clear previous images
-        const imgCount = config.galleryImages.length;
         
         // Add all images to the gallery initially, hidden
         config.galleryImages.forEach((imgName, index) => {
@@ -106,32 +133,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 images[currentIndex].style.opacity = '1';
                 currentIndex++;
             } else {
-                // All images are visible, optionally loop or do something else
-                // For now, we'll just keep them visible after they all fade in
-                clearInterval(galleryAnimationInterval); // Stop after one full cycle
+                // All images are visible, stop the animation interval
+                clearInterval(galleryAnimationInterval);
             }
         };
 
-        // Start showing images
+        // Start showing images with a staggered delay
         const galleryAnimationInterval = setInterval(showNextImage, config.galleryCycleInterval / images.length);
     };
 
+    /**
+     * Fetches publications from Google Scholar using a proxy and displays them.
+     */
     const fetchGoogleScholarPublications = async () => {
         if (!publicationsList) return;
 
         publicationsList.innerHTML = '<p>Loading publications...</p>'; // Loading indicator
 
         try {
-            // Using a proxy to bypass CORS, or a server-side script
-            // For client-side, this requires a public API or a CORS-enabled proxy
-            // Note: Directly scraping Google Scholar from client-side JavaScript is often blocked by CORS
-            // A common approach is a serverless function (e.g., Netlify Functions, AWS Lambda) or a simple proxy server
+            // Using a public proxy to bypass CORS for client-side scraping
+            // Note: This is a common approach for demos but may not be robust for production
             const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://scholar.google.com/citations?user=${config.googleScholarId}&hl=en`)}`;
             
             const response = await fetch(proxyUrl);
             const data = await response.json();
             
-            // The content is inside data.contents when using allorigins.win
+            // The actual HTML content is inside data.contents when using allorigins.win
             const parser = new DOMParser();
             const doc = parser.parseFromString(data.contents, 'text/html');
 
@@ -140,11 +167,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (publicationItems.length > 0) {
                 publicationsList.innerHTML = ''; // Clear loading message
                 publicationItems.forEach(item => {
-                    const title = item.querySelector('.gsc_a_at').textContent;
-                    const authors = item.querySelector('.gsc_a_an').textContent;
-                    const journal = item.querySelector('.gsc_a_ti').textContent;
-                    const year = item.querySelector('.gsc_a_h').textContent;
-                    const citationLink = item.querySelector('.gsc_a_at').href;
+                    // Extract publication details
+                    const titleElement = item.querySelector('.gsc_a_at');
+                    const title = titleElement ? titleElement.textContent : 'No Title';
+                    const citationLink = titleElement ? titleElement.href : '#';
+
+                    const authorsElement = item.querySelector('.gsc_a_an');
+                    const authors = authorsElement ? authorsElement.textContent : 'Unknown Authors';
+
+                    const journalElement = item.querySelector('.gsc_a_ti');
+                    const journal = journalElement ? journalElement.textContent : 'Unknown Journal';
+
+                    const yearElement = item.querySelector('.gsc_a_h');
+                    const year = yearElement ? yearElement.textContent : 'N.D.';
 
                     const li = document.createElement('li');
                     li.innerHTML = `
@@ -164,6 +199,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    /**
+     * Activates a specific tab, showing its content and highlighting its button.
+     * @param {string} tabId The ID of the tab content to activate.
+     */
     const activateTab = (tabId) => {
         // Deactivate all tab buttons and content
         tabButtons.forEach(button => button.classList.remove('active'));
@@ -177,8 +216,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (targetContent) targetContent.classList.add('active');
     };
 
+    /**
+     * Initializes and populates the recent updates carousel with dynamic content.
+     */
     const setupRecentUpdatesCarousel = () => {
-        if (!recentUpdatesContainer) return;
+        if (!recentUpdatesContainer || !updateCarouselIndicators) return;
 
         recentUpdatesContainer.innerHTML = ''; // Clear any existing content
         updateCarouselIndicators.innerHTML = ''; // Clear existing indicators
@@ -197,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             recentUpdatesContainer.appendChild(item);
 
-            // Create indicator dot
+            // Create indicator dot button
             const indicator = document.createElement('button');
             indicator.classList.add('carousel-indicator');
             if (index === 0) indicator.classList.add('active');
@@ -205,14 +247,24 @@ document.addEventListener('DOMContentLoaded', () => {
             updateCarouselIndicators.appendChild(indicator);
         });
 
+        // After setting up the elements, start the carousel functionality
         startUpdateCarousel();
     };
 
+    /**
+     * Manages the automatic cycling and manual navigation of the recent updates carousel.
+     */
     const startUpdateCarousel = () => {
         const items = recentUpdatesContainer.querySelectorAll('.carousel-item');
         const indicators = updateCarouselIndicators.querySelectorAll('.carousel-indicator');
         let currentIndex = 0;
 
+        if (items.length === 0) return; // No updates to carousel
+
+        /**
+         * Shows a specific slide by adding 'active' class and updates indicators.
+         * @param {number} index The index of the slide to show.
+         */
         const showSlide = (index) => {
             items.forEach((item, i) => {
                 item.classList.toggle('active', i === index);
@@ -222,23 +274,28 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
+        /**
+         * Advances to the next slide in the carousel.
+         */
         const nextSlide = () => {
             currentIndex = (currentIndex + 1) % items.length;
             showSlide(currentIndex);
         };
 
-        // Clear any existing interval to prevent duplicates
+        // Clear any existing interval to prevent multiple carousel loops
         if (updateCarouselIntervalId) {
             clearInterval(updateCarouselIntervalId);
         }
+        // Start the automatic slide rotation
         updateCarouselIntervalId = setInterval(nextSlide, config.updateCarouselInterval);
 
-        // Add event listeners for indicators
+        // Add event listeners for indicator buttons to allow manual navigation
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => {
                 currentIndex = index;
                 showSlide(currentIndex);
-                clearInterval(updateCarouselIntervalId); // Reset interval on manual click
+                // Reset the auto-cycle interval on manual click
+                clearInterval(updateCarouselIntervalId); 
                 updateCarouselIntervalId = setInterval(nextSlide, config.updateCarouselInterval);
             });
         });
@@ -246,41 +303,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Event Listeners ---
 
-    // Mobile navigation toggle
+    // Event listener for mobile navigation toggle button
     if (navToggle) {
         navToggle.addEventListener('click', toggleNavMenu);
     }
 
-    // Smooth scrolling for internal links
+    // Event listeners for smooth scrolling on internal navigation links
     sectionLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1); // Remove '#'
+            e.preventDefault(); // Prevent default anchor jump
+            const targetId = this.getAttribute('href').substring(1); // Get target ID from href (remove '#')
             smoothScroll(targetId);
+            // Close the mobile nav menu if it's open after clicking a link
             if (navMenu && navMenu.classList.contains('active')) {
-                toggleNavMenu(); // Close nav menu after clicking a link
+                toggleNavMenu(); 
             }
         });
     });
 
-    // Tab functionality for Research/About
+    // Event listeners for tab switching functionality (e.g., Research/About sections)
     tabButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const tabId = this.getAttribute('data-tab');
+            const tabId = this.getAttribute('data-tab'); // Get the target tab ID from data-tab attribute
             activateTab(tabId);
         });
     });
 
-    // Show/hide scroll-up button
+    // Event listeners for the scroll-up button visibility and click action
     if (scrollUpButton) {
+        // Show/hide button based on scroll position
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) { // Show button after scrolling 300px
+            if (window.scrollY > 300) { // Show button after scrolling down 300px
                 scrollUpButton.classList.add('show');
             } else {
                 scrollUpButton.classList.remove('show');
             }
         });
 
+        // Scroll to top when button is clicked
         scrollUpButton.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -289,22 +349,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Initializations ---
+    // --- Initializations (Functions called when the DOM is fully loaded) ---
 
-    // Animate the hero gallery images
+    // Start the hero gallery image animation
     animateGalleryImages();
 
-    // Fetch publications if the element exists
+    // Fetch and display publications from Google Scholar
     if (publicationsList) {
         fetchGoogleScholarPublications();
     }
 
-    // Activate the first tab by default (if tabs exist)
+    // Activate the first tab by default if there are tabs present
     if (tabButtons.length > 0) {
         activateTab(tabButtons[0].getAttribute('data-tab'));
     }
 
-    // Setup recent updates carousel
+    // Set up and start the recent updates carousel
     if (recentUpdatesContainer) {
         setupRecentUpdatesCarousel();
     }
