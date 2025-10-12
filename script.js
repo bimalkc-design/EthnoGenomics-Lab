@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Dynamic Hero Gallery - REVERTED TO ORIGINAL IMAGES + FIXED OFFSET
+    // Dynamic Hero Gallery - Updated for smoother transitions
     const gallery = document.querySelector('.dynamic-hero-gallery');
     const images = [
         '2.10.jpg',
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const current = gallery.querySelector('.hero-gallery-image.active');
         current.classList.remove('active');
         currentImage = (currentImage + 1) % images.length;
-        gallery.children[currentImage + 1].classList.add('active');  // FIXED: +1 skips header
+        gallery.children[currentImage + 1].classList.add('active'); // +1 skips header
     }, 5000);
 
     // Dynamic Publications - Updated with provided publications
