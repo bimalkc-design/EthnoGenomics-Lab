@@ -1,201 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EthnoGenomics Lab — Dr. Bimal Kumar Chetri (PhD)</title>
-<meta name="description" content="Official website of EthnoGenomics Lab by Dr. Bimal Kumar Chetri. Specializing in Plant Genomics, Organellar Genome Mining, Ethnobotany, Medicinal Plant Research, and Traditional Knowledge integration.">
-<meta name="author" content="Dr. Bimal Kumar Chetri">
-<meta name="keywords" content="EthnoGenomics, Plant Genomics, Molecular Biology, Ethnobotany, Medicinal Plants, Biodiversity, Traditional Knowledge, Bioinformatics, Bhutan, Research, Dr. Bimal Kumar Chetri">
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-<!-- FontAwesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!-- External CSS -->
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EthnoGenomics Lab — Dr. Bimal Kumar Chetri (PhD)</title>
+    <meta name="description" content="Official website of EthnoGenomics Lab, specializing in Plant Genomics, Organellar Genome Mining, Ethnobotany, Medicinal Plant Research, and Traditional Knowledge integration.">
+    <meta name="author" content="Dr. Bimal Kumar Chetri">
+    <meta name="keywords" content="EthnoGenomics, Plant Genomics, Molecular Biology, Ethnobotany, Medicinal Plants, Biodiversity, Traditional Knowledge, Bioinformatics, Bhutan, Research, Collaboration, Services">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React and Babel -->
+    <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.6/babel.min.js"></script>
 </head>
-<body>
+<body class="font-montserrat bg-gray-100 text-gray-800">
+    <div id="root"></div>
 
-<div class="main-wrapper">
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-  <!-- Navigation -->
-  <nav class="main-nav">
-    <div class="container nav-container">
-      <div class="brand-name"><a href="#home">EthnoGenomics</a></div>
-      <button class="nav-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
-      <ul class="nav-menu">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about-lab">About the Lab</a></li> <!-- Renamed -->
-        <li><a href="#research">Collaboration Areas</a></li> <!-- Renamed -->
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+        // Sample publications data (assumed from publications.json)
+        const publications = [
+            {
+                title: "Chloroplast Genome Sequencing of *Rhododendron arboreum* from the Eastern Himalayas: Insights into Phylogeny and Adaptive Evolution",
+                authors: "Chetri, B. K., Sharma, S., & Rai, R.",
+                journal: "Journal of Plant Genomics",
+                year: "2023",
+                link: "https://scholar.google.com/scholar?q=Chloroplast+Genome+Sequencing+Rhododendron+arboreum"
+            },
+            {
+                title: "Ethnobotanical Survey of Medicinal Plants Used by Indigenous Communities in Eastern Bhutan",
+                authors: "Chetri, B. K., Gurung, S., & Dendup, C.",
+                journal: "Economic Botany",
+                year: "2022",
+                link: "https://scholar.google.com/scholar?q=Ethnobotanical+Survey+Medicinal+Plants+Bhutan"
+            },
+            {
+                title: "Mitochondrial Genome Analysis of *Swertia chirayita* Reveals Novel Genetic Markers for Species Authentication",
+                authors: "Rai, R., Chetri, B. K., & Sharma, S.",
+                journal: "BMC Plant Biology",
+                year: "2021",
+                link: "https://scholar.google.com/scholar?q=Mitochondrial+Genome+Swertia+chirayita"
+            }
+        ];
 
-  <!-- Hero/Welcome Section -->
-  <header class="hero" id="home">
-    <div class="container hero-content">
-      <div class="hero-text-area">
-        <h1>Welcome to EthnoGenomics Lab</h1>
-        <p class="hero-tagline">Bridging Traditional Knowledge with Molecular Insights for Plant Conservation & Discovery</p>
-        <p class="hero-mission">At EthnoGenomics, we delve into the genetic architecture of medicinal and herbal plants, integrating advanced genomics with rich ethnobotanical wisdom. Our mission is to unlock the potential of plant biodiversity for sustainable utilization and conservation, with a special focus on the unique flora of the Himalayas.</p>
-        <div class="hero-cta">
-            <a href="#about-lab" class="btn btn-primary">Learn More About Our Lab <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-    </div>
-  </header>
+        // Gallery images from provided assets
+        const galleryImages = [
+            '2.10.jpg',
+            '3.5a.jpg',
+            '3.5b.jpg',
+            '3.6.jpg',
+            '4.2.jpg',
+            '4.4.jpg',
+            '5.0.jpg',
+            '5.2.jpg'
+        ];
 
-  <!-- Top Motion Gallery (New Element) -->
-  <section class="top-motion-gallery-wrapper">
-    <div class="top-motion-gallery container">
-      <div class="top-gallery-track">
-        <!-- Images dynamically loaded here for motion effect -->
-      </div>
-    </div>
-  </section>
+        // Navigation Component
+        const Navigation = () => {
+            const [isOpen, setIsOpen] = useState(false);
 
-  <main class="container">
-    <!-- About the Lab Section -->
-    <section id="about-lab" class="section-card">
-      <h2 class="section-title">About the EthnoGenomics Lab</h2> <!-- Renamed -->
-      <p class="section-description">Our mission and the researcher leading the way in plant genomics and ethnobotany.</p>
-      <div class="about-lab-intro">
-        <p>The EthnoGenomics Lab is dedicated to advancing our understanding of plant genetics, with a particular emphasis on the medicinal and herbal flora of the Himalayas. We integrate cutting-edge molecular biology and bioinformatics with invaluable traditional knowledge to explore organellar genomes, authenticate species, and support biodiversity conservation efforts. Our work is driven by a commitment to sustainable utilization of plant resources and unlocking their full therapeutic potential.</p>
-      </div>
+            const toggleMenu = () => setIsOpen(!isOpen);
 
-      <!-- Dr. Chetri's Profile within About the Lab -->
-      <h3 class="section-subtitle" style="margin-top: var(--spacing-lg);">Meet the Principal Investigator</h3>
-      <div class="about-flex-container">
-        <div class="about-profile-card">
-            <img src="portrait.jpg" alt="Dr. Bimal Kumar Chetri" class="portrait-about">
-            <h3>Dr. Bimal Kumar Chetri <span class="degree">(PhD)</span></h3>
-            <p class="profile-title-sm">Principal Investigator, EthnoGenomics Lab</p>
-            <div class="tag-group">
-                <span class="tag">Plant Genomics</span>
-                <span class="tag">Ethnobotany</span>
-                <span class="tag">Bioinformatics</span>
-                <span class="tag">Medicinal Plants</span>
-                <span class="tag">Traditional Knowledge</span>
-                <span class="tag">Biodiversity</span>
+            return (
+                <header className="bg-blue-900 text-white sticky top-0 z-50 shadow-md">
+                    <div className="max-w-5xl mx-auto px-4 flex justify-between items-center py-3">
+                        <div className="flex items-center gap-3">
+                            <img src="portrait.jpg" alt="Dr. Bimal Kumar Chetri" className="w-8 h-8 rounded-full border-2 border-green-500 object-cover" />
+                            <h1 className="font-playfair text-lg font-bold">EthnoGenomics Lab</h1>
+                        </div>
+                        <button onClick={toggleMenu} className="lg:hidden text-xl" aria-label="Toggle navigation">
+                            <i className="fas fa-bars"></i>
+                        </button>
+                        <nav className={`lg:flex ${isOpen ? 'block' : 'hidden'} absolute lg:static top-14 left-0 w-full lg:w-auto bg-blue-900 lg:bg-transparent p-4 lg:p-0 transition-all duration-300`}>
+                            <ul className="flex flex-col lg:flex-row gap-3 lg:gap-6">
+                                {['Home', 'About', 'Research', 'Services', 'Publications', 'Contact'].map((item) => (
+                                    <li key={item}>
+                                        <a href={`#${item.toLowerCase()}`} className="hover:text-green-400 transition-colors text-sm font-medium" onClick={() => setIsOpen(false)}>
+                                            {item}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+            );
+        };
+
+        // Hero Component with Gallery
+        const Hero = () => {
+            const [currentImage, setCurrentImage] = useState(0);
+
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    setCurrentImage((prev) => (prev + 1) % galleryImages.length);
+                }, 4000);
+                return () => clearInterval(interval);
+            }, []);
+
+            return (
+                <section id="home" className="bg-gradient-to-br from-gray-100 to-gray-200 py-10">
+                    <div className="max-w-5xl mx-auto px-4 grid lg:grid-cols-2 gap-6 items-center">
+                        <div className="text-center lg:text-left">
+                            <h1 className="font-playfair text-2xl lg:text-3xl text-blue-800 mb-3">EthnoGenomics Lab</h1>
+                            <p className="text-base text-blue-600 font-light mb-3">Advancing Plant Genomics and Ethnobotany</p>
+                            <p className="text-sm mb-4 max-w-md mx-auto lg:mx-0">We integrate advanced genomics and bioinformatics with traditional knowledge to study medicinal plants of the Himalayas, focusing on conservation and sustainable utilization.</p>
+                            <a href="#research" className="inline-block bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-all text-sm">
+                                Explore Research <i className="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                        <div className="relative h-56 lg:h-72 rounded-lg overflow-hidden shadow-lg">
+                            {galleryImages.map((src, index) => (
+                                <img
+                                    key={index}
+                                    src={src}
+                                    alt={`Research Image ${index + 1}`}
+                                    className={`absolute w-full h-full object-cover transition-opacity duration-1200 ${index === currentImage ? 'opacity-100' : 'opacity-0'}`}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Tabbed Content Component
+        const TabbedContent = () => {
+            const [activeTab, setActiveTab] = useState('about');
+
+            return (
+                <main className="max-w-5xl mx-auto px-4 py-10">
+                    <nav className="flex justify-center flex-wrap gap-2 mb-6 border-b border-gray-300">
+                        {['About', 'Research', 'Services', 'Publications'].map((tab) => (
+                            <button
+                                key={tab}
+                                onClick={() => setActiveTab(tab.toLowerCase())}
+                                className={`px-3 py-2 text-sm font-medium rounded-t-md transition-all ${
+                                    activeTab === tab.toLowerCase() ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                                }`}
+                            >
+                                {tab}
+                            </button>
+                        ))}
+                    </nav>
+                    <div className="bg-white p-5 rounded-lg shadow-md">
+                        {activeTab === 'about' && (
+                            <section id="about" className="animate-fade-in">
+                                <h2 className="font-playfair text-xl text-blue-800 mb-3 text-center">About the EthnoGenomics Lab</h2>
+                                <p className="text-sm text-center max-w-lg mx-auto mb-6 text-gray-600">Pioneering research in plant genomics and ethnobotany for Himalayan biodiversity.</p>
+                                <div className="grid lg:grid-cols-2 gap-4">
+                                    <div>
+                                        <h3 className="font-playfair text-base text-blue-700 mb-2">Our Mission</h3>
+                                        <p className="text-sm mb-4">The EthnoGenomics Lab focuses on unlocking the genetic potential of medicinal and herbal plants through organellar genome mining, bioinformatics, and ethnobotanical integration, with an emphasis on sustainable conservation in the Himalayas.</p>
+                                        <div className="bg-gray-50 p-3 rounded-md border-l-4 border-green-500">
+                                            <h4 className="text-sm font-medium text-blue-600 mb-2">Core Objectives</h4>
+                                            <ul className="list-none text-sm space-y-1">
+                                                <li className="flex items-center gap-2"><i className="fas fa-leaf text-green-500"></i> Genomic resource development</li>
+                                                <li className="flex items-center gap-2"><i className="fas fa-seedling text-green-500"></i> Species authentication</li>
+                                                <li className="flex items-center gap-2"><i className="fas fa-dna text-green-500"></i> Biodiversity conservation</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 className="font-playfair text-base text-blue-700 mb-2">Principal Investigator</h3>
+                                        <div className="flex items-start gap-3">
+                                            <img src="portrait.jpg" alt="Dr. Bimal Kumar Chetri" className="w-16 h-16 rounded-full border-2 border-green-500 object-cover" />
+                                            <div>
+                                                <h4 className="text-sm font-medium">Dr. Bimal Kumar Chetri (PhD)</h4>
+                                                <p className="text-xs text-gray-600 mb-2">Principal Investigator</p>
+                                                <p className="text-xs">PhD (IIT Guwahati), MSc (Pune University). Leads research in plant genomics, ethnobotany, and bioinformatics.</p>
+                                                <a href="cv.pdf" target="_blank" className="text-blue-600 text-xs hover:underline mt-1 inline-block">
+                                                    <i className="fas fa-download mr-1"></i> Download CV
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        )}
+                        {activeTab === 'research' && (
+                            <section id="research" className="animate-fade-in">
+                                <h2 className="font-playfair text-xl text-blue-800 mb-3 text-center">Collaboration Areas</h2>
+                                <p className="text-sm text-center max-w-lg mx-auto mb-6 text-gray-600">Join us in advancing genomic science and sustainable plant resource management.</p>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                    {[
+                                        { title: "Organellar Genomics", desc: "Assembly and annotation of chloroplast and mitochondrial genomes for phylogenetic and marker development.", icon: "fas fa-dna", img: "research_genomics.jpg" },
+                                        { title: "Ethnobotany & Conservation", desc: "Integrating traditional knowledge with scientific validation for sustainable plant use.", icon: "fas fa-leaf" },
+                                        { title: "GHG Inventory & Ecology", desc: "Assessing greenhouse gas dynamics in diverse ecosystems.", icon: "fas fa-globe" }
+                                    ].map((item) => (
+                                        <div key={item.title} className="bg-gray-50 p-3 rounded-md border border-gray-200 hover:shadow-lg transition-shadow">
+                                            {item.img && <img src={item.img} alt={item.title} className="w-full h-32 object-cover rounded-md mb-2" />}
+                                            <i className={`${item.icon} text-2xl text-blue-600 mb-2 block text-center`}></i>
+                                            <h3 className="text-sm font-medium text-center mb-1">{item.title}</h3>
+                                            <p className="text-xs text-gray-600 text-center">{item.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="text-center mt-6">
+                                    <a href="#contact" className="inline-block bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-all text-sm">
+                                        Initiate Collaboration <i className="fas fa-handshake ml-1"></i>
+                                    </a>
+                                </div>
+                            </section>
+                        )}
+                        {activeTab === 'services' && (
+                            <section id="services" className="animate-fade-in">
+                                <h2 className="font-playfair text-xl text-blue-800 mb-3 text-center">Research Services</h2>
+                                <p className="text-sm text-center max-w-lg mx-auto mb-6 text-gray-600">Specialized services to support genomic and ethnobotanical research.</p>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                    {[
+                                        { title: "NGS Data Analysis", desc: "Assembly, annotation, and downstream analysis of next-generation sequencing data.", icon: "fas fa-code" },
+                                        { title: "Genotyping by Sequencing", desc: "High-throughput genotyping for species authentication and diversity studies.", icon: "fas fa-vial" },
+                                        { title: "Plant Flow Cytometry", desc: "Analysis of plant cell properties for genomic and physiological studies.", icon: "fas fa-microscope" }
+                                    ].map((item) => (
+                                        <div key={item.title} className="bg-gray-50 p-3 rounded-md border border-gray-200 hover:shadow-lg transition-shadow">
+                                            <i className={`${item.icon} text-2xl text-blue-600 mb-2 block text-center`}></i>
+                                            <h3 className="text-sm font-medium text-center mb-1">{item.title}</h3>
+                                            <p className="text-xs text-gray-600 text-center">{item.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="text-center mt-6">
+                                    <a href="#contact" className="inline-block bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-all text-sm">
+                                        Request Services <i className="fas fa-flask ml-1"></i>
+                                    </a>
+                                </div>
+                            </section>
+                        )}
+                        {activeTab === 'publications' && (
+                            <section id="publications" className="animate-fade-in">
+                                <h2 className="font-playfair text-xl text-blue-800 mb-3 text-center">Selected Publications</h2>
+                                <p className="text-sm text-center max-w-lg mx-auto mb-6 text-gray-600">Contributions to plant genomics and ethnobotany.</p>
+                                <div className="space-y-3">
+                                    {publications.map((pub, index) => (
+                                        <div key={index} className="bg-gray-50 p-3 rounded-md border-l-4 border-blue-600 hover:transform hover:translate-x-1 transition-transform">
+                                            <h4 className="text-sm font-medium mb-1">{pub.title}</h4>
+                                            <p className="text-xs text-gray-600 mb-1"><strong>Authors:</strong> {pub.authors}</p>
+                                            <p className="text-xs text-gray-600 mb-1"><strong>Journal:</strong> {pub.journal} ({pub.year})</p>
+                                            <a href={pub.link} target="_blank" className="text-blue-600 text-xs hover:underline">
+                                                Read More <i className="fas fa-external-link-alt ml-1"></i>
+                                            </a>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="text-center mt-6">
+                                    <a href="https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID" target="_blank" className="inline-block bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-all text-sm">
+                                        <i className="fas fa-graduation-cap mr-1"></i> View All on Google Scholar
+                                    </a>
+                                </div>
+                            </section>
+                        )}
+                    </div>
+                </main>
+            );
+        };
+
+        // Contact Component
+        const Contact = () => (
+            <section id="contact" className="bg-gray-200 py-10">
+                <div className="max-w-5xl mx-auto px-4">
+                    <h2 className="font-playfair text-xl text-blue-800 mb-3 text-center">Connect With Us</h2>
+                    <p className="text-sm text-center max-w-lg mx-auto mb-6 text-gray-600">Contact us for collaborations, services, or research inquiries.</p>
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+                        {[
+                            { icon: "fas fa-envelope", title: "Email", value: "bimal_kum.sherubtse@rub.edu.bt", href: "mailto:bimal_kum.sherubtse@rub.edu.bt" },
+                            { icon: "fab fa-orcid", title: "ORCID", value: "0000-0002-2154-7676", href: "https://orcid.org/0000-0002-2154-7676" },
+                            { icon: "fab fa-researchgate", title: "ResearchGate", value: "View Profile", href: "https://www.researchgate.net/profile/Bimal-Chetri" },
+                            { icon: "fas fa-graduation-cap", title: "Google Scholar", value: "Scan QR Code", href: "https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID", img: "qrcode.png" }
+                        ].map((item, index) => (
+                            <a key={index} href={item.href} target="_blank" rel="noopener noreferrer" className="bg-white p-3 rounded-md text-center hover:shadow-lg transition-shadow">
+                                {item.img ? (
+                                    <img src={item.img} alt={`${item.title} QR Code`} className="w-16 mx-auto mb-2" />
+                                ) : (
+                                    <i className={`${item.icon} text-xl text-blue-600 mb-2`}></i>
+                                )}
+                                <h4 className="text-sm font-medium mb-1">{item.title}</h4>
+                                <p className="text-xs text-gray-600">{item.value}</p>
+                            </a>
+                        ))}
+                    </div>
+                    <p className="text-sm text-center mt-6 text-gray-600">Kanglung-42002, Sherubtse College, Royal University of Bhutan, Trashigang, Bhutan</p>
+                </div>
+            </section>
+        );
+
+        // Footer Component
+        const Footer = () => (
+            <footer className="bg-blue-900 text-white text-center py-3">
+                <p className="text-xs">&copy; {new Date().getFullYear()} EthnoGenomics Lab — Dr. Bimal Kumar Chetri, Sherubtse College. All rights reserved.</p>
+            </footer>
+        );
+
+        // Scroll to Top Button
+        const ScrollToTop = () => {
+            const [visible, setVisible] = useState(false);
+
+            useEffect(() => {
+                const toggleVisibility = () => setVisible(window.scrollY > 200);
+                window.addEventListener('scroll', toggleVisibility);
+                return () => window.removeEventListener('scroll', toggleVisibility);
+            }, []);
+
+            return (
+                <button
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    className={`fixed bottom-3 right-3 bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-600 transition-all ${visible ? 'block' : 'hidden'}`}
+                    aria-label="Scroll to top"
+                >
+                    <i className="fas fa-arrow-up"></i>
+                </button>
+            );
+        };
+
+        // Main App Component
+        const App = () => (
+            <div>
+                <Navigation />
+                <Hero />
+                <TabbedContent />
+                <Contact />
+                <Footer />
+                <ScrollToTop />
             </div>
-            <a href="cv.pdf" target="_blank" class="btn btn-outline" style="margin-top: var(--spacing-md);"><i class="fas fa-download"></i> Download CV</a>
-        </div>
-        <div class="about-text">
-          <p>Dr. Chetri's academic journey culminates in a **PhD from IIT Guwahati** and an **MSc in Botany from Pune University**. His research explores the intricate world of plant genetics, specifically focusing on **organellar genome mining** of herbal and medicinal plants. This involves a multidisciplinary approach, blending cutting-edge **plant molecular biology** techniques with sophisticated **bioinformatics analysis**.</p>
-          <p>A significant aspect of his work is rooted in **ethnobotany**, where he integrates valuable traditional knowledge with scientific inquiry. He is particularly passionate about the rich biodiversity of Bhutan and the Eastern Himalayas, striving to generate genomic resources that aid in species authentication, conservation, and the sustainable utilization of these invaluable natural assets.</p>
-          <div class="about-details-grid">
-            <div class="detail-item"><i class="fas fa-book-reader"></i><span>**Expertise:** Plant Genomics, Organellar Genome Mining, Ethnobotany, Bioinformatics, Medicinal Plants, GHG Inventory.</span></div>
-            <div class="detail-item"><i class="fas fa-chalkboard-teacher"></i><span>**Teaching:** Plant Diversity, Ethnobotany, Genetics & Genomics, Plant Physiology, Bioinformatics.</span></div>
-            <div class="detail-item"><i class="fas fa-flask"></i><span>**Services:** NGS Data Assembly & Annotation, Downstream Analysis, Genotyping by Sequencing, Plant Flow Cytometry, Academic Writing.</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
+        );
 
-    <!-- Research Section (Collaboration Areas) -->
-    <section id="research" class="section-card">
-      <h2 class="section-title">Areas for Collaboration</h2> <!-- Renamed -->
-      <p class="section-description">Our core research areas where we actively seek partnerships to bridge traditional knowledge with modern genomic science for sustainable plant resource management and discovery.</p>
-      <div class="research-grid">
-        <div class="research-card">
-          <img src="research_genomics.jpg" alt="Organellar Genomics Research">
-          <div class="research-card-overlay">
-            <h4>Organellar Genomics</h4>
-            <p>Assembly & annotation of chloroplast and mitochondrial genomes from NGS data for phylogenetic insights and marker development.</p>
-          </div>
-        </div>
-        <div class="research-card">
-          <img src="research_ethnobotany.jpg" alt="Ethnobotany Research">
-          <div class="research-card-overlay">
-            <h4>Ethnobotany & Conservation</h4>
-            <p>Integrating traditional knowledge with scientific validation for plant conservation and sustainable use.</p>
-          </div>
-        </div>
-        <div class="research-card">
-          <img src="research_ghg.jpg" alt="GHG Inventory Research">
-          <div class="research-card-overlay">
-            <h4>GHG Inventory & Ecology</h4>
-            <p>Developing methodologies for assessing greenhouse gas dynamics in diverse vegetation types and land-use patterns.</p>
-          </div>
-        </div>
-      </div>
-      <div class="text-center" style="margin-top: var(--spacing-xl);">
-          <a href="#contact" class="btn btn-primary">Initiate Collaboration <i class="fas fa-handshake"></i></a>
-      </div>
-    </section>
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
 
-    <!-- Publications Section -->
-    <section id="publications" class="section-card">
-      <h2 class="section-title">Selected Publications</h2>
-      <p class="section-description">A selection of my peer-reviewed publications showcasing contributions to plant genomics, ethnobotany, and molecular biology.</p>
-      <div id="publications-list" class="publications-list-container">
-        <!-- Publications will be populated here by script.js -->
-      </div>
-      <div class="text-center" style="margin-top: 30px;">
-        <a href="https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-          <i class="fas fa-graduation-cap"></i> View All on Google Scholar
-        </a>
-      </div>
-    </section>
-
-    <!-- Full Gallery Section (Remains for comprehensive viewing) -->
-    <section id="gallery" class="section-card">
-      <h2 class="section-title">EthnoGenomics Photo Gallery</h2>
-      <p class="section-description">A visual journey through fieldwork, laboratory sessions, and the diverse plant life we study in the Himalayas and beyond.</p>
-      <div id="gallery-container" class="gallery-motion-container">
-        <div class="gallery-track">
-          <!-- Images will be populated here by script.js -->
-        </div>
-      </div>
-      <p class="text-center gallery-tip"><i class="fas fa-info-circle"></i> Click on any image to view it larger!</p>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section-card">
-      <h2 class="section-title">Connect With EthnoGenomics Lab</h2>
-      <p class="section-description">Feel free to reach out for collaborations, research inquiries, or academic discussions.</p>
-      <div class="contact-grid">
-        <a href="mailto:bimal_kum.sherubtse@rub.edu.bt" class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <h4>Email</h4>
-          <p>bimal_kum.sherubtse@rub.edu.bt</p>
-        </a>
-        <a href="https://orcid.org/0000-0002-2154-7676" target="_blank" rel="noopener noreferrer" class="contact-item">
-          <i class="fab fa-orcid"></i>
-          <h4>ORCID</h4>
-          <p>orcid.org/0000-0002-2154-7676</p>
-        </a>
-        <a href="https://www.researchgate.net/profile/Bimal-Chetri" target="_blank" rel="noopener noreferrer" class="contact-item">
-          <i class="fab fa-researchgate"></i>
-          <h4>ResearchGate</h4>
-          <p>View Profile</p>
-        </a>
-        <div class="contact-item qrcode-item">
-          <a href="https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID" target="_blank" rel="noopener noreferrer">
-             <img src="qrcode.png" alt="Google Scholar QR Code" class="qrcode-image">
-          </a>
-          <h4>Google Scholar</h4>
-          <p>Scan to view profile</p>
-        </div>
-      </div>
-      <p class="text-center" style="margin-top: 30px;">**Postal Address:** Kanglung-42002, Faculty of Life Sciences, Sherubtse College, Royal University of Bhutan, Trashigang, Bhutan</p>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>&copy; <span id="current-year"></span> EthnoGenomics Lab — Dr. Bimal Kumar Chetri, Faculty of Life Sciences, Sherubtse College. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <button id="scrollToTopBtn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
-
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
+    <style>
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .animate-fade-in {
+            animation: fadeIn 0.3s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
