@@ -16,12 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
             'pp.jpg',
             'research_genomics.jpg'
         ],
-        galleryCycleInterval: 5000, // 5 seconds (this will now only control the animation delays, not a strict cycle)
+        galleryCycleInterval: 5000, // This will be used for the staggered fade-in, not a strict cycle.
         scrollOffset: 70, // Adjust this value if your fixed header height changes
         googleScholarId: 'Hp0ZnX4AAAAJ', // *** REMEMBER TO REPLACE THIS WITH YOUR ACTUAL ID, just the ID part ***
         linkedInProfile: 'https://www.linkedin.com/in/bimal-k-chetri-ph-d-a6b840a5/',
         
-        // --- NEW: Recent Updates Configuration (as specified in the original request) ---
+        // --- NEW: Recent Updates Configuration (MERGED FROM YOUR FIRST REQUEST) ---
         updateImageBaseUrl: '', // e.g., 'updates/', 'assets/updates/'
         recentUpdates: [
             { 
@@ -54,176 +54,248 @@ document.addEventListener('DOMContentLoaded', () => {
         dynamicGallery: '.dynamic-hero-gallery',
         publicationsList: '#publications-list',
         tabButtons: '.tab-button',
-        tabContent: '.tab-content',
-        sectionLink: '.section-link',
-        scrollUpButton: '.scroll-up',
-        recentUpdatesContainer: '#recent-updates-carousel',
-        updateCarouselIndicators: '#update-carousel-indicators'
+        tabPanes: '.tab-pane', // Changed from tabContent as per your latest code
+        scrollToTopBtn: '#scrollToTopBtn', // Changed from scrollUpButton
+        currentYearSpan: '#current-year',
+        sections: 'section[id]',
+        navLinks: '.nav-menu-compact a[href^="#"]',
+        googleScholarLink: 'a[href*="scholar.google.com"]',
+        // --- NEW: Selectors for Recent Updates Carousel ---
+        recentUpdatesContainer: '#recent-updates-carousel', // Add this selector
+        updateCarouselIndicators: '#update-carousel-indicators' // Add this selector
     };
 
-    // --- DOM Elements ---
-    const navToggle = document.querySelector(selectors.navToggle);
-    const navMenu = document.querySelector(selectors.navMenu);
-    const dynamicGallery = document.querySelector(selectors.dynamicGallery);
-    const publicationsList = document.querySelector(selectors.publicationsList);
-    const tabButtons = document.querySelectorAll(selectors.tabButtons);
-    const sectionLinks = document.querySelectorAll(selectors.sectionLink);
-    const scrollUpButton = document.querySelector(selectors.scrollUpButton);
-    const recentUpdatesContainer = document.querySelector(selectors.recentUpdatesContainer);
-    const updateCarouselIndicators = document.querySelector(selectors.updateCarouselIndicators);
+    // Store DOM elements for easier access
+    const elements = {};
+    for (const key in selectors) {
+        const found = document.querySelectorAll(selectors[key]);
+        elements[key] = found.length === 1 ? found[0] : found; // If only one element, store directly; otherwise, store NodeList
+    }
 
     // --- State Variables ---
-    let currentGalleryImageIndex = 0; // Though currently unused due to new animateGalleryImages logic
-    let updateCarouselIntervalId;
+    let updateCarouselIntervalId; // For managing the recent updates carousel auto-advance
 
-    // --- Helper Functions ---
-
-    /**
-     * Toggles the active class on the mobile navigation menu and its toggle button.
-     */
-    const toggleNavMenu = () => {
-        navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active'); // Animate the hamburger icon
-    };
+    // --- Utility Functions ---
 
     /**
-     * Smoothly scrolls the window to a target element, accounting for a fixed header.
-     * @param {string} targetId The ID of the element to scroll to.
+     * Smoothly scrolls to a target element.
+     * @param {HTMLElement} target - The element to scroll to.
      */
-    const smoothScroll = (targetId) => {
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-            const headerOffset = config.scrollOffset; // Adjust for fixed header
-            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = elementPosition - headerOffset;
+    function smoothScrollTo(target) {
+        if (target) {
+            // Get header height for accurate scroll position, fallback to config
+            const header = document.querySelector('.main-header-compact');
+            const offset = header ? header.offsetHeight : config.scrollOffset;
+            const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: pos, behavior: 'smooth' });
+        }
+    }
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
+    // --- Navigation & Header ---
+
+    /**
+     * Initializes mobile navigation toggle functionality.
+     */
+    function initMobileNav() {
+        if (elements.navToggle && elements.navMenu) {
+            elements.navToggle.addEventListener('click', () => {
+                const isExpanded = elements.navToggle.getAttribute('aria-expanded') === 'true';
+                elements.navToggle.setAttribute('aria-expanded', !isExpanded);
+                elements.navMenu.classList.toggle('open');
+            });
+
+            // Close nav when clicking outside
+            document.addEventListener('click', (event) => {
+                if (!elements.navMenu.contains(event.target) && !elements.navToggle.contains(event.target) && elements.navMenu.classList.contains('open')) {
+                    elements.navMenu.classList.remove('open');
+                    elements.navToggle.setAttribute('aria-expanded', 'false');
+                }
             });
         }
-    };
+    }
 
     /**
-     * Animates the gallery images by fading them in one by one.
-     * Images remain visible after fading in.
+     * Highlights the active navigation link based on scroll position.
      */
-    const animateGalleryImages = () => {
-        if (!dynamicGallery) return;
+    function highlightActiveNavLink() {
+        let currentId = '';
+        const header = document.querySelector('.main-header-compact');
+        const headerHeight = header ? header.offsetHeight : 0;
+        const scrollPos = window.scrollY + headerHeight + 10; // Add some buffer
 
-        dynamicGallery.innerHTML = ''; // Clear previous images
-        
-        // Add all images to the gallery initially, hidden
+        // Ensure elements.sections is an iterable NodeList
+        Array.from(elements.sections).forEach(section => {
+            if (section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
+                currentId = section.id;
+            }
+        });
+
+        // Ensure elements.navLinks is an iterable NodeList
+        Array.from(elements.navLinks).forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentId}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    /**
+     * Attaches smooth scroll behavior to navigation links.
+     */
+    function initSmoothScrolling() {
+        // Ensure elements.navLinks is an iterable NodeList
+        Array.from(elements.navLinks).forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                smoothScrollTo(target);
+
+                // Close mobile nav after clicking a link
+                if (window.innerWidth <= 992 && elements.navMenu && elements.navMenu.classList.contains('open')) {
+                    elements.navMenu.classList.remove('open');
+                    elements.navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    }
+
+    // --- Dynamic Hero Gallery ---
+
+    /**
+     * Creates and appends gallery images to the dynamic gallery container.
+     * Implements a staggered fade-in animation, with images remaining visible.
+     */
+    function createDynamicGallery() {
+        if (!elements.dynamicGallery || config.galleryImages.length === 0) return;
+
+        elements.dynamicGallery.innerHTML = ''; // Clear existing content to prevent duplicates
+
         config.galleryImages.forEach((imgName, index) => {
             const img = document.createElement('img');
             img.src = config.galleryImageBaseUrl + imgName;
-            img.alt = `Gallery Image ${index + 1}`;
-            img.classList.add('gallery-image');
+            img.alt = `Lab Image ${index + 1}`;
+            img.classList.add('gallery-image'); // Add a class for potential styling/animation
             img.style.opacity = '0'; // Start hidden
-            img.style.transition = `opacity 1s ease-in-out ${index * 0.5}s`; // Staggered transition delay
-            dynamicGallery.appendChild(img);
+            // Staggered transition delay based on index
+            img.style.transition = `opacity 1s ease-in-out ${index * 0.5}s`; 
+            elements.dynamicGallery.appendChild(img);
         });
 
-        const images = dynamicGallery.querySelectorAll('.gallery-image');
-
-        // Function to show images one by one with a delay
-        let currentIndex = 0;
-        const showNextImage = () => {
-            if (currentIndex < images.length) {
-                images[currentIndex].style.opacity = '1';
-                currentIndex++;
-            } else {
-                // All images are visible, stop the animation interval
-                clearInterval(galleryAnimationInterval);
-            }
-        };
-
-        // Start showing images with a staggered delay
-        const galleryAnimationInterval = setInterval(showNextImage, config.galleryCycleInterval / images.length);
-    };
-
+        // After adding all images, trigger their fade-in after a short delay
+        setTimeout(() => {
+            Array.from(elements.dynamicGallery.children).forEach(img => {
+                img.style.opacity = '1';
+            });
+        }, 100); // Give browser a moment to render before starting transitions
+    }
+    
     /**
-     * Fetches publications from Google Scholar using a proxy and displays them.
+     * Initializes the dynamic image gallery.
      */
-    const fetchGoogleScholarPublications = async () => {
-        if (!publicationsList) return;
-
-        publicationsList.innerHTML = '<p>Loading publications...</p>'; // Loading indicator
-
-        try {
-            // Using a public proxy to bypass CORS for client-side scraping
-            // Note: This is a common approach for demos but may not be robust for production
-            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://scholar.google.com/citations?user=${config.googleScholarId}&hl=en`)}`;
-            
-            const response = await fetch(proxyUrl);
-            const data = await response.json();
-            
-            // The actual HTML content is inside data.contents when using allorigins.win
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(data.contents, 'text/html');
-
-            const publicationItems = doc.querySelectorAll('#gsc_a_b .gsc_a_tr');
-            
-            if (publicationItems.length > 0) {
-                publicationsList.innerHTML = ''; // Clear loading message
-                publicationItems.forEach(item => {
-                    // Extract publication details
-                    const titleElement = item.querySelector('.gsc_a_at');
-                    const title = titleElement ? titleElement.textContent : 'No Title';
-                    const citationLink = titleElement ? titleElement.href : '#';
-
-                    const authorsElement = item.querySelector('.gsc_a_an');
-                    const authors = authorsElement ? authorsElement.textContent : 'Unknown Authors';
-
-                    const journalElement = item.querySelector('.gsc_a_ti');
-                    const journal = journalElement ? journalElement.textContent : 'Unknown Journal';
-
-                    const yearElement = item.querySelector('.gsc_a_h');
-                    const year = yearElement ? yearElement.textContent : 'N.D.';
-
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <a href="${citationLink}" target="_blank" rel="noopener noreferrer">${title}</a><br>
-                        <span>${authors}</span><br>
-                        <em>${journal}, ${year}</em>
-                    `;
-                    publicationsList.appendChild(li);
-                });
-            } else {
-                publicationsList.innerHTML = '<p>No publications found or unable to fetch.</p>';
-            }
-
-        } catch (error) {
-            console.error('Error fetching Google Scholar publications:', error);
-            publicationsList.innerHTML = '<p>Error loading publications. Please try again later.</p>';
+    function initDynamicGallery() {
+        if (config.galleryImages.length > 0 && elements.dynamicGallery) {
+            createDynamicGallery();
         }
-    };
+    }
+
+    // --- Publications Section ---
+    const publications = [
+        {
+            title: "De novo plastome assembly of Cymbopogon bhutanicus Noltie, an endemic lemon grass from Bhutan, with geospatial, comparative genomic, and phylogenetic insights",
+            authors: "Mohan Singh Rana, Nicolas Dierckxsens, Pritesh Bhatt, Bimal K Chetri",
+            journal: "Ecological Genetics and Genomics",
+            year: "2025",
+            link: "https://doi.org/10.1016/j.egg.2025.100372"
+        },
+        {
+            title: "Plastome genomics of the crop wild relative Thladiantha cordifolia illuminates the evolution and phylogeny of the gourd family (Cucurbitaceae)",
+            authors: "Bimal K Chetri, SS Sonu, Rahul G Shelke, Sudip Mitra, Lata Rangan",
+            journal: "Genetic Resources and Crop Evolution",
+            year: "2025",
+            link: "https://link.springer.com/article/10.1007/s10722-025-02579-6"
+        },
+        {
+            title: "Ethnomedicinal Practices in Kilikhar, Mongar",
+            authors: "BImal K Chetri, K., Phuntsho Wangdi, Tshering Penjor",
+            journal: "Asian Plant Research Journal",
+            year: "2018",
+            link: "https://d1wqtxts1xzle7.cloudfront.net/59067833/Chetri122018APRJ4578620190428-37384-8w2tn0-libre.pdf?1556505489=&response-content-disposition=inline%3B+filename%3DEthnomedicinal_Practices_in_Kilikhar_Mon.pdf&Expires=1760258951&Signature=K0~XHfL7rt~KHyRb3DbP0D7mkgwyQLWCnFABmOKcKWjQYGXH9jV20DTVsnjtYPnOvVeeRS7INOmg3GVTr7-gXkMTS1El8DKsldrWmSbXuYC801T4RFPRLdTyl0etsNjmyrSkjFBzuYrTWV8oHKkH7r8UR7A~so1l~-DnZjjrEd2ka27gQwv29qoZVJkw~fzUjZIZrm2F8iI0Cku10hQWsqhn2nBtO8trcU-yIcdJ0jAyxSNNOiD9Jx5~2IXuJvsE91HhX47dHsPiDN67Z3LOzIjznaxPFSghoiG-ZNhKuIFSCa-4d5OFManm0IhORzH9ylz4U2pZ0NaEzVG6lAZcyg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA"
+        },
+        {
+            title: "Insights into cucurbitaceae mitogenomes: gene length variation, correlation features, and phylogenetic relationship",
+            authors: "Bimal K Chetri, SS Sonu, Nicolas Dierckxsens, Sudip Mitra, Latha Rangan",
+            journal: "Journal of Plant Biochemistry and Biotechnology",
+            year: "2025",
+            link: "https://link.springer.com/article/10.1007/s40009-025-01633-2"
+        },
+        {
+            title: "In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, Albophoma sp. BAPR5",
+            authors: "Jintu Rabha, Bimal Kumar Chetri, Sukanya Das, Dhruva Kumar Jha",
+            journal: "South African Journal of Botany",
+            year: "2023",
+            link: "https://doi.org/10.1016/j.sajb.2023.05.033"
+        }
+        // Add more publications here following the same structure
+    ];
 
     /**
-     * Activates a specific tab, showing its content and highlighting its button.
-     * @param {string} tabId The ID of the tab content to activate.
+     * Populates the publications list from the 'publications' array.
      */
-    const activateTab = (tabId) => {
-        // Deactivate all tab buttons and content
-        tabButtons.forEach(button => button.classList.remove('active'));
-        document.querySelectorAll(selectors.tabContent).forEach(content => content.classList.remove('active'));
+    function loadPublications() {
+        if (elements.publicationsList) {
+            elements.publicationsList.innerHTML = '';
+            publications.forEach(pub => {
+                const div = document.createElement('div');
+                div.classList.add('publication-item');
+                div.innerHTML = `
+                    <h4>${pub.title}</h4>
+                    <p><strong>Authors:</strong> ${pub.authors}</p>
+                    <p><strong>Journal:</strong> ${pub.journal} (${pub.year})</p>
+                    <a href="${pub.link}" target="_blank" rel="noopener noreferrer">Read More <i class="fas fa-external-link-alt"></i></a>
+                `;
+                elements.publicationsList.appendChild(div);
+            });
+        }
+    }
 
-        // Activate the clicked button and corresponding content
-        const clickedButton = document.querySelector(`[data-tab="${tabId}"]`);
-        const targetContent = document.getElementById(tabId);
-
-        if (clickedButton) clickedButton.classList.add('active');
-        if (targetContent) targetContent.classList.add('active');
-    };
+    // --- Tab Functionality ---
 
     /**
-     * Initializes and populates the recent updates carousel with dynamic content.
+     * Initializes tab switching behavior for content panes.
+     */
+    function initTabs() {
+        // Ensure elements.tabButtons is an iterable NodeList
+        Array.from(elements.tabButtons).forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+
+                Array.from(elements.tabButtons).forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Ensure elements.tabPanes is an iterable NodeList
+                Array.from(elements.tabPanes).forEach(pane => pane.classList.remove('active'));
+                const activePane = document.getElementById(tabId);
+                if (activePane) activePane.classList.add('active');
+            });
+        });
+        // Ensure the first tab is active on load
+        if (elements.tabButtons.length > 0 && elements.tabPanes.length > 0) {
+            elements.tabButtons[0].click(); // Simulate a click on the first button
+        }
+    }
+
+    // --- Recent Updates Carousel (Re-added) ---
+
+    /**
+     * Sets up and populates the recent updates carousel.
      */
     const setupRecentUpdatesCarousel = () => {
-        if (!recentUpdatesContainer || !updateCarouselIndicators) return;
+        // Ensure these elements exist before proceeding
+        if (!elements.recentUpdatesContainer || !elements.updateCarouselIndicators) return;
 
-        recentUpdatesContainer.innerHTML = ''; // Clear any existing content
-        updateCarouselIndicators.innerHTML = ''; // Clear existing indicators
+        elements.recentUpdatesContainer.innerHTML = ''; // Clear any existing content
+        elements.updateCarouselIndicators.innerHTML = ''; // Clear existing indicators
 
         config.recentUpdates.forEach((update, index) => {
             // Create carousel item
@@ -237,26 +309,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>${update.text}</p>
                 </div>
             `;
-            recentUpdatesContainer.appendChild(item);
+            elements.recentUpdatesContainer.appendChild(item);
 
             // Create indicator dot button
             const indicator = document.createElement('button');
             indicator.classList.add('carousel-indicator');
             if (index === 0) indicator.classList.add('active');
             indicator.setAttribute('data-slide-to', index);
-            updateCarouselIndicators.appendChild(indicator);
+            elements.updateCarouselIndicators.appendChild(indicator);
         });
 
-        // After setting up the elements, start the carousel functionality
-        startUpdateCarousel();
+        startUpdateCarousel(); // Start the carousel animation after setup
     };
 
     /**
      * Manages the automatic cycling and manual navigation of the recent updates carousel.
      */
     const startUpdateCarousel = () => {
-        const items = recentUpdatesContainer.querySelectorAll('.carousel-item');
-        const indicators = updateCarouselIndicators.querySelectorAll('.carousel-indicator');
+        const items = elements.recentUpdatesContainer.querySelectorAll('.carousel-item');
+        const indicators = elements.updateCarouselIndicators.querySelectorAll('.carousel-indicator');
         let currentIndex = 0;
 
         if (items.length === 0) return; // No updates to carousel
@@ -301,71 +372,84 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- Event Listeners ---
+    // --- Scroll to Top Button ---
 
-    // Event listener for mobile navigation toggle button
-    if (navToggle) {
-        navToggle.addEventListener('click', toggleNavMenu);
-    }
-
-    // Event listeners for smooth scrolling on internal navigation links
-    sectionLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault(); // Prevent default anchor jump
-            const targetId = this.getAttribute('href').substring(1); // Get target ID from href (remove '#')
-            smoothScroll(targetId);
-            // Close the mobile nav menu if it's open after clicking a link
-            if (navMenu && navMenu.classList.contains('active')) {
-                toggleNavMenu(); 
-            }
-        });
-    });
-
-    // Event listeners for tab switching functionality (e.g., Research/About sections)
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const tabId = this.getAttribute('data-tab'); // Get the target tab ID from data-tab attribute
-            activateTab(tabId);
-        });
-    });
-
-    // Event listeners for the scroll-up button visibility and click action
-    if (scrollUpButton) {
-        // Show/hide button based on scroll position
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) { // Show button after scrolling down 300px
-                scrollUpButton.classList.add('show');
-            } else {
-                scrollUpButton.classList.remove('show');
-            }
-        });
-
-        // Scroll to top when button is clicked
-        scrollUpButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+    /**
+     * Manages the visibility and click behavior of the "Scroll to Top" button.
+     */
+    function initScrollToTop() {
+        if (elements.scrollToTopBtn) {
+            window.addEventListener('scroll', () => {
+                elements.scrollToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
             });
-        });
+            elements.scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        }
     }
 
-    // --- Initializations (Functions called when the DOM is fully loaded) ---
+    // --- Footer & Dynamic Content ---
 
-    // Start the hero gallery image animation
-    animateGalleryImages();
-
-    // Fetch and display publications from Google Scholar
-    if (publicationsList) {
-        fetchGoogleScholarPublications();
+    /**
+     * Sets the current year in the footer.
+     */
+    function setCurrentYear() {
+        if (elements.currentYearSpan) {
+            elements.currentYearSpan.textContent = new Date().getFullYear();
+        }
     }
 
-    // Activate the first tab by default if there are tabs present
-    if (tabButtons.length > 0) {
-        activateTab(tabButtons[0].getAttribute('data-tab'));
+    /**
+     * Updates dynamic links with actual profile IDs and adds LinkedIn.
+     */
+    function updateDynamicLinks() {
+        // Update Google Scholar link if ID is provided
+        const googleScholarBaseUrl = 'https://scholar.google.com/citations?user=';
+        if (elements.googleScholarLink && config.googleScholarId && config.googleScholarId !== 'YOUR_GOOGLE_SCHOLAR_ID') { 
+            if (elements.googleScholarLink.href.startsWith(googleScholarBaseUrl) || elements.googleScholarLink.href === 'https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ') {
+                 elements.googleScholarLink.href = googleScholarBaseUrl + config.googleScholarId;
+            }
+        }
+
+        // Add LinkedIn to contact grid if not already present
+        const contactGrid = document.querySelector('.contact-grid'); // Use querySelector for single element
+        if (contactGrid && config.linkedInProfile) {
+            // Check if a LinkedIn link already exists to prevent duplicates
+            if (!contactGrid.querySelector('a[href*="linkedin.com"]')) {
+                const linkedInItem = document.createElement('a');
+                linkedInItem.href = config.linkedInProfile;
+                linkedInItem.target = "_blank";
+                linkedInItem.rel = "noopener noreferrer";
+                linkedInItem.classList.add('contact-item');
+                linkedInItem.innerHTML = `
+                    <i class="fab fa-linkedin"></i>
+                    <h4>LinkedIn</h4>
+                    <p>View Profile</p>
+                `;
+                const qrcodeItem = contactGrid.querySelector('.qrcode-item');
+                if (qrcodeItem) {
+                    contactGrid.insertBefore(linkedInItem, qrcodeItem);
+                } else {
+                    contactGrid.appendChild(linkedInItem);
+                }
+            }
+        }
     }
 
-    // Set up and start the recent updates carousel
-    if (recentUpdatesContainer) {
-        setupRecentUpdatesCarousel();
+    // --- Initialize All Functionalities ---
+    function initialize() {
+        initMobileNav();
+        initDynamicGallery();
+        loadPublications();
+        initTabs();
+        setupRecentUpdatesCarousel(); // Call this to set up and start the carousel
+        initScrollToTop();
+        setCurrentYear();
+        updateDynamicLinks(); // Call this after all static HTML is parsed
+
+        // Initial highlights and scroll listeners
+        highlightActiveNavLink();
+        window.addEventListener('scroll', highlightActiveNavLink);
+        initSmoothScrolling();
     }
+
+    initialize();
 });
