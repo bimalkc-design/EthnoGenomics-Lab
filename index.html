@@ -20,7 +20,6 @@
         <header class="main-header-compact">
             <div class="container header-container">
                 <div class="header-brand"><a href="#home">EthnoGenomics Lab</a></div>
-                <!-- Tiny Profile (Small and on the side, de-emphasized) -->
                 <div class="tiny-profile-wrapper">
                     <img src="portrait.jpg" alt="Dr. Chetri">
                     <div class="tiny-profile-info">
@@ -39,7 +38,7 @@
             </div>
         </header>
 
-        <!-- Hero Section (Compact, with Dynamic Gallery for Visual Interest) -->
+        <!-- Hero Section -->
         <section class="hero-compact" id="home">
             <div class="hero-text-area">
                 <h1>EthnoGenomics Lab</h1>
@@ -50,13 +49,12 @@
                 </div>
             </div>
             <div class="dynamic-hero-gallery">
-                <!-- Images for subtle motion effect - populated by JS -->
+                <!-- Images populated by JS -->
             </div>
         </section>
 
         <!-- Main Content Layout -->
         <div class="main-content-layout container">
-            <!-- Main Content with Tabs for Compactness and Better UX -->
             <main class="main-content-tabs">
                 <nav class="tab-nav">
                     <button class="tab-button active" data-tab="about-lab">About the Lab</button>
@@ -70,8 +68,6 @@
                             <div class="about-lab-text">
                                 <p>The EthnoGenomics Lab advances plant genomics by integrating ethnobotanical knowledge with molecular techniques. Our core focus includes organellar genome assembly, phylogenetic analysis, and conservation strategies for Himalayan flora.</p>
                                 <p>Key research integrates bioinformatics for NGS data analysis, supporting sustainable medicinal plant utilization and biodiversity preservation.</p>
-
-                                <!-- Compact Contact Icons -->
                                 <div class="about-lab-contact-mini">
                                     <h3>Connect with Us</h3>
                                     <div class="contact-grid-mini">
@@ -108,7 +104,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="about-lab-highlights">
                                 <h3>Core Expertise</h3>
                                 <ul>
@@ -122,7 +117,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Collaboration Areas Tab -->
                     <div class="tab-pane" id="research">
                         <p class="section-description">Opportunities for collaboration in genomics, ethnobotany, and ecological research.</p>
@@ -147,12 +141,11 @@
                             <a href="#about-lab-contact-mini" class="btn btn-primary">Initiate Collaboration <i class="fas fa-handshake"></i></a>
                         </div>
                     </div>
-
                     <!-- Publications Tab -->
                     <div class="tab-pane" id="publications">
                         <p class="section-description">Selected peer-reviewed works in plant genomics and related fields.</p>
                         <div class="publications-list-compact" id="publications-list">
-                            <!-- Publications populated via JS -->
+                            <!-- Populated via JS -->
                         </div>
                         <div class="text-center" style="margin-top: var(--spacing-xl);">
                             <a class="googleScholarLink" href="https://scholar.google.com/citations?user=Hp0ZnX4AAAAJ" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
@@ -162,14 +155,12 @@
                     </div>
                 </div>
             </main>
-
-            <!-- Recent Updates Side Panel -->
             <aside class="recent-updates-panel">
                 <div class="updates-container">
                     <h3>Recent Updates</h3>
                     <div class="updates-content">
                         <div class="update-image-carousel" id="recent-updates-carousel">
-                            <!-- Carousel items populated by JS -->
+                            <!-- Populated by JS -->
                         </div>
                         <div class="carousel-controls">
                             <div class="carousel-dots" id="update-carousel-indicators"></div>
@@ -177,9 +168,9 @@
                     </div>
                 </div>
             </aside>
-        </div> <!-- End main-content-layout -->
+        </div>
 
-        <!-- Contact Section - Enhanced for postal address -->
+        <!-- Enhanced Postal Address Section -->
         <section id="contact-footer" class="section-card contact-footer container">
             <h2 class="section-title">Postal Address</h2>
             <div class="contact-address-wrapper">
@@ -188,7 +179,7 @@
             </div>
         </section>
 
-        <!-- Footer - Enhanced for copyright -->
+        <!-- Enhanced Footer -->
         <footer class="footer-compact">
             <div class="container">
                 <p class="copyright-text">&copy; <span id="current-year"></span> EthnoGenomics Lab &mdash; Faculty of Life Sciences, Sherubtse College. All rights reserved.</p>
@@ -197,10 +188,6 @@
 
         <button id="scrollToTopBtn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
     </div>
-
-    <!-- Inline Script for Dynamic Year -->
-    <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
