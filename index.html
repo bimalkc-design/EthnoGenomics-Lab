@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EthnoGenomics Lab — Bimal K Chetri (PhD)</title>
     <meta name="description" content="Official website of EthnoGenomics Lab by Bimal K Chetri (PhD) Specializing in Plant Genomics, Organellar Genome Mining, Ethnobotany, Medicinal Plant Research, and Traditional Knowledge integration.">
-    <meta name="author" content
-
-="Dr. Chetri">
+    <meta name="author" content="Dr. Chetri">
     <meta name="keywords" content="EthnoGenomics, Plant Genomics, Molecular Biology, Ethnobotany, Medicinal Plants, Biodiversity, Traditional Knowledge, Bioinformatics, Bhutan, Research, Dr. Bimal Kumar Chetri">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -52,7 +50,16 @@
                 </div>
             </div>
             <div class="dynamic-hero-gallery">
-                <h2 class="gallery-header">Recent Updates</h2>
+                <!-- News Ticker for Publications and Updates -->
+                <div class="news-ticker">
+                    <h3>Latest Publications & News</h3>
+                    <div class="ticker-container">
+                        <div class="ticker-content" id="ticker-content">
+                            <!-- Content populated via JS -->
+                        </div>
+                    </div>
+                </div>
+                <h2 class="gallery-header">Gallery</h2>
                 <!-- Images for subtle motion effect -->
             </div>
         </section>
@@ -97,6 +104,15 @@
                                         </div>
                                     </a>
                                     <!-- LinkedIn will be added here by JS -->
+                                    <div class="contact-item-mini qrcode-item-mini">
+                                        <a href="https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ" target="_blank" rel="noopener noreferrer">
+                                            <img src="qrcode.png" alt="Google Scholar QR Code" class="qrcode-image-mini">
+                                        </a>
+                                        <div class="contact-info-mini">
+                                            <h4>Google Scholar</h4>
+                                            <p>Scan to view</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -148,6 +164,11 @@
                         <p class="section-description">Selected peer-reviewed works in plant genomics and related fields.</p>
                         <div class="publications-list-compact" id="publications-list">
                             <!-- Publications populated via JS -->
+                        </div>
+                        <div class="text-center" style="margin-top: var(--spacing-xl);">
+                            <a href="https://scholar.google.com/citations?hl=ro&user=Hp0ZnX4AAAAJ" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                <i class="fas fa-graduation-cap"></i> View All on Google Scholar
+                            </a>
                         </div>
                     </div>
                 </div>
