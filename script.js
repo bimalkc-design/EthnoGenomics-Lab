@@ -18,6 +18,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Dynamic News Ticker for Publications and Updates
+    const tickerContent = document.getElementById('ticker-content');
+    const newsItems = [
+        { text: 'New Publication: Plastome genomics of Thladiantha cordifolia in Genetic Resources and Crop Evolution, 2025', link: 'https://doi.org/10.1007/s10722-025-02579-6' },
+        { text: 'New Publication: De novo plastome assembly of Cymbopogon bhutanicus in Ecological Genetics and Genomics, 2025', link: 'https://doi.org/10.1016/j.egg.2025.100372' },
+        { text: 'News: EthnoGenomics Lab presents at International Conference on Himalayan Biodiversity, 2025', link: '#' },
+        { text: 'New Publication: Insights into cucurbitaceae mitogenomes in Journal of Plant Biochemistry and Biotechnology, 2025', link: 'https://doi.org/10.1007/s13562-025-00992-7' },
+        { text: 'News: Collaboration initiated with Bhutanese traditional healers for medicinal plant research', link: '#' },
+    ];
+
+    newsItems.forEach(item => {
+        const newsItem = document.createElement('div');
+        newsItem.classList.add('ticker-item');
+        newsItem.innerHTML = `<a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.text}</a>`;
+        tickerContent.appendChild(newsItem);
+    });
+
+    let tickerOffset = 0;
+    const tickerSpeed = 1; // Adjust for smoother or faster scrolling
+    const tickerContainer = document.querySelector('.ticker-container');
+    function animateTicker() {
+        tickerOffset -= tickerSpeed;
+        if (tickerOffset <= -tickerContent.offsetWidth) {
+            tickerOffset = tickerContainer.offsetWidth;
+        }
+        tickerContent.style.transform = `translateX(${tickerOffset}px)`;
+        requestAnimationFrame(animateTicker);
+    }
+    animateTicker();
+
     // Dynamic Hero Gallery
     const gallery = document.querySelector('.dynamic-hero-gallery');
     const images = [
@@ -49,34 +79,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const current = gallery.querySelector('.hero-gallery-image.active');
         current.classList.remove('active');
         currentImage = (currentImage + 1) % images.length;
-        gallery.children[currentImage + 1].classList.add('active'); // +1 skips header
+        gallery.querySelectorAll('.hero-gallery-image')[currentImage].classList.add('active');
     }, 5000);
 
-    // Dynamic Publications - Updated to show only DOI link
+    // Dynamic Publications
     const publications = [
         {
             title: '<strong>Chetri, B.K.</strong>, Sonu, S.S., Shelke, R.G. et al. Plastome genomics of the crop wild relative <em>Thladiantha cordifolia</em> illuminates the evolution and phylogeny of the gourd family (Cucurbitaceae)',
             journal: 'Genetic Resources and Crop Evolution, 72: 10441–10456',
             year: 2025,
-            doi: 'https://doi.org/10.1007/s10722-025-02579-6'
+            doi: 'https://doi.org/10.1007/s10722-025-02579-6',
+            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder1'
         },
         {
             title: 'Mohan Singh Rana, Nicolas Dierckxsens, Pritesh Bhatt, <strong>Chetri, B.K.</strong> De novo plastome assembly of <em>Cymbopogon bhutanicus</em> Noltie, an endemic lemon grass from Bhutan, with geospatial, comparative genomic, and phylogenetic insights',
             journal: 'Ecological Genetics and Genomics, 36: 100372',
             year: 2025,
-            doi: 'https://doi.org/10.1016/j.egg.2025.100372'
+            doi: 'https://doi.org/10.1016/j.egg.2025.100372',
+            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder2'
         },
         {
             title: '<strong>Chetri, B.K.</strong>, Sonu, S.S., Dierckxsens, N. et al. Insights into cucurbitaceae mitogenomes: gene length variation, correlation features, and phylogenetic relationship',
             journal: 'Journal of Plant Biochemistry and Biotechnology',
             year: 2025,
-            doi: 'https://doi.org/10.1007/s13562-025-00992-7'
+            doi: 'https://doi.org/10.1007/s13562-025-00992-7',
+            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder3'
         },
         {
             title: 'Jintu Rabha, <strong>Chetri, B.K.</strong>, Sukanya Das, Dhruva Kumar Jha, In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, <em>Albophoma</em> sp. BAPR5',
             journal: 'South African Journal of Botany, 158: 347–368',
             year: 2023,
-            doi: 'https://doi.org/10.1016/j.sajb.2023.05.033'
+            doi: 'https://doi.org/10.1016/j.sajb.2023.05.033',
+            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder4'
         }
     ];
 
@@ -87,7 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
         pubItem.innerHTML = `
             <h4>${pub.title}</h4>
             <p>${pub.journal}, ${pub.year}</p>
-            <a href="${pub.doi}" target="_blank" rel="noopener noreferrer">View DOI</a>
+            <a href="${pub.doi}" target="_blank" rel="noopener noreferrer">View Publication (DOI)</a>
+            <br>
+            <a href="${pub.googleScholar}" target="_blank" rel="noopener noreferrer">View on Google Scholar</a>
         `;
         pubList.appendChild(pubItem);
     });
