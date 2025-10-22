@@ -84,63 +84,57 @@ document.addEventListener('DOMContentLoaded', () => {
         gallery.querySelectorAll('.hero-gallery-image')[currentImage].classList.add('active');
     }, 5000);
 
-    // Dynamic Publications
-    const publications = [
+// Dynamic Publications
+const publications = [
     {
-  title: 'Rana, M.S., Pinnika, G. &amp; &lt;strong&gt;Chetri, B.K.&lt;/strong&gt; De Novo Plastome Assembly and Comparative Genomics of Elatostema lineolatum var. major: Insights into Urticaceae Orthologs, Phylogeny, and Comparative Analysis of 242 Plastomes',
-  journal: 'Biol Bull Rev',
-  year: 2025,
-  doi: 'https://doi.org/10.1134/S2079086425600353'
+        title: 'Rana, M.S., Pinnika, G. & <strong>Chetri, B.K.</strong> De Novo Plastome Assembly and Comparative Genomics of <em>Elatostema lineolatum</em> var. <em>major</em>: Insights into Urticaceae Orthologs, Phylogeny, and Comparative Analysis of 242 Plastomes',
+        journal: 'Biol Bull Rev',
+        year: 2025,
+        doi: 'https://doi.org/10.1134/S2079086425600353'
     },
-        {
-  title: 'Senapati, A., Gupta, D., &lt;strong&gt;Chetri, B.K.&lt;/strong&gt; et al. Linking genome size to life form and community structure in a semi-natural landscape from Northeast India',
-  journal: 'Protoplasma',
-  year: 2025,
-  doi: 'https://doi.org/10.1007/s00709-025-02119-0'
+    {
+        title: 'Senapati, A., Gupta, D., <strong>Chetri, B.K.</strong> et al. Linking genome size to life form and community structure in a semi-natural landscape from Northeast India',
+        journal: 'Protoplasma',
+        year: 2025,
+        doi: 'https://doi.org/10.1007/s00709-025-02119-0'
     },
-        {
-            title: '<strong>Chetri, B.K.</strong>, Sonu, S.S., Shelke, R.G. et al. Plastome genomics of the crop wild relative <em>Thladiantha cordifolia</em> illuminates the evolution and phylogeny of the gourd family (Cucurbitaceae)',
-            journal: 'Genetic Resources and Crop Evolution, 72: 10441–10456',
-            year: 2025,
-            doi: 'https://doi.org/10.1007/s10722-025-02579-6',
-            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder1'
-        },
-        {
-            title: 'Mohan Singh Rana, Nicolas Dierckxsens, Pritesh Bhatt, <strong>Chetri, B.K.</strong> De novo plastome assembly of <em>Cymbopogon bhutanicus</em> Noltie, an endemic lemon grass from Bhutan, with geospatial, comparative genomic, and phylogenetic insights',
-            journal: 'Ecological Genetics and Genomics, 36: 100372',
-            year: 2025,
-            doi: 'https://doi.org/10.1016/j.egg.2025.100372',
-            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder2'
-        },
-        {
-            title: '<strong>Chetri, B.K.</strong>, Sonu, S.S., Dierckxsens, N. et al. Insights into cucurbitaceae mitogenomes: gene length variation, correlation features, and phylogenetic relationship',
-            journal: 'Journal of Plant Biochemistry and Biotechnology',
-            year: 2025,
-            doi: 'https://doi.org/10.1007/s13562-025-00992-7',
-            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder3'
-        },
-        {
-            title: 'Jintu Rabha, <strong>Chetri, B.K.</strong>, Sukanya Das, Dhruva Kumar Jha, In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, <em>Albophoma</em> sp. BAPR5',
-            journal: 'South African Journal of Botany, 158: 347–368',
-            year: 2023,
-            doi: 'https://doi.org/10.1016/j.sajb.2023.05.033',
-            googleScholar: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Hp0ZnX4AAAAJ&citation_for_view=Hp0ZnX4AAAAJ:placeholder4'
-        }
-    ];
+    {
+        title: '<strong>Chetri, B.K.</strong>, Sonu, S.S., Shelke, R.G. et al. Plastome genomics of the crop wild relative <em>Thladiantha cordifolia</em> illuminates the evolution and phylogeny of the gourd family (<em>Cucurbitaceae</em>)',
+        journal: 'Genetic Resources and Crop Evolution, 72: 10441–10456',
+        year: 2025,
+        doi: 'https://doi.org/10.1007/s10722-025-02579-6'
+    },
+    {
+        title: 'Mohan Singh Rana, Nicolas Dierckxsens, Pritesh Bhatt, <strong>Chetri, B.K.</strong> De novo plastome assembly of <em>Cymbopogon bhutanicus</em> Noltie, an endemic lemon grass from Bhutan, with geospatial, comparative genomic, and phylogenetic insights',
+        journal: 'Ecological Genetics and Genomics, 36: 100372',
+        year: 2025,
+        doi: 'https://doi.org/10.1016/j.egg.2025.100372'
+    },
+    {
+        title: '<strong>Chetri, B.K.</strong>, Sonu, S.S., Dierckxsens, N. et al. Insights into <em>Cucurbitaceae</em> mitogenomes: gene length variation, correlation features, and phylogenetic relationship',
+        journal: 'Journal of Plant Biochemistry and Biotechnology',
+        year: 2025,
+        doi: 'https://doi.org/10.1007/s13562-025-00992-7'
+    },
+    {
+        title: 'Jintu Rabha, <strong>Chetri, B.K.</strong>, Sukanya Das, Dhruva Kumar Jha, In-vitro and in-silico evaluation of antimicrobial and antibiofilm secondary metabolites of a novel fungal endophyte, <em>Albophoma</em> sp. BAPR5',
+        journal: 'South African Journal of Botany, 158: 347–368',
+        year: 2023,
+        doi: 'https://doi.org/10.1016/j.sajb.2023.05.033'
+    }
+];
 
-    const pubList = document.getElementById('publications-list');
-    publications.forEach(pub => {
-        const pubItem = document.createElement('div');
-        pubItem.classList.add('pub-item');
-        pubItem.innerHTML = `
-            <h4>${pub.title}</h4>
-            <p>${pub.journal}, ${pub.year}</p>
-            <a href="${pub.doi}" target="_blank" rel="noopener noreferrer">View Publication (DOI)</a>
-            <br>
-            <a href="${pub.googleScholar}" target="_blank" rel="noopener noreferrer">View on Google Scholar</a>
-        `;
-        pubList.appendChild(pubItem);
-    });
+const pubList = document.getElementById('publications-list');
+publications.forEach(pub => {
+    const pubItem = document.createElement('div');
+    pubItem.classList.add('pub-item');
+    pubItem.innerHTML = `
+        <h4>${pub.title}</h4>
+        <p>${pub.journal}, ${pub.year}</p>
+        <a href="${pub.doi}" target="_blank" rel="noopener noreferrer">View Publication (DOI)</a>
+    `;
+    pubList.appendChild(pubItem);
+});
 
     // Dynamic LinkedIn Contact Item
     const contactGrid = document.querySelector('.contact-grid-mini');
