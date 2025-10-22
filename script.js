@@ -86,21 +86,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dynamic Publications
     const publications = [
-
-
-{
+    {
   title: 'Rana, M.S., Pinnika, G. &amp; &lt;strong&gt;Chetri, B.K.&lt;/strong&gt; De Novo Plastome Assembly and Comparative Genomics of Elatostema lineolatum var. major: Insights into Urticaceae Orthologs, Phylogeny, and Comparative Analysis of 242 Plastomes',
   journal: 'Biol Bull Rev',
   year: 2025,
   doi: 'https://doi.org/10.1134/S2079086425600353'
-},
-
+    },
         {
   title: 'Senapati, A., Gupta, D., &lt;strong&gt;Chetri, B.K.&lt;/strong&gt; et al. Linking genome size to life form and community structure in a semi-natural landscape from Northeast India',
   journal: 'Protoplasma',
   year: 2025,
   doi: 'https://doi.org/10.1007/s00709-025-02119-0'
-},
+    },
         {
             title: '<strong>Chetri, B.K.</strong>, Sonu, S.S., Shelke, R.G. et al. Plastome genomics of the crop wild relative <em>Thladiantha cordifolia</em> illuminates the evolution and phylogeny of the gourd family (Cucurbitaceae)',
             journal: 'Genetic Resources and Crop Evolution, 72: 10441–10456',
